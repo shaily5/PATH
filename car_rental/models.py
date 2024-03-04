@@ -22,3 +22,21 @@ class Car(models.Model):
 
     def __str__(self):
         return f"{self.year} {self.make} {self.model}"
+
+# Rental Reservation Model
+class RentalReservation(models.Model):
+    STATUS_CHOICES = [
+        ('reserved', 'Reserved'),
+        ('canceled', 'Canceled'),
+        ('completed', 'Completed'),
+    ]
+
+    rental_start_date = models.DateField()
+    rental_end_date = models.DateField()
+    customer = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    car = models.ForeignKey('Car', on_delete=models.CASCADE)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='reserved')
+
+    def __str__(self):
+        return f"{self.car} - {self.customer} - Status: {self.status}"
