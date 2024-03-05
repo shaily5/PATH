@@ -8,6 +8,11 @@
 <div>
     <h1>{% block hometitle %} Welcome to our Car Rental{% endblock %}</h1>
     {% block body_block %}{% endblock %}
+    <form action="{%  url 'PATH:submitContactInfo' %}" method="POST">
+        {% csrf_token %}
+        {% block form_block %}{% endblock %}
+    <button type="submit">Submit</button>
+    </form>
 </div>
 
 </body>

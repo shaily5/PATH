@@ -7,6 +7,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
+from PATH.forms import ContactForm
+
+
 def user_login(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -40,3 +43,14 @@ def register_user(request):
     else:
         form = UserCreationForm()
     return render(request, 'PATH/register.html', {'form': form})
+
+def contact_us(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            msg = 'Form Submitted Successfully'
+            return render(request,'PATH/contactUs.html',{'form':form,'msg':msg})
+    else:
+        form = ContactForm()
+        return render(request, 'PATH/contactUs.html', {'form':form})
+

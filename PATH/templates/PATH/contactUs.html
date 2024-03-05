@@ -1,0 +1,9 @@
+{%  extends 'PATH/base.html' %}
+
+{% block form_block %}
+    {% if msg %}
+        {{ msg }}
+    {% endif %}
+{{ form }}
+
+{% endblock %}
