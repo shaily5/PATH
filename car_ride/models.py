@@ -23,3 +23,24 @@ class CarType(models.Model):
 
     def __str__(self):
         return self.name
+
+class Location(models.Model):
+    state = models.CharField(max_length=100, choices=[
+        ('AB', 'Alberta'),
+        ('BC', 'British Columbia'),
+        ('MB', 'Manitoba'),
+        ('NB', 'New Brunswick'),
+        ('NL', 'Newfoundland and Labrador'),
+        ('NT', 'Northwest Territories'),
+        ('NS', 'Nova Scotia'),
+        ('NU', 'Nunavut'),
+        ('ON', 'Ontario'),
+        ('PE', 'Prince Edward Island'),
+        ('QC', 'Quebec'),
+        ('SK', 'Saskatchewan'),
+        ('YT', 'Yukon'),
+    ])
+    city = models.CharField(max_length=100)
+
+    def _str_(self):
+        return f"{self.city},{self.state}"
