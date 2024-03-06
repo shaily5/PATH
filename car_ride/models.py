@@ -44,3 +44,18 @@ class Location(models.Model):
 
     def _str_(self):
         return f"{self.city},{self.state}"
+
+class Ride(models.Model):
+    rider_name = models.CharField(max_length=100)
+    rider_email = models.EmailField()
+    rider_phone = models.CharField(max_length=20)
+    car_type = models.ForeignKey(CarType, on_delete=models.CASCADE)
+    car_name = models.CharField(max_length=100)
+    from_location = models.ForeignKey('Location', related_name='from_location_rides', on_delete=models.CASCADE)
+    to_location = models.ForeignKey('Location', related_name='to_location_rides', on_delete=models.CASCADE)
+    pickup_date = models.DateTimeField(default=datetime.now)
+    drop_off_date = models.DateTimeField(default=datetime.now)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def _str_(self):
+        return f"{self.rider_name}'s ride from {self.from_location} to {self.to_location}"
