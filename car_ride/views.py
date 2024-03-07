@@ -37,3 +37,6 @@ def about_us(request):
 
 def landing(request):
     return render(request, 'landing.html')
+
+def passenger_home(request):
+    return render(request, 'passenger/passenger_home.html')
