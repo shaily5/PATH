@@ -44,3 +44,7 @@ def passenger_home(request):
 def passenger_rides(request):
     rides = Ride.objects.all()
     return render(request, 'passenger/passenger_rides.html', {'rides': rides})
+
+def passenger_confirm(request):
+    passenger_details = request.POST
+    return render(request, 'passenger/passenger_confirm.html', {'passenger_details': passenger_details})
