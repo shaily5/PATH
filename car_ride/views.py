@@ -43,4 +43,4 @@ def passenger_home(request):
 
 def passenger_rides(request):
     rides = Ride.objects.all()
-    return render(request, 'passenger/passenger_rides.html', {'rides': rides})
+    return render(request, 'passenger/passenger_rides.html', {'rides': rides})
