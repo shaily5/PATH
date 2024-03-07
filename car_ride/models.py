@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from django.contrib.auth.models import User
 
 class RegisterDriver(models.Model):
     GENDER_CHOICES = [
@@ -59,3 +60,9 @@ class Ride(models.Model):
 
     def _str_(self):
         return f"{self.rider_name}'s ride from {self.from_location} to {self.to_location}"
+
+class BookedRide(models.Model):
+    passenger = models.ForeignKey(User, on_delete=models.CASCADE)
+    ride = models.ForeignKey(Ride, on_delete=models.CASCADE)
+    driver = models.ForeignKey(RegisterDriver, on_delete=models.CASCADE)
+    booking_date = models.DateTimeField(auto_now_add=True)
