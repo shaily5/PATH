@@ -21,6 +21,17 @@ def post_ride(request):
         form = RideForm()
     return render(request, 'car_ride/post_ride.html', {'form': form})
 
+def edit_ride(request, ride_id):
+    ride = get_object_or_404(Ride, pk=ride_id)
+    if request.method == 'POST':
+        form = RideForm(request.POST, instance=ride)
+        if form.is_valid():
+            form.save()
+            return redirect('all_rides')
+    else:
+        form = RideForm(instance=ride)
+    return render(request, 'car_ride/edit_ride.html', {'form': form})
+
 def about_us(request):
     return render(request, 'car_ride/about_us.html')
 
