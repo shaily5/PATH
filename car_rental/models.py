@@ -40,3 +40,14 @@ class RentalReservation(models.Model):
 
     def __str__(self):
         return f"{self.car} - {self.customer} - Status: {self.status}"
+
+class RentalInvoice(models.Model):
+    rental_reservation = models.OneToOneField('RentalReservation', on_delete=models.CASCADE)
+    invoice_number = models.CharField(max_length=100, unique=True)
+    issue_date = models.DateField()
+    due_date = models.DateField()
+    amount_due = models.DecimalField(max_digits=10, decimal_places=2)
+    paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Invoice #{self.invoice_number} - Total: ${self.amount_due}"
