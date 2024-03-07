@@ -40,3 +40,7 @@ def landing(request):
 
 def passenger_home(request):
     return render(request, 'passenger/passenger_home.html')
+
+def passenger_rides(request):
+    rides = Ride.objects.all()
+    return render(request, 'passenger/passenger_rides.html', {'rides': rides})
