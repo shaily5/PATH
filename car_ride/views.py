@@ -1,4 +1,4 @@
-from .models import Ride
+from .models import Ride, BookedRide
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import RideForm
@@ -37,6 +37,10 @@ def about_us(request):
 
 def landing(request):
     return render(request, 'landing.html')
+
+def all_booked_rides(request):
+    all_booked_rides = BookedRide.objects.filter(passenger_id=request.user.id)
+    return render(request, 'passenger/all_booked_rides.html', {'all_booked_rides': all_booked_rides})
 
 def passenger_home(request):
     return render(request, 'passenger/passenger_home.html')
