@@ -38,9 +38,9 @@ def about_us(request):
 def landing(request):
     return render(request, 'landing.html')
 
-def all_booked_rides(request):
-    all_booked_rides = BookedRide.objects.filter(passenger_id=request.user.id)
-    return render(request, 'passenger/all_booked_rides.html', {'all_booked_rides': all_booked_rides})
+# def all_booked_rides(request):
+#     all_booked_rides = BookedRide.objects.filter(passenger_id=request.user.id)
+#     return render(request, 'passenger/all_booked_rides.html', {'all_booked_rides': all_booked_rides})
 
 def passenger_home(request):
     return render(request, 'passenger/passenger_home.html')
@@ -52,3 +52,28 @@ def passenger_rides(request):
 def passenger_confirm(request):
     passenger_details = request.POST
     return render(request, 'passenger/passenger_confirm.html', {'passenger_details': passenger_details})
+
+def all_booked_rides(request):
+
+    all_booked_rides = BookedRide.objects.filter(passenger=request.user.id)
+    booked_rides_details = []
+
+    for booked_ride in all_booked_rides:
+        ride = booked_ride.ride
+        rider_name = ride.rider_name
+        rider_email = ride.rider_email
+        rider_phone = ride.rider_phone
+        ride_details = {
+            'ride': ride,
+            'rider_name': rider_name,
+            'rider_email': rider_email,
+            'rider_phone': rider_phone,
+            'passenger_details': {
+                'passenger_name': booked_ride.passenger_name,
+                'passenger_email': booked_ride.passenger_email,
+                'passenger_phone': booked_ride.passenger_phone,
+            }
+        }
+        booked_rides_details.append(ride_details)
+
+    return render(request, 'passenger/all_booked_rides.html', {'booked_rides_details': booked_rides_details})
