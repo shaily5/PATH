@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import Car, RentalReservation
+from .models import Car, RentalReservation, RentalInvoice
 
 
 # Create your views here.
@@ -25,3 +25,12 @@ def rental_reservation_list(request):
 
     # Return the response with the reservation information
     return HttpResponse(response_body, content_type='text/plain')
+
+def rental_invoice_detail(request, invoice_number):
+    try:
+        invoice = RentalInvoice.objects.get(invoice_number=invoice_number)
+    except RentalInvoice.DoesNotExist:
+        # Handle the case where the invoice does not exist
+        return render(request, 'invoice_not_found.html')
+
+    return render(request, 'rental_invoice_detail.html', {'invoice': invoice})
