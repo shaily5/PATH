@@ -4,6 +4,9 @@ from django.shortcuts import render
 from .models import Car, RentalReservation, RentalInvoice
 
 
+def dashboard(request):
+    return render(request, 'car_rental/dashboard.html')
+
 # Create your views here.
 def car_list(request):
     cars = Car.objects.all()

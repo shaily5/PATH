@@ -1,0 +1,26 @@
+{%  extends 'car_rental/base.html' %}
+
+{% block body_block %}
+<h1>Welcome to the Car Rental Dashboard</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Rental Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.make }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.year }}</td>
+                <td>${{ car.rental_price }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

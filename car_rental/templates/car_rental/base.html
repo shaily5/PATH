@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <h1>{% block hometitle %} Welcome to PATH{% endblock %}</h1>
+    <h1>{% block hometitle %} Welcome to our Car Rental{% endblock %}</h1>
     {% block body_block %}{% endblock %}
     <form action="{%  url 'PATH:submitContactInfo' %}" method="POST">
         {% csrf_token %}

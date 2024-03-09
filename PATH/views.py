@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
@@ -28,9 +29,8 @@ def user_login(request):
 
     return render(request, 'PATH/login.html')  # Replace 'login.html' with the name of your login template
 
-@login_required
 def home(request):
-    # Your home view logic goes here
+
     return render(request, 'PATH/home.html')  # Replace 'home.html' with the name of your home template
 
 def register_user(request):
