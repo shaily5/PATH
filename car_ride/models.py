@@ -67,3 +67,19 @@ class Mycar(models.Model):
             img.thumbnail(output_size)
             img.save(self.car_img.path)
 
+
+
+class Booking(models.Model):
+    name = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    car = models.ForeignKey(Mycar, on_delete=models.SET_NULL, null=True)
+    contact = models.CharField(max_length=11, null=False)
+    email = models.EmailField(max_length=80)
+    pickup = models.DateField()
+    dropoff = models.DateField()
+    pick_add = models.CharField(max_length=100, null=False)
+    drop_add = models.CharField(max_length=100, null=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+    num_seats_booked = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.id)
