@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
+# from PIL import Image
 
 class Customer(models.Model):
     usern = models.OneToOneField(User, on_delete=models.CASCADE, max_length=80, unique=True, blank=True)

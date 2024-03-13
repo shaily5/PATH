@@ -10,7 +10,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 from PATH.forms import ContactForm
 
-
 def user_login(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -54,3 +53,10 @@ def contact_us(request):
         form = ContactForm()
         return render(request, 'PATH/contactUs.html', {'form':form})
 
+
+def carInventory(request):
+    return render(request, 'PATH/carsInventory.html', )
+
+
+def rentedCars(request):
+    return render(request, 'PATH/rentedCars.html', )

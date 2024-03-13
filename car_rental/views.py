@@ -37,3 +37,4 @@ def rental_invoice_detail(request, invoice_number):
         return render(request, 'invoice_not_found.html')
 
     return render(request, 'rental_invoice_detail.html', {'invoice': invoice})
+
