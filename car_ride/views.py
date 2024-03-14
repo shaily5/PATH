@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 import mysql.connector as sql
@@ -19,7 +18,6 @@ def LoginUser(request):
         return render(request, "login.html")
 
     if request.method == "POST":
-        # m = sql.connect(host="localhost", user="root", passwd="WORld(@)12", database='carpooling')
         usern = request.POST['usern']
         password = request.POST['password']
 
