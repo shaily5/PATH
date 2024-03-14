@@ -1,6 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from .forms import CarForm
+# from .forms import PhotoForm
 from .models import Car, RentalReservation, RentalInvoice
 
 
@@ -38,3 +40,26 @@ def rental_invoice_detail(request, invoice_number):
 
     return render(request, 'rental_invoice_detail.html', {'invoice': invoice})
 
+def create_car(request):
+    if request.method == 'POST':
+        form = CarForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Redirect to a success page or another view
+    else:
+        form = CarForm()
+    return render(request, 'car_rental/create_car.html', {'form': form})
+
+# def upload_photo(request):
+#     if request.method == 'POST':
+#         form = PhotoForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('show_photos')
+#     else:
+#         form = PhotoForm()
+#     return render(request, 'car_rental/create_car.html', {'form': form})
+#
+def show_photos(request):
+    photos = Car.objects.all()
+    return render(request, 'car_rental/show_uploaded_image.html', {'cars': photos})

@@ -19,6 +19,8 @@ class Car(models.Model):
     year = models.PositiveIntegerField()
     daily_rate = models.DecimalField(max_digits=8, decimal_places=2)
     available = models.BooleanField(default=True)
+    color = models.CharField(max_length=50,default="unknown")
+    photo = models.ImageField(upload_to='car_photos/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.year} {self.make} {self.model}"
