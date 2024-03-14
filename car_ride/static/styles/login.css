@@ -1,0 +1,152 @@
+.topnav {
+    background-color: rgb(117, 174, 199);
+    overflow: hidden;
+    width: 100%;
+    height: 5em;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  
+  }
+  
+  .topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Poppins',sans-serif;
+  }
+  
+  .topnav a:hover{
+    color: #565665;
+    text-decoration: none;
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+
+body{
+    align-content: center;
+    background-color: #f2f1f8;
+}
+
+
+form{
+    height: 500px;
+    width: 600px;
+    background-color: #fff;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    /* padding: 50px 35px; */
+    /* margin-top: 10%; */
+    margin:0 auto;
+    margin-bottom: 5%;
+
+    padding: 25px 30px;
+    margin-top: 6%;
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #0a0a0a;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 50px;
+    text-align: center;
+    /* background-color: #07411a; */
+    color: #7d7d81;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+
+
+/*#username{
+    border: 1px solid black;
+}*/
+
+#password{
+    border: 1px solid black;
+}
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    border: 1px solid black;
+}
+::placeholder{
+    color: #111010;
+}
+button{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #09333f;
+    color: white;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.social{
+  margin-top: 30px;
+  display: flex;
+}
+.social div{
+  background: red;
+  width: 150px;
+  border-radius: 3px;
+  padding: 5px 10px 10px 5px;
+  background-color: rgba(255,255,255,0.27);
+  color: #0c0c0c;
+  text-align: center;
+}
+.social div:hover{
+  background-color: rgba(14, 13, 13, 0.47);
+}
+
+#link{
+    text-decoration: underline;
+}
+
+#link:hover{
+    color: #6a6464;
+}
+
+.cssanimation, .cssanimation span {
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.cssanimation span { display: inline-block }
+
+.fadeInBottom { animation-name: fadeInBottom }
+@keyframes fadeInBottom {
+  from {
+      opacity: 0;
+      transform: translateY(100%);
+  }
+  to { opacity: 1 }
+}
