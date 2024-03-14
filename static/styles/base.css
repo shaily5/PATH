@@ -1,0 +1,165 @@
+/* Body styles */
+body {
+    background-image: url('static/images/cars/img1.jpeg');
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: white; /* Set body background color to white */
+    color: white;
+}
+
+.topnav {
+    background: linear-gradient(to right, white 3%, #330356 3%, #30014f calc(100% - 3%), white calc(100% - 3%)); /* Gradient background */
+    overflow: hidden;
+    width: 100%;
+    height: 5em;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    margin: 0;
+    padding: 0;
+    position: relative;
+    border-radius: 2.5em; /* Set the border-radius to create a square rounded border */
+    border: 2px solid white; /* Add border with white color */
+    box-sizing: border-box; /* Ensure border is included in the width and height */
+}
+
+.topnav a {
+    color: #988b8b;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background: rgb(48, 1, 79); /* Transparent background color */
+}
+
+.topnav a:visited,
+.topnav a:focus,
+.topnav a:active { /* Style visited, focused, and active links */
+    color: #988b8b !important; /* Set the text color */
+    text-decoration: none !important; /* Remove underline */
+}
+
+.topnav a:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Set the background color to white with 50% opacity */
+    border-radius: 10px; /* Maintain the border-radius */
+    padding: 10px 14px 10px; /* Adjust padding to decrease width and height */
+}
+
+.active {
+    color: white;
+}
+
+
+
+
+
+
+
+#name {
+    float: left;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: #1a1a2a;
+    margin-top: 20px;
+    color: white;
+}
+
+#rest {
+    float: right;
+}
+
+#rest ul {
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 1px;
+}
+.footer {
+    background: linear-gradient(to right, white 3%, #330356 3%, #30014f calc(100% - 3%), white calc(100% - 3%)); /* Gradient background */
+    padding: 30px;
+    text-decoration: none;
+    color: #988b8b; /* Text color */
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 2.5em; /* Rounded border */
+    border: 2px solid white; /* Border */
+}
+
+.footer .section1 {
+    width: 33%; /* Adjust width */
+    padding: 0 20px;
+    background: rgb(48, 1, 79);
+}
+
+.footer h3 {
+    color: #988b8b; /* Heading color */
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li {
+    margin-bottom: 5px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #988b8b; /* Link color */
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #565665;
+}
+
+
+
+.section1 {
+    width: 33%;
+}
+
+
+.col-25 {
+      float: left;
+      width: 25%;
+      margin-top: 6px;
+    }
+
+    /* Floating column for inputs: 75% width */
+    .col-75 {
+      float: left;
+      width: 75%;
+      margin-top: 6px;
+    }
+
+    .cssanimation, .cssanimation span {
+      animation-duration: 0.8s;
+      animation-fill-mode: both;
+    }
+
+    .cssanimation span { display: inline-block }
+
+    .fadeInBottom { animation-name: fadeInBottom }
+    @keyframes fadeInBottom {
+      from {
+          opacity: 0;
+          transform: translateY(100%);
+      }
+      to { opacity: 1 }
+    }
+
+
+
+
+
