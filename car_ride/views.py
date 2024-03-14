@@ -14,6 +14,25 @@ from django.contrib.auth.hashers import make_password
 from .models import Customer, Mycar, ContactUs, Booking
 from django.contrib.auth.decorators import login_required
 
+def LoginUser(request):
+    if request.method == "GET":
+        return render(request, "login.html")
+
+    if request.method == "POST":
+        # m = sql.connect(host="localhost", user="root", passwd="WORld(@)12", database='carpooling')
+        usern = request.POST['usern']
+        password = request.POST['password']
+
+        user = authenticate(request, username=usern, password=password)
+        if user is not None:
+            login(request, user)
+            print("from login", user)
+            return redirect('dashboard')
+        else:
+            messages.error(request, "Invalid username or password!")
+            return redirect('login')
+    return render(request, "login.html")
+
 def Register(request):
     if request.method == 'GET':
         return render(request, "registration.html")
