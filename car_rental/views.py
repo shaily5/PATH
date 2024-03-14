@@ -1,10 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .forms import CarForm
-# from .forms import PhotoForm
+from .forms import CarForm, RentalReservationForm
 from .models import Car, RentalReservation, RentalInvoice
 
+
+# views.py
 
 def dashboard(request):
     return render(request, 'car_rental/dashboard.html')
@@ -50,16 +51,33 @@ def create_car(request):
         form = CarForm()
     return render(request, 'car_rental/create_car.html', {'form': form})
 
-# def upload_photo(request):
-#     if request.method == 'POST':
-#         form = PhotoForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('show_photos')
-#     else:
-#         form = PhotoForm()
-#     return render(request, 'car_rental/create_car.html', {'form': form})
-#
 def show_photos(request):
     photos = Car.objects.all()
     return render(request, 'car_rental/show_uploaded_image.html', {'cars': photos})
+
+def rental_reservation_view(request):
+    # Retrieve customer's details from the session
+    customer = request.session.get('customer', None)
+    if customer is None:
+        # Redirect or handle the case where customer details are not available in the session
+        pass
+
+    if request.method == 'POST':
+        form = RentalReservationForm(request.POST)
+        if form.is_valid():
+            # Save the reservation object
+            reservation = form.save(commit=False)
+            reservation.customer = customer
+            reservation.save()
+            # Redirect or show success message
+    else:
+        # Filter available cars based on the selected car type
+        selected_car_type = request.GET.get('car_type', None)
+        if selected_car_type:
+            available_cars = Car.objects.filter(type=selected_car_type)
+        else:
+            available_cars = Car.objects.all()
+
+        form = RentalReservationForm()
+
+    return render(request, 'car_rental/rental_reservation.html', {'form': form, 'available_cars': available_cars})

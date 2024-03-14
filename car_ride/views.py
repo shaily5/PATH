@@ -1,14 +1,14 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-import mysql.connector as sql
+# import mysql.connector as sql
 from django.db import IntegrityError, transaction
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import login, logout, authenticate
 from django.http import JsonResponse, HttpResponseForbidden, HttpResponseRedirect, HttpResponseNotFound, HttpResponse
-from requests import request
+# from requests import request
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Mycar, ContactUs, Booking
 from django.contrib.auth.decorators import login_required

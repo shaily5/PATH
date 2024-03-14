@@ -33,15 +33,36 @@ class RentalReservation(models.Model):
         ('completed', 'Completed'),
     ]
 
+    car_type_choices = [
+        ('sedan', 'Sedan'),
+        ('suv', 'SUV'),
+        ('truck', 'Truck'),
+        ('van', 'Van'),
+        # Add more choices as needed
+    ]
+
+    PICKUP_LOCATIONS = [
+        ('London', 'London'),
+        ('Windsor', 'Windsor'),
+        ('Toronto', 'Toronto'),
+        ('Hamilton', 'Hamilton'),
+        # Add more locations as needed
+    ]
+
     rental_start_date = models.DateField()
     rental_end_date = models.DateField()
     customer = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     car = models.ForeignKey('Car', on_delete=models.CASCADE)
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='reserved')
+
+    pickup_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
+    pickup_time = models.DateTimeField()
+    return_time = models.DateTimeField()
+    car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
 
     def __str__(self):
         return f"{self.car} - {self.customer} - Status: {self.status}"
+
 
 class RentalInvoice(models.Model):
     rental_reservation = models.OneToOneField('RentalReservation', on_delete=models.CASCADE)
@@ -66,6 +87,9 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+
+
+from django.db import models
 
 class CustomerReview(models.Model):
     customer = models.ForeignKey('CustomUser', on_delete=models.CASCADE)

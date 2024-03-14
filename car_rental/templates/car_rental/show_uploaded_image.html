@@ -14,7 +14,7 @@
             <p>Color: {{ car.color }}</p>
 {#                {{ car.photo }}#}
             {% if car.photo %}
-                <img src="/media/car_photos/Toyota.jpeg" alt="{{ car.make }} {{ car.model }} photo">
+                <img width="500px" height="500px" src="{{ car.photo.url }}" alt="{{ car.make }} {{ car.model }} photo">
             {% else %}
                 <p>No photo available</p>
             {% endif %}

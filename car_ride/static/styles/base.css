@@ -1,6 +1,6 @@
 /* Body styles */
 body {
-    background-image: url('../images/cars/img1.jpeg');
+    background-image: url('static/images/cars/img1.jpeg');
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background-color: white; /* Set body background color to white */

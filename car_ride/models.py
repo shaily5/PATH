@@ -13,6 +13,9 @@ class Customer(models.Model):
     city = models.CharField(max_length=100, null=False)
     state = models.CharField(max_length=100, null=False)
 
+    def __str__(self):
+        return f"{self.usern} - {self.email}"
+
     def _str_(self):
         return str(self.fname)
 
