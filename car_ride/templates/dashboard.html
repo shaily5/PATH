@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/dashboard.css'%}">
+
+        <div class="dashboard1">
+        
+            <h3>DASHBOARD</h3>
+
+        </div>
+
+        <div class="cssanimation sequence fadeInBottom">
+
+
+            <div class="dashboard">
+                <div class="circle-container">
+                    <h5>If you Drive Car</h5>
+                    <div class="circle-section">
+                        <div class="circles" style="margin-left: 30px;"><a href="{% url 'addmycar' %}">Add My Car</a></div>
+                        <div class="circles"><a href="{% url 'customerbookings' %}">Customer Bookings</a></div>
+                    </div>
+                </div>
+                <div class="circle-container">
+                    <h5>If you Need Ride</h5>
+                    <div class="circle-section">
+                        <div class="circles"><a href="{% url 'searchmycar' %}">Book My Ride</a></div>
+                        <div class="circles"><a href="{% url 'mybookings' %}">My Bookings</a></div>
+                    </div>
+                </div>
+                <div class="circle-container">
+                    <h5>Your Account</h5>
+                    <div class="circle-section">
+                        <div class="circles"><a href="{% url 'myaccount' %}">My Account</a></div>
+                        <div class="circles"><a href="{% url 'changepassword' %}">Change Password</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
