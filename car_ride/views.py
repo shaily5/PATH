@@ -60,3 +60,8 @@ def Register(request):
                 messages.warning(request, "Account already exists!")
                 return redirect('register')
         return render(request, "registration.html")
+
+# Home page
+def home(request):
+    return render(request, "home.html")
+
