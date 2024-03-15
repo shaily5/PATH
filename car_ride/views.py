@@ -65,3 +65,9 @@ def Register(request):
 def home(request):
     return render(request, "home.html")
 
+# Function to show dashboard to the logged in users
+@login_required(login_url='login')
+def dash(request):
+    if request.user.is_authenticated:
+        print("from dashboard", request.user)
+        return render(request, "dashboard.html")
