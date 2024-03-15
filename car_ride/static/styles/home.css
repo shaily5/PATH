@@ -1,0 +1,228 @@
+
+
+.box {
+  float: left;
+  width: 300px;
+  padding: 0 10px;
+  margin-left:100px ;
+  margin-right: 100px;
+  position: relative;
+    }
+
+/* Remove extra left and right margins, due to padding in columns */
+.features {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.features:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); this adds the "card" effect */
+  padding: 16px;
+  border: none;
+  text-align: center;
+  /* background-color: #f1f1f1; */
+}
+
+
+
+ .container {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #f2f2f2c2;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.container img {
+  max-width: 50%;
+  max-height:50%;
+  float: left;
+  margin-right: 15px;
+}
+
+
+/*.dropdown {*/
+/*  float: left;*/
+/*  overflow: hidden;*/
+/*}*/
+
+/*.dropdown .dropbtn {*/
+/*  font-size: 16px;*/
+/*  border: none;*/
+/*  outline: none;*/
+/*  color: white;*/
+/*  padding: 14px 16px;*/
+/*  background-color: inherit;*/
+/*  font-family: inherit;*/
+/*  margin: 0;*/
+/*}*/
+
+/*.navbar a:hover, .dropdown:hover .dropbtn {*/
+/*  background-color: red;*/
+/*}*/
+
+/*.dropdown-content {*/
+/*  display: none;*/
+/*  position: absolute;*/
+/*  background-color: #f9f9f9;*/
+/*  min-width: 160px;*/
+/*  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+/*  z-index: 1;*/
+/*}*/
+
+/*.dropdown-content a {*/
+/*  float: none;*/
+/*  color: black;*/
+/*  padding: 12px 16px;*/
+/*  text-decoration: none;*/
+/*  display: block;*/
+/*  text-align: left;*/
+/*}*/
+
+/*.dropdown:hover .dropdown-content {*/
+/*  display: block;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+/*body {*/
+/*            margin: 0;*/
+/*            font-family: 'Poppins', sans-serif;*/
+/*            background: linear-gradient(to left, #1b0a21, #220c31, #441b6c); !* Gradient background from left to right *!*/
+/*            color: white;*/
+/*        }*/
+
+/*.topnav {*/
+/*        background: linear-gradient(to left,#1b0a21, #220c31, #441b6c); !* Gradient background from left to right *!*/
+/*        overflow: hidden;*/
+/*        width: 100%;*/
+/*        height: 5em;*/
+/*        display: inline-block;*/
+/*        margin: 0;*/
+/*        padding: 0;*/
+/*        position: relative;*/
+
+/*    }*/
+
+/*    .topnav a {*/
+/*        float: right;*/
+/*        display: inline-block;*/
+/*        color: #f2f2f2;*/
+/*        text-align: center;*/
+/*        padding: 14px 16px;*/
+/*        text-decoration: none;*/
+/*        font-size: 17px;*/
+/*        font-family: 'Poppins', sans-serif;*/
+/*        background: linear-gradient(135deg, #070707, #282828);*/
+/*        margin-top: 15px;*/
+/*        cursor: pointer;*/
+/*        transition: background-color 0.3s ease;*/
+/*        border-radius: 8px;*/
+/*    }*/
+
+/*    .topnav a:hover {*/
+/*        background: linear-gradient(135deg, #282828, #070707);*/
+/*    }*/
+
+
+/*        .active {*/
+/*            color: white;*/
+/*        }*/
+
+/*        #name {*/
+/*            float: left;*/
+/*            font-family: 'Poppins', sans-serif;*/
+/*            font-size: 20px;*/
+/*            color: #1a1a2a;*/
+/*            margin-top: 25px;*/
+/*            color: white;*/
+/*        }*/
+
+/*        #rest {*/
+/*            float: right;*/
+/*        }*/
+
+/*        #rest ul {*/
+/*            display: inline-block;*/
+/*            margin-right: 5px;*/
+/*            margin-left: 1px;*/
+/*        }*/
+
+/*        !* Footer styles *!*/
+/*    .footer {*/
+/*        background: linear-gradient(to left, #1b0a21, #220c31, #441b6c);*/
+/*        padding: 30px;*/
+/*        text-decoration: none;*/
+/*        color: #FFFFFF;*/
+/*        margin-top: 30px;*/
+/*        display: flex;*/
+/*        justify-content: space-around;*/
+/*    }*/
+
+/*    .footer .section1 {*/
+/*        width: 50%;*/
+/*        padding: 0 20px;*/
+/*    }*/
+
+/*    .footer h3 {*/
+/*        color: #fff;*/
+/*        font-size: 1.5em;*/
+/*        margin-bottom: 10px;*/
+/*    }*/
+
+/*    .footer p {*/
+/*        margin: 5px 0;*/
+/*    }*/
+
+/*    .footer ul {*/
+/*        list-style: none;*/
+/*        padding: 0;*/
+/*    }*/
+
+/*    .footer ul li {*/
+/*        margin-bottom: 5px;*/
+/*    }*/
+
+/*    .footer a {*/
+/*        text-decoration: none;*/
+/*        color: #FFFFFF;*/
+/*        transition: color 0.3s ease;*/
+/*    }*/
+
+/*    .footer a:hover {*/
+/*        color: #565665;*/
+/*    }*/
+
+/*    .footer button {*/
+/*        padding: 10px 20px;*/
+/*        margin-bottom: 5px;*/
+/*        background: linear-gradient(135deg, #070707, #282828);*/
+/*        color: #FFFFFF;*/
+/*        border: none;*/
+/*        border-radius: 10px; !* Increased border-radius for more rounded corners *!*/
+/*        cursor: pointer;*/
+/*        transition: background-color 0.3s ease;*/
+/*        box-shadow: 0 10px 10px 3px rgba(13, 2, 17, 0.7);*/
+/*        margin-right: 10px;*/
+/*    }*/
+
+/*    .footer button:hover {*/
+/*        background-color: #565665; !* Darken the background color on hover *!*/
+/*    }*/
+
+
+/*        .section1 {*/
+/*            width: 33%;*/
+/*        }*/
