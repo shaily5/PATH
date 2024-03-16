@@ -6,7 +6,7 @@ urlpatterns=[
     path('register/', views.Register, name="register"),
     path('login/', views.LoginUser, name="login"),
     path('dashboard/', views.dash, name="dashboard"),
-    path('addmycar/', views.Addcar, name="addmycar"),
+    # path('addmycar/', views.Addcar, name="addmycar"),
     path('customerbookings/', views.CustomerBookings, name="customerbookings"),
     path('searchmycar/', views.Search, name="searchmycar"),
 ]

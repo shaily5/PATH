@@ -12,4 +12,4 @@ class CarForm(forms.ModelForm):
 class RentalReservationForm(forms.ModelForm):
     class Meta:
         model = RentalReservation
-        fields = ['rental_start_date', 'rental_end_date', 'car', 'pickup_location', 'pickup_time', 'return_time', 'car_type']
+        fields = ['rental_start_date', 'rental_end_date', 'car', 'pickup_location','dropoff_location', 'pickup_time', 'return_time', 'car_type']

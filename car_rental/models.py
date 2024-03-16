@@ -1,7 +1,13 @@
+from datetime import datetime
+
 from django.db import models
 
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+
+from car_ride.models import Customer
+
 
 class CustomUser(models.Model):
     email = models.EmailField(unique=True)
@@ -49,19 +55,23 @@ class RentalReservation(models.Model):
         # Add more locations as needed
     ]
 
-    rental_start_date = models.DateField()
-    rental_end_date = models.DateField()
-    customer = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    rental_start_date = models.DateField(default=timezone.now)
+    rental_end_date = models.DateField(default=timezone.now)
+    pickup_time = models.DateTimeField(default=timezone.now)
+    return_time = models.DateTimeField(default=timezone.now)
+
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,default=None)  # Use Customer model here
     car = models.ForeignKey('Car', on_delete=models.CASCADE)
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
 
     pickup_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
-    pickup_time = models.DateTimeField()
-    return_time = models.DateTimeField()
+    dropoff_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
+
+
     car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
 
     def __str__(self):
-        return f"{self.car} - {self.customer} - Status: {self.status}"
+        return f"{self.car} - {self.customer} "
 
 
 class RentalInvoice(models.Model):

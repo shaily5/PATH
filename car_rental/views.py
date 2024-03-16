@@ -55,10 +55,15 @@ def show_photos(request):
     photos = Car.objects.all()
     return render(request, 'car_rental/show_uploaded_image.html', {'cars': photos})
 
+def forgot_password(request):
+    return render(request, 'car_rental/authentication/forget_pass.html', )
+
+
 def rental_reservation_view(request):
     # Retrieve customer's details from the session
-    customer = request.session.get('customer', None)
-    if customer is None:
+    customer_id = request.session.get('customer_id')
+    # customer = request.session.get('customer', None)
+    if customer_id is None:
         # Redirect or handle the case where customer details are not available in the session
         pass
 
@@ -67,7 +72,7 @@ def rental_reservation_view(request):
         if form.is_valid():
             # Save the reservation object
             reservation = form.save(commit=False)
-            reservation.customer = customer
+            reservation.customer = customer_id
             reservation.save()
             # Redirect or show success message
     else:
@@ -80,4 +85,4 @@ def rental_reservation_view(request):
 
         form = RentalReservationForm()
 
-    return render(request, 'car_rental/rental_reservation.html', {'form': form, 'available_cars': available_cars})
+    return render(request, 'car_rental/rental_reservation.html', {'RentalForm': form})
