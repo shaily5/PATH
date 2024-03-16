@@ -98,3 +98,16 @@ def Addcar(request):
                 return render(request, "addmycar.html", {'form': form})
 
     return render(request, "addmycar.html")
+
+
+
+def CustomerBookings(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            user = request.user
+            cust = Customer.objects.get(usern=user)
+            mybook = Booking.objects.filter(name=cust)
+            mycar = Mycar.objects.filter(cust=cust)
+            otherbookings = Booking.objects.filter(car__in=mycar).exclude(name=cust)
+            context = {'otherbookings': otherbookings}
+            return render(request, "cust_booking.html", context)
