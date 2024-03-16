@@ -71,3 +71,30 @@ def dash(request):
     if request.user.is_authenticated:
         print("from dashboard", request.user)
         return render(request, "dashboard.html")
+
+# Function to add user's car in the database
+# @login_required(login_url='login')
+def Addcar(request):
+    # print('Hello1')
+    if request.method == 'GET':
+        # print('Hello2', request.user.is_authenticated, type(request.user))
+        if request.user.is_authenticated:
+            # print('Hello3')
+            form = AddcarForm()
+            # print('Hello4')
+            return render(request, "addmycar.html", {'form': form})
+
+    if request.method == 'POST':
+        # print('Hello5')
+        if request.user.is_authenticated:
+            form = AddcarForm(request.POST, request.FILES)
+            print(form)
+            if form.is_valid():
+                form.instance.cust = request.user.customer
+                form.save()
+                return redirect('dashboard')
+            else:
+                # If form is invalid, render form again with errors
+                return render(request, "addmycar.html", {'form': form})
+
+    return render(request, "addmycar.html")
