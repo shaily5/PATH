@@ -1,0 +1,129 @@
+body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to left, #1b0a21, #220c31, #441b6c); /* Gradient background from left to right */
+            color: white;
+        }
+
+.topnav {
+        background: linear-gradient(to left,#1b0a21, #220c31, #441b6c); /* Gradient background from left to right */
+        overflow: hidden;
+        width: 100%;
+        height: 5em;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        position: relative;
+
+    }
+
+    .topnav a {
+        float: right;
+        display: inline-block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #070707, #282828);
+        margin-top: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .topnav a:hover {
+        background: linear-gradient(135deg, #282828, #070707);
+    }
+
+
+        .active {
+            color: white;
+        }
+
+        #name {
+            float: left;
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            color: #1a1a2a;
+            margin-top: 25px;
+            color: white;
+        }
+
+        #rest {
+            float: right;
+        }
+
+        #rest ul {
+            display: inline-block;
+            margin-right: 5px;
+            margin-left: 1px;
+        }
+
+        /* Footer styles */
+    .footer {
+        background: linear-gradient(to left, #1b0a21, #220c31, #441b6c);
+        padding: 30px;
+        text-decoration: none;
+        color: #FFFFFF;
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .footer .section1 {
+        width: 50%;
+        padding: 0 20px;
+    }
+
+    .footer h3 {
+        color: #fff;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .footer p {
+        margin: 5px 0;
+    }
+
+    .footer ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer ul li {
+        margin-bottom: 5px;
+    }
+
+    .footer a {
+        text-decoration: none;
+        color: #FFFFFF;
+        transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+        color: #565665;
+    }
+
+    .footer button {
+        padding: 10px 20px;
+        margin-bottom: 5px;
+        background: linear-gradient(135deg, #070707, #282828);
+        color: #FFFFFF;
+        border: none;
+        border-radius: 10px; /* Increased border-radius for more rounded corners */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 10px 10px 3px rgba(13, 2, 17, 0.7);
+        margin-right: 10px;
+    }
+
+    .footer button:hover {
+        background-color: #565665; /* Darken the background color on hover */
+    }
+
+
+        .section1 {
+            width: 33%;
+        }

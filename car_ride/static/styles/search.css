@@ -1,0 +1,127 @@
+body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to left, #1b0a21, #220c31, #441b6c); /* Gradient background from left to right */
+            color: white;
+        }
+
+
+
+.content-wrapper {
+  display: flex;
+}
+
+.image-wrapper {
+  flex: 1;
+  padding: 20px;
+}
+
+.image-wrapper img {
+    margin-top: 20px;
+  width: 99%;
+  height: 100%;
+
+    border-radius: 10px;
+}
+
+.content {
+  flex: 1;
+
+  max-width: 50%; /* Set maximum width for the form */
+  background: linear-gradient(135deg, #070707, #282828); /* Background gradient */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Add border radius */
+  box-shadow: 0 10px 10px 3px rgba(13, 2, 17, 0.7);
+  text-align: center;
+    margin-top: 30px;
+margin-right: 2%;
+}
+
+.content input[type="text"],
+.content input[type="password"],
+.content input[type="date"],
+.content select {
+  width: calc(80% - 20px); /* Set the width of text inputs and selects to match the box width */
+  padding: 8px; /* Add padding to inputs */
+  margin-bottom: 15px; /* Add margin between inputs */
+  box-sizing: border-box; /* Include padding and border in the width */
+  display: block;
+  margin: 0 auto;
+}
+
+.content button {
+  width: calc(80% - 20px); /* Set the width of the button to match the box width */
+  padding: 15px; /* Add padding to the button */
+  background-color: rgba(54, 24, 77, 0.7); /* Background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+  cursor: pointer; /* Add pointer cursor */
+  margin-top: 20px;
+}
+
+.content button:hover {
+  background-color: #35303f; /* Change background color on hover */
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 50px;
+  text-align: center;
+  color: #fdfdff;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+.parentDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
+.content1 {
+  display: flex;
+  align-items: center;
+  width: 65%; /* Adjust the width as needed */
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: black; /* Background color for each content box */
+  color: white; /* Text color */
+    margin-top: 7%;
+    box-shadow: 0 10px 10px 3px rgba(13, 2, 17, 0.7);
+    font-size: 20px;
+}
+
+.content1 img {
+  width: 500px; /* Adjust image width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 20px;
+}
+
+.content1 p {
+  text-align: left; /* Align text to the left */
+}
+
+.content1 a {
+  margin-left: auto; /* Move the button to the right */
+}
+
+.content1 button {
+  padding: 10px 20px;
+  background-color: rgba(54, 24, 77, 0.7); /* Button background color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.content1 button:hover {
+  background-color: #35303f; /* Darker button color on hover */
+}
