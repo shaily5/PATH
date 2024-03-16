@@ -15,7 +15,7 @@ urlpatterns = [
     path('rent_a_car/', views.rental_reservation_view, name='rent_a_car'),
 
     path('forgot_password/', views.forgot_password, name='forgot_password'),
-    # path('login/', views.login, name='login'),
+    path('login/', views.login, name='login'),
     # path('signup/', views.signup, name='signup'),
 
 ]

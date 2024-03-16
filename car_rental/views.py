@@ -58,6 +58,9 @@ def show_photos(request):
 def forgot_password(request):
     return render(request, 'car_rental/authentication/forget_pass.html', )
 
+def login(request):
+    return render(request, 'car_rental/authentication/login.html', )
+
 
 def rental_reservation_view(request):
     # Retrieve customer's details from the session
