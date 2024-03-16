@@ -61,6 +61,9 @@ def forgot_password(request):
 def login(request):
     return render(request, 'car_rental/authentication/login.html', )
 
+def signup(request):
+    return render(request, 'car_rental/authentication/signup.html', )
+
 
 def rental_reservation_view(request):
     # Retrieve customer's details from the session

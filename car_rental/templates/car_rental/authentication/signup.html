@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,25 +9,25 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Sign up Form </title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'car_rental/css/style.css' %}">
 </head>
 
 <body>
     <div class="container">
         <div class="header">
-            <img src="./images/logo.png" alt="Logo" class="logo"> <!-- Path to your logo image -->
+            <img src="{% static 'car_rental/images/logo.png' %}" alt="Logo" class="logo"> <!-- Path to your logo image -->
         </div>
         <div class="content">
             <div class="side-image">
-                <img src="./images/Frame.png" alt="Side Image"> <!-- Path to your side image -->
+                <img src="{% static 'car_rental/images/Frame.png' %}" alt="Side Image"> <!-- Path to your side image -->
             </div>
             <div class="login-form">
 
                 <form>
                     <div style="padding: 0 0 50px 0;">
                         <h2>Sign up</h2>
-                        <p>Alrady register? <a href="" style="color: white;"> Sign in for free   </a></p>
-                        
+                        <p>Already register? <a href="{% url 'forgot_password' %}" style="color: white;"> Sign in for free   </a></p>
+
                     </div>
 
                     <div class="form-flex">
@@ -53,7 +54,7 @@
                                     <input type="checkbox" id="checkbox1" class="checkbox-input">
                                     <label for="checkbox1" class="checkbox-label">Remember me ?</label>
                                 </div>
-                                <a class="forg" href="">Forget password?</a>
+                                <a class="forg" href="{% url 'forgot_password' %}">Forget password?</a>
                             </div>
                         </div>
                     </div>
