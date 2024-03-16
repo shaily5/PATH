@@ -29,4 +29,4 @@ class SearchForm(forms.ModelForm):
     class Meta:
         model = Mycar
         fields = ['from_place', 'to_place', 'from_date', 'to_date']
-        labels = {'from_place': 'From Place', 'to_place': 'To Place', 'from_date': 'From Date', 'to_date': 'To Date'}
+        labels = {'from_place': 'From Place', 'to_place': 'To Place', 'from_date': 'From Date', 'to_date':'ToDate'}

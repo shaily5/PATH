@@ -12,6 +12,7 @@ from django.http import JsonResponse, HttpResponseForbidden, HttpResponseRedirec
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Mycar, ContactUs, Booking
 from django.contrib.auth.decorators import login_required
+from .forms import SearchForm, BookingForm
 
 def LoginUser(request):
     if request.method == "GET":
