@@ -111,3 +111,31 @@ def CustomerBookings(request):
             otherbookings = Booking.objects.filter(car__in=mycar).exclude(name=cust)
             context = {'otherbookings': otherbookings}
             return render(request, "cust_booking.html", context)
+
+
+def Search(request):
+    if request.method == "GET":
+        form = SearchForm()
+        return render(request, "search.html", {'form': form})
+
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            from_place = form.cleaned_data['from_place']
+            to_place = form.cleaned_data['to_place']
+            from_date = form.cleaned_data['from_date']
+            to_date = form.cleaned_data['to_date']
+
+            # Filter cars based on provided criteria
+            cars = Mycar.objects.filter(
+                from_place=from_place,
+                to_place=to_place,
+            )
+            if from_date:
+                cars = cars.filter(from_date=from_date)
+            if to_date:
+                cars = cars.filter(to_date=to_date)
+
+            return render(request, "searched_cars.html", {'cars': cars})
+        else:
+            return render(request, "search.html", {'form': form})
