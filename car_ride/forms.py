@@ -21,3 +21,12 @@ class AddcarForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AddcarForm, self).__init__(*args, **kwargs)
+
+class SearchForm(forms.ModelForm):
+    from_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    to_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = Mycar
+        fields = ['from_place', 'to_place', 'from_date', 'to_date']
+        labels = {'from_place': 'From Place', 'to_place': 'To Place', 'from_date': 'From Date', 'to_date': 'To Date'}
