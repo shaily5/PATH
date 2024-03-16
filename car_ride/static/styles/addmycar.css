@@ -1,0 +1,11 @@
+    .addcar {
+      height: 700px;
+      width: 750px;
+      padding: 30px;
+    }
+
+    .col-75 {
+      float: left;
+      width: 75%;
+      margin-top: 6px;
+    }
