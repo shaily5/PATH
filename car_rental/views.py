@@ -13,6 +13,8 @@ from car_rental.models import Car, RentalReservation, RentalInvoice, CustomUser
 
 # views.py
 
+def homepage(request):
+    return render(request, 'PATH/homepage.html')
 def dashboard(request):
     return render(request, 'car_rental/dashboard.html')
 
