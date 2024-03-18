@@ -26,15 +26,8 @@ class AddNewUser(forms.ModelForm):
                              widget=forms.TextInput(attrs={'placeholder': 'Email',
                                                            'class': 'form-control',
                                                            }))
-    password1 = forms.CharField(max_length=50,
-                                required=True,
-                                label=("Password"),
-                                widget=forms.PasswordInput(attrs={'placeholder': 'Password',
-                                                                  'class': 'form-control',
-                                                                  'data-toggle': 'password',
-                                                                  'id': 'password',
-                                                                  }))
-    password2 = forms.CharField(max_length=50,
+
+    cpassword = forms.CharField(max_length=50,
                                 required=True,
                                 label=("Confirm Password"),
                                 widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password',
@@ -45,7 +38,7 @@ class AddNewUser(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['fullname', 'email', 'password1', 'password2']
+        fields = ['fullname', 'email', 'password', 'cpassword']
 
 
 class LoginForm(forms.ModelForm):

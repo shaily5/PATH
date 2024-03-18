@@ -18,6 +18,18 @@ class CustomUser(models.Model):
     ]
 
     email = models.EmailField(max_length=80, unique=True,default='')
+    password = models.CharField(max_length=128,null=False,default='')
+    #
+    # password = models.CharField(max_length=50,
+    #                             required=True,
+    #                             label=("Password"),
+    #                             widget=models.PasswordInput(attrs={'placeholder': 'Password',
+    #                                                               'class': 'form-control',
+    #                                                               'data-toggle': 'password',
+    #                                                               'id': 'password',
+    #                                                               }))
+
+
     fullname =models.CharField(max_length=100, null=False,default='')
     country = models.CharField(max_length=100, blank=True, null=False,default='')
     address = models.CharField(max_length=100,blank=True, null=False, default='')

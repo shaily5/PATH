@@ -22,38 +22,12 @@
                 <img src="{% static 'car_rental/images/Frame.png' %}" alt="Side Image"> <!-- Path to your side image -->
             </div>
             <div class="login-form">
-
-                <form>
-                    <div style="padding: 0 0 50px 0;">
-                        <h2>Welcome again</h2>
-                        <p>New to Design Space? <a href="" style="color: white;"> Sign up for free </a></p>
-                    </div>
-
-
-                    <div class="form-flex">
-                        <label style="font-size: 16px;" class="label" for="username">Enter username / Email</label>
-                    </div>
-                    <input type="text" id="username" name="username" required>
-
-                    <div>
-                        <div class="form-flex">
-                            <label style="font-size: 16px;" class="label" for="password">Password</label>
-                            <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>
-                        </div>
-                        <div style="margin-bottom: 30px;">
-                            <input type="password" id="password" name="password" required>
-                            <div class="form-flex">
-                                <div class="check">
-                                    <input type="checkbox" id="checkbox1" class="checkbox-input">
-                                    <label for="checkbox1" class="checkbox-label">Remember me ?</label>
-                                </div>
-                                <a class="forg" href="">Forget password?</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-
+                {% if errMsg %}
+                    {{ errMsg }}
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ LoginForm }}
                     <button type="submit">Login</button>
                 </form>
 

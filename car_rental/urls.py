@@ -16,7 +16,6 @@ urlpatterns = [
 
     path('forgot_password/', views.forgot_password, name='forgot_password'),
     path('car_rental/login/', views.loginView, name='login'),
-
     path('car_rental/signup/', views.signup, name='signup'),
 
 ]

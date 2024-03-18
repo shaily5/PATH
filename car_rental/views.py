@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.db import IntegrityError
@@ -80,26 +81,35 @@ class CustomLoginView(LoginView):
         # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
         return super(CustomLoginView, self).form_valid(form)
 
+def authenticate_user(email, password):
+        user = CustomUser.objects.get(email=email)
+        if not user:
+            return None
+        else:
+            if password != user.password:
+                return None
+            else:
+                return user
+
 
 def loginView(request):
     if request.method == "GET":
-        return render(request, "car_rental/authentication/login.html")
+        form=LoginForm()
+        return render(request, "car_rental/authentication/login.html",{'LoginForm':form})
 
     if request.method == "POST":
         email = request.POST['email']
         password = request.POST['password']
 
-        user = authenticate(request, email=email, password=password)
+        user = authenticate_user(email, password)
         if user is not None:
-            login(request, user)
-            print("from login", user)
-            return render(request, "car_rental/services/dashboard.html")
+            request.session['user_id'] = user.id
+            return render(request, "car_rental/services/dashboard.html",{'id':request.session['user_id']})
 
         else:
-            messages.error(request, "Invalid username or password!")
-            return render(request, "car_rental/authentication/login.html")
-
-    return render(request, "car_rental/authentication/login.html")
+            form = LoginForm()
+            errMsg= "Invalid username or password!"
+            return render(request, "car_rental/authentication/login.html",{"errMsg":errMsg,'LoginForm':form})
 
 
 def signup(request):
@@ -110,8 +120,8 @@ def signup(request):
     if request.method == 'POST':
         usern = request.POST['fullname']
         email = request.POST['email']
-        password = request.POST['password1']
-        cpassword = request.POST['password2']
+        password = request.POST['password']
+        cpassword = request.POST['cpassword']
 
         if password != cpassword:
             msg="Password does not match Confirm Password"
