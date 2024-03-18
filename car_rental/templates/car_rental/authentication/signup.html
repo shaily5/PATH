@@ -23,43 +23,50 @@
             </div>
             <div class="login-form">
 
-                <form>
-                    <div style="padding: 0 0 50px 0;">
-                        <h2>Sign up</h2>
-                        <p>Already register? <a href="{% url 'forgot_password' %}" style="color: white;"> Sign in for free   </a></p>
-
-                    </div>
-
-                    <div class="form-flex">
-                        <label style="font-size: 16px;" class="label" for="username">Enter username / Email</label>
-                    </div>
-                    <input type="text" id="username" name="username" required>
-
-
-                    <div class="form-flex">
-                        <label style="font-size: 16px;" class="label" for="password">Password</label>
-                            <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>
-                    </div>
-                    <input type="password" id="password" name="password" required>
-
-                    <div>
-                        <div class="form-flex">
-                            <label style="font-size: 16px;" class="label" for="password">Confirm password</label>
-                            <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>
-                        </div>
-                        <div style="margin-bottom: 30px;">
-                            <input type="password" id="password" name="password" required>
-                            <div class="form-flex">
-                                <div class="check">
-                                    <input type="checkbox" id="checkbox1" class="checkbox-input">
-                                    <label for="checkbox1" class="checkbox-label">Remember me ?</label>
-                                </div>
-                                <a class="forg" href="{% url 'forgot_password' %}">Forget password?</a>
-                            </div>
-                        </div>
-                    </div>
-
-
+                <form method="POST">
+                  {% csrf_token %}
+{#                    <div style="padding: 0 0 50px 0;">#}
+{#                        <h2>Sign up</h2>#}
+{#                        <p>Already register? <a href="" style="color: white;"> Sign in for free   </a></p>#}
+{##}
+{#                    </div>#}
+{##}
+{#                    <div class="form-flex">#}
+{#                        <label style="font-size: 16px;" class="label" for="username">Enter username / Email</label>#}
+{#                    </div>#}
+{#                    <input type="text" id="username" name="username" required>#}
+{##}
+{##}
+{#                    <div class="form-flex">#}
+{#                        <label style="font-size: 16px;" class="label" for="password">Password</label>#}
+{#                            <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>#}
+{#                    </div>#}
+{#                    <input type="password" id="password" name="password" required>#}
+{##}
+{#                    <div>#}
+{#                        <div class="form-flex">#}
+{#                            <label style="font-size: 16px;" class="label" for="password">Confirm password</label>#}
+{#                            <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>#}
+{#                        </div>#}
+{#                        <div style="margin-bottom: 30px;">#}
+{#                            <input type="password" id="password" name="password" required>#}
+{#                            <div class="form-flex">#}
+{#                                <div class="check">#}
+{#                                    <input type="checkbox" id="checkbox1" class="checkbox-input">#}
+{#                                    <label for="checkbox1" class="checkbox-label">Remember me ?</label>#}
+{#                                </div>#}
+{#                                <a class="forg" href="{% url 'forgot_password' %}">Forget password?</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+                        {{ msg }}
+                        {% if errorMsg %}
+                            <h1>Error</h1>
+                            {{ errorMsg }}
+                        {% else %}
+                            <h2> No error</h2>
+                        {% endif %}
+                        {{ addUserForm }}
 
                     <button type="submit">Login</button>
                 </form>

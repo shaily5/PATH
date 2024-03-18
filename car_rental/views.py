@@ -1,8 +1,13 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
+from django.db import IntegrityError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .forms import CarForm, RentalReservationForm
-from .models import Car, RentalReservation, RentalInvoice
+from .forms import CarForm, RentalReservationForm, AddNewUser, LoginForm
+from car_rental.models import Car, RentalReservation, RentalInvoice, CustomUser
 
 
 # views.py
@@ -58,11 +63,71 @@ def show_photos(request):
 def forgot_password(request):
     return render(request, 'car_rental/authentication/forget_pass.html', )
 
-def login(request):
-    return render(request, 'car_rental/authentication/login.html', )
+
+class CustomLoginView(LoginView):
+    form_class = LoginForm()
+
+    def form_valid(self, form):
+        remember_me = form.cleaned_data.get('remember_me')
+
+        if not remember_me:
+            # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
+            self.request.session.set_expiry(0)
+
+            # Set session as modified to force data updates/cookie to be saved.
+            self.request.session.modified = True
+
+        # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
+        return super(CustomLoginView, self).form_valid(form)
+
+
+def loginView(request):
+    if request.method == "GET":
+        return render(request, "car_rental/authentication/login.html")
+
+    if request.method == "POST":
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            print("from login", user)
+            return render(request, "car_rental/services/dashboard.html")
+
+        else:
+            messages.error(request, "Invalid username or password!")
+            return render(request, "car_rental/authentication/login.html")
+
+    return render(request, "car_rental/authentication/login.html")
+
 
 def signup(request):
-    return render(request, 'car_rental/authentication/signup.html', )
+    if request.method == 'GET':
+        form= AddNewUser()
+        return render(request, "car_rental/authentication/signup.html",{'addUserForm':form})
+
+    if request.method == 'POST':
+        usern = request.POST['fullname']
+        email = request.POST['email']
+        password = request.POST['password1']
+        cpassword = request.POST['password2']
+
+        if password != cpassword:
+            msg="Password does not match Confirm Password"
+            return render(request, 'car_rental/authentication/signup.html',{'errorMsg': msg})
+
+        form = AddNewUser(request.POST)
+        if form.is_valid():
+            newUser = form.save(commit=False)
+            newUser.save()
+            msg = "Data Saved Successfully"
+            # form = AddNewUser()
+            return render(request, 'car_rental/authentication/login.html', {"msg": msg})
+        else:
+            msg = "Failed"
+            return render(request, 'car_rental/authentication/signup.html', {'SignUpForm': form,'msg':msg})
+
 
 
 def rental_reservation_view(request):

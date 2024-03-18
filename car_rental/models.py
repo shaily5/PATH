@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
@@ -10,14 +11,29 @@ from car_ride.models import Customer
 
 
 class CustomUser(models.Model):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    date_of_birth = models.DateField(null=True, blank=True)
-    # Add more fields as needed
+
+    pp_issueing_country = [
+        ('Canada', 'Canada'),
+        ('USA', 'USA'),
+    ]
+
+    email = models.EmailField(max_length=80, unique=True,default='')
+    fullname =models.CharField(max_length=100, null=False,default='')
+    country = models.CharField(max_length=100, blank=True, null=False,default='')
+    address = models.CharField(max_length=100,blank=True, null=False, default='')
+    city = models.CharField(max_length=100,blank=True, null=False,default='')
+    state = models.CharField(max_length=100,blank=True, null=False,default='')
+    postal_code = models.CharField(max_length=100,blank=True, null=False,default='')
+    mobile = models.CharField(max_length=11,blank=True, null=False,default='')
+
+    issueing_country = models.CharField(max_length=100,blank=True, choices=pp_issueing_country, default='Windsor')
+    dl_number = models.CharField(max_length=100,blank=True, null=False,default='')
+    expiry_date = models.DateTimeField(null=True, blank=True)
+    birth_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return self.email
+        return f"{self.fullname} - {self.email}"
+
 
 class Car(models.Model):
     make = models.CharField(max_length=100)
@@ -61,12 +77,7 @@ class RentalReservation(models.Model):
     return_time = models.DateTimeField(default=timezone.now)
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,default=None)  # Use Customer model here
-    car = models.ForeignKey('Car', on_delete=models.CASCADE)
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
-
     pickup_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
-    dropoff_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
-
 
     car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
 
