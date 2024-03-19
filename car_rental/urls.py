@@ -3,6 +3,8 @@ from django.urls import path, include
 
 from PATH_project import settings
 from car_rental import views
+from django.contrib.auth import views as auth_views
+from car_rental.views import ResetPasswordView
 
 urlpatterns = [
     path('cars/', views.car_list, name='car-list'),
@@ -15,8 +17,25 @@ urlpatterns = [
     path('rent_a_car/', views.rental_reservation_view, name='rent_a_car'),
 
     path('forgot_password/', views.forgot_password, name='forgot_password'),
-    path('car_rental/login/', views.loginView, name='login'),
+    path('car_rental/login/', views.loginView, name='rentallogin'),
     path('car_rental/signup/', views.signup, name='signup'),
+
+    # path('reset_password/', auth_views.PasswordResetView.as_view(), name='reset_password'),
+    #
+    # path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('password-reset/', ResetPasswordView.as_view(), name='password_reset'),
+
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name='car_rental/authentication/password_reset_confirm.html'),
+         name='password_reset_confirm'),
+
+    # path('reset/<uidb64>/<token>/',
+    #      auth_views.PasswordResetConfirmView.as_view(),
+    #      name='password_reset_confirm'),
+
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name='car_rental/authentication/password_reset_complete.html'),
+         name='password_reset_complete'),
 
 ]
 
