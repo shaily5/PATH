@@ -1,34 +1,89 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/dashboard.css'%}">
-        <div class="dashboard1">
-            <h3>DASHBOARD</h3>
-        </div>
-        <div class="cssanimation sequence fadeInBottom">
-            <div class="dashboard">
-                <div class="circle-container">
-                    <h5>If you Drive Car</h5>
-                    <div class="circle-section">
-                        <div class="circles" style="margin-left: 30px;"><a href="{% url 'car_ride:addmycar' %}">Add My Car</a></div>
-                        <div class="circles"><a href="{% url 'car_ride:customerbookings' %}">Customer Bookings</a></div>
-                    </div>
-                </div>
-                <div class="circle-container">
-                    <h5>If you Need Ride</h5>
-                    <div class="circle-section">
-                        <div class="circles"><a href="{% url 'car_ride:searchmycar' %}">Book My Ride</a></div>
-                        <div class="circles"><a href="{% url 'car_ride:mybookings' %}">My Bookings</a></div>
-                    </div>
-                </div>
-                <div class="circle-container">
-                    <h5>Your Account</h5>
-                    <div class="circle-section">
-                        <div class="circles"><a href="{% url 'car_ride:myaccount' %}">My Account</a></div>
-{#                        <div class="circles"><a href="{% url 'car_ride:changepassword' %}">Change Password</a></div>#}
-                    </div>
-                </div>
+
+<style>
+    .dashboard1 {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .dashboard1 h3 {
+        font-size: 24px;
+        color: #333;
+    }
+
+    .dashboard {
+        display: flex;
+        {#justify-content: center;#}
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .circle-container {
+        {#margin: 0 20px;#}
+        margin: 0;
+    }
+
+    .circle-section {
+        display: flex;
+        flex-direction: column;
+        {#align-items: center;#}
+    }
+
+    .circles {
+        {#width: 160px;#}
+        {#height: 160px;#}
+        width: 50%;
+        background-color: #9961BA;
+        color: #fff;
+        text-align: center;
+        line-height: 160px;
+        margin-bottom: 20px;
+        transition: background-color 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .circles a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .circles:hover {
+        background-color: rgba(153, 97, 186, 0.8);
+    }
+</style>
+
+<div class="dashboard1">
+    <h3>DASHBOARD</h3>
+</div>
+
+<div class="cssanimation sequence fadeInBottom">
+    <div class="dashboard">
+        <div class="circle-container">
+            <h5 >For Drivers</h5>
+             <img src="{% static 'images/img9.png' %}" alt="Image" style="width: 50%; position: absolute; right: 0px;">
+            <div class="circle-section">
+                <div class="circles" ><a href="{% url 'car_ride:addmycar' %}">Add My Car</a></div>
+                <div class="circles"><a href="{% url 'car_ride:customerbookings' %}">Customer Bookings</a></div>
+{#                <div class="circles"><a href="{% url 'car_ride:mycar_list' %}">Posted Ride</a></div>#}
             </div>
         </div>
+        <div class="circle-container">
+            <h5 >For Passengers</h5>
+            <div class="circle-section">
+                <div class="circles"><a href="{% url 'car_ride:searchmycar' %}">Book My Ride</a></div>
+                <div class="circles"><a href="{% url 'car_ride:mybookings' %}">My Bookings</a></div>
+            </div>
+        </div>
+        <div class="circle-container">
+            <h5 > Account Details</h5>
+            <div class="circle-section">
+                <div class="circles"><a href="{% url 'car_ride:myaccount' %}">My Account</a></div>
+{#                <div class="circles"><a href="{% url 'car_ride:changepassword' %}">Change Password</a></div>#}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
-
