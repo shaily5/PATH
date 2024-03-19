@@ -4,52 +4,86 @@
     <head>
         <meta charset="UTF-8">
         <title>Path - 3 in 1 Teleportation Pods </title>
-        <link rel="stylesheet" href="{% static 'styles/base.css'%}">
+        <link rel="stylesheet" href="{% static 'styles/base.css' %}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Kalam' rel='stylesheet'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-{#        <script src="{% static 'js/home.js'%}"></script>#}
+        <script src="{% static 'js/home.js'%}"></script>
     </head>
+    <body>
+
+
     <div class="topnav" id="myTopnav">
         <ul>
-            <div id="name">
-                <h1>Path - Car Pool</h1>
+            <div id="name" class="name">
+                <img alt="logo" src="https://s3-alpha-sig.figma.com/img/b47a/cd04/2ce54eab4ad0df124f136b646202b058?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PmkirwFkRyN3Lk-tTl9olQ19KKa6KiGlCVr2HzBcVRvsBGxhZMDoQ~f-m9q8Jw075bEhkZGDPoUdxlu4QhQ6ct4DdFLP2VNbiLPXp1JzQE6TQ7W81pTCsLayFCbDfPEReKXVavM~Ltupuqb3evNlL26yw-sI~nuQ4eLgqoTDt9~udcz08T~9wV6hY2uZHt-JFwKW1et9ZZXPLcVkSZHgQwK~x1IO1E~iOIHXvkcwbOInZ~m3kpzRFYYyUN5gNn9iipG5Uua-DNZ-RJRNpJM~7i0MLbFYhtmaHU0r1j9Bb79uLPbTTIUFq-tmtZV1IEBMKkZHbSrWOGh75ootwu4yjA__"/>
             </div>
         </ul>
-    <ul id="rest">
-      <ul><a href="{% url 'car_ride:home' %}" class="active">Home</a></ul>
-      <ul><a href="{% url 'car_ride:searchmycar' %}">Book Your Car</a></ul>
-      {% if user.is_authenticated %}
-      <ul><a href="{% url 'car_ride:dashboard' %}">Dashboard</a></ul>
-{#      <ul><a href="{% url 'car_ride:allcars' %}">Cars</a></ul>#}
-{#      <ul><a href="{% url 'car_ride:mycar_list' %}">My Cars</a></ul>#}
-{#      <ul><a href="{% url 'logout' %}">Logout</a></ul>#}
-      {% else %}
-{#      <ul><a href="{% url 'car_ride:allcars' %}">Cars</a></ul>#}
-      <ul><a href="{% url 'car_ride:register' %}">Register</a></ul>
-      <ul><a href="{% url 'car_ride:login' %}">Login</a></ul>
-{#      <ul><a href="{% url 'car_ride:contact' %}">Contact us</a></ul>#}
+        <ul id="rest" class="rest">
+            <div class="nav-links">
+              <ul class="nav__list">
+                <li class="nav__el">
+                    <a class="nav__link" href="{% url 'car_ride:home' %}" class="active">Home</a>
+                </li>
+              </ul>
+
+              <ul class="nav__list">
+                  <li class="nav__el">
+                      <a class="nav__link" href="{% url 'car_ride:searchmycar' %}">Book Ride</a>
+                  </li>
+              </ul>
+
+              {% if user.is_authenticated %}
+
+              <ul class="nav__list">
+                <li class="nav__el">
+                    <a class="nav__link" href="{% url 'car_ride:dashboard' %}">Dashboard</a>
+                </li>
+              </ul>
+
+              <ul class="nav__list">
+                <li class="nav__el">
+{#                    <a class="nav__link" href="{% url 'car_ride:allcars' %}">All Rides</a>#}
+                </li>
+              </ul>
+
+              <ul class="nav__list">
+                <li class="nav__el">
+{#                    <a class="nav__link" href="{% url 'car_ride:logout' %}">Logout</a>#}
+                </li>
+              </ul>
+              {% else %}
+              <ul class="nav__list">
+                <li class="nav__el">
+{#                    <a class="nav__link" href="{% url 'car_ride:allcars' %}">All Rides</a>#}
+                </li>
+              </ul>
+              <ul class="nav__list">
+                <li class="nav__el">
+{#                    <a class="nav__link" href="{% url 'car_ride:contact' %}">Contact us</a>#}
+                </li>
+              </ul>
+          </div>
+              <div class="register">
+                  <ul><a class="registerBtn" href="{% url 'car_ride:register' %}">Register</a></ul>
+                  <ul><a class="loginBtn" href="{% url 'car_ride:login' %}">Login</a></ul>
+          </div>
       {% endif %}
-    </ul>
+        </ul>
     </div>
+
 <div>
     {% block body_block %}*** {% endblock %}
 </div>
-  <div class="footer">
-    <div class="section1">
-      <h3>Contact us</h3>
-      <i class="fa fa-home">Address No: XXXXXXX Street</i></br>
-      <i class="fa fa-phone">Mobile: 1234567890</i></br>
-      <i class="fa fa-envelope">Email: abc@gmail.com</i></br>
-    </div>
-    <div class="section1">
-      <h3>Project Links</h3>
-      <a href="{% url 'car_ride:home' %}">Home</a></br>
-{#      <a href="{% url 'car_ride:contact' %}">Contact</a></br>#}
-      <a href="{% url 'car_ride:login' %}">Login</a></br>
-      <a href="{% url 'car_ride:register' %}">Register</a></br>
-    </div>
-  </div>
+
+  <div class="footer" style="overflow: hidden; display: flex; justify-content: center; flex-direction: column; align-content: center;
+align-items: center">
+      <h6 style="margin:10; padding: 0">Copyrights @2024</h6>
+      <h6>University Of Windsor, Windsor, ON
+Canada</h6>
+</div>
+     </body>
 </html>
+
