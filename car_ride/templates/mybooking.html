@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/mybooking.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
+  <div class="dashboard1">
+    <h3>MY BOOKINGS</h3>
+  </div>
+  <div class="cssanimation sequence fadeInBottom">
+{% if book %}
+{% for i in book %}
+       <div class="container2" id="container2">
+    <div class="abc">
+      <img src="{{i.car.imageURL}}">
+      <table>
+        <tr>
+          <td style="background-color: #50a0bb;color: white;">Rider Name</td>
+          <td>{{i.car.cust.fname}}</td>
+        </tr>
+        <tr>
+          <td style="background-color: #50a0bb;color: white;">Rider Email</td>
+          <td>{{i.car.cust.email}}</td>
+        </tr>
+        <tr>
+          <td style="background-color: #50a0bb;color: white;">Contact</td>
+          <td>{{i.car.cust.mobile}}</td>
+        </tr>
+      </table>
+    </div>
+    <h3>Your Booking Details</h3>
+    <div class="title">
+      <div class="table-container">
+        <table class="table1">
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">Booking Reference Number</td>
+            <td>{{i.id}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">Booking Date</td>
+            <td>{{i.date_added}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">Customer Name</td>
+            <td>{{i.name}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">Contact Number</td>
+            <td>{{i.contact}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">Email</td>
+            <td>{{i.email}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">PickUp Date</td>
+            <td>{{i.pickup}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">Drop Date</td>
+            <td>{{i.dropoff}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">PickUp Address</td>
+            <td>{{i.pick_add}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #50a0bb;color: white;">Drop Address</td>
+            <td>{{i.drop_add}}</td>
+          </tr>
+            <tr>
+            <td style="background-color: #50a0bb;color: white;">Total Seats</td>
+            <td>{{i.num_seats_booked}}</td>
+          </tr>
+        </table>
+          <form action="{% url 'car_ride:cancel_booking' i.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="cancel-btn">Cancel Booking</button>
+            </form>
+          <form action="{% url 'car_ride:edit_booking' i.id %}" method="get">
+          <button type="submit" class="edit-btn">Edit Booking</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
