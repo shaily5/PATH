@@ -1,73 +1,131 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
-  <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
+
   <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">
+
+<style>
+    body {
+      background-image: url("{% static 'images/img10.jpg' %}");
+      background-size: cover;
+      background-repeat: no-repeat;
+     font-weight: 10;
+    }
+
+     #link:hover {
+        color: black;
+    }
+
+    .container {
+      display: flex;
+
+      height: 100%;
+    }
+
+    .image {
+      flex: 1;
+    }
+
+    .form-container {
+      flex: 1;
+    }
+    /* Added CSS for better alignment */
+    .input-box {
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    label, select {
+      display: block;
+      color: white;
+    }
+</style>
+
   <div>
     {% if messages %}
     {% for message in messages %}
+
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
       <center>{{ message }}</center>
     </div>
     {% endfor %}
     {% endif %}
   </div>
-  <div class="cssanimation sequence fadeInBottom">
-    <div class="container1">
-      <div class="title">
-        <h3>Sign Up Into New Account</h3>
-      </div>
+
+  <div class="container cssanimation sequence fadeInBottom">
+    <div class="image">
+      <img src="{% static 'images/img9.jpg' %}" alt="Image" style="width: 100%; height: 40%; margin-top: 30%; padding-right: 15%">
+    </div>
+
+    <div class="form-container" style="margin-top: 7%; margin-bottom: 5%">
+      <div class="container1" style="background-color: rgba(153, 97, 186, 1); border-radius: 20px; width: 650px; height: 700px">
+        <div class="title">
+          <h3 style="color: white">Sign Up Into New Account</h3>
+            <p style="color: white; text-align: center">Already a member? <a href="http://127.0.0.1:8000/login" id="link" style="padding-left: 1%; color: white">Log In here</a> </p>
+        </div>
+
+
       <div class="content">
         <form action="" method="post">
           {% csrf_token %}
           <div class="user-details">
             <div class="input-box">
-              <span class="details">Full Name</span>
-              <input type="text" name="fname" placeholder="Enter your name" required="">
+              <span class="details" style="color: white; font-weight: 10">Full Name</span>
+              <input type="text" name="fname" placeholder="Enter your name" required="" style="color: black; border-radius: 50px; border-color: white">
             </div>
+
             <div class="input-box">
-              <span class="details">Username</span>
-              <input type="text" name="usern" placeholder="Enter your username" required="">
+              <span class="details" style="color: white; font-weight: 10">Username</span>
+              <input type="text" name="usern" placeholder="Enter your username" required="" style="color: black; border-radius: 50px; border-color: white">
             </div>
+
             <div class="input-box">
-              <span class="details">Password</span>
-              <input type="password" name="password" placeholder="Enter your password" required="">
+              <span class="details" style="color: white; font-weight: 10">Password</span>
+              <input type="password" name="password" placeholder="Enter your password" required="" style="color: black; border-radius: 50px; border-color: white">
             </div>
+
             <div class="input-box">
-              <span class="details">Email</span>
-              <input type="email" name="email" placeholder="Enter your email" required="">
+              <span class="details" style="color: white; font-weight: 10">Email</span>
+              <input type="email" name="email" placeholder="Enter your email" required="" style="color: black; border-radius: 50px; border-color: white">
             </div>
+
             <div class="input-box">
-              <span class="details">Phone Number</span>
-              <input type="text" name="mobile" placeholder="Enter your number" required="">
+              <span class="details" style="color: white; font-weight: 10">Phone Number</span>
+              <input type="text" name="mobile" placeholder="Enter your number" required="" style="color: black; border-radius: 50px; border-color: white">
             </div>
+
             <div class="gender-details">
               <input type="radio" name="gender" value="Male" id="dot-1">
               <input type="radio" name="gender" value="Female" id="dot-2">
               <input type="radio" name="gender" value="Prefer not to say" id="dot-3">
-              <span class="gender-title">Gender</span>
+
+              <span class="gender-title" style="color: white; padding-left: 25px; font-weight: 10; font-size: 15px">Gender</span>
+
               <div class="category">
                 <label for="dot-1">
                   <span class="dot one"></span>
-                  <span class="gender">Male</span>
+                  <span class="gender" style="color: white; font-weight:10; padding-left: 10px">Male</span>
                 </label>
+
                 <label for="dot-2">
                   <span class="dot two"></span>
-                  <span class="gender">Female</span>
+                  <span class="gender" style="color: white; font-weight:10; padding-left: 10px">Female</span>
                 </label>
+
                 <label for="dot-3">
                   <span class="dot three"></span>
-                  <span class="gender">Prefer not to say</span>
+                  <span class="gender" style="color: white; font-weight:10; padding-left: 10px">Prefer not to say</span>
                 </label>
               </div>
             </div>
+
             <div class="input-box" style="width: 100%;">
-              <span class="details">Address</span>
-              <input type="text" name="address" placeholder="Enter your address" required="">
+              <span class="details" style="color: white; font-weight: 10">Address</span>
+              <input type="text" name="address" placeholder="Enter your address" required="" style="color: black; border-radius: 50px; border-color: white">
             </div>
-            <div class="input-box">
+
+            <div class="input-box" style="width: 49%;">
               <label for="inputState">State</label>
-              <select class="form-control" name="state" id="inputState" style="border:1px solid black">
+              <select class="form-control" name="state" id="inputState" style="border-radius: 50px; border-color: white">
                 <option value="SelectState">Select State</option>
                 <option value="Alberta">Alberta</option>
                 <option value="British Columbia">British Columbia</option>
@@ -84,17 +142,41 @@
                 <option value="Yukon">Yukon</option>
               </select>
             </div>
-              <div class="input-box" style="width: 100%;">
-              <span class="details">City</span>
-              <input type="text" name="city" placeholder="Enter City" required="">
+{#            <div class="input-box">#}
+{#              <label for="inputDistrict">City</label>#}
+{#              <select class="form-control" id="inputDistrict" name="city" style="border:1px solid black">#}
+{#                <option value="">Select City </option>#}
+{#              </select>#}
+{#            </div>#}
+
+        <div class="input-box" style="width: 49%; float: right;">
+              <label for="inputDistrict" style="padding-left: 25px">City</label>
+              <input type="text" name="city" placeholder="Enter City" required="" style="color: black; border-radius: 50px; border-color: white">
             </div>
+
+            <!--<div class="input-box">
+              <span class="details">City</span>
+              <input type="text" name="city" placeholder="Enter your City" required="">
+            </div>
+
+            <div class="input-box">
+              <span class="details">State</span>
+              <input type="text" name="state" placeholder="Enter your State" required="">
+            </div>-->
           </div>
+
           <div class="button">
-            <input type="submit" value="Register">
+            <input type="submit" value="Register" style="background-color: white; color: black; border-radius: 50px; border-color: white">
           </div>
         </form>
-        <p style="text-align: center;">Or <a href="{% url 'car_ride:login'%}">LOGIN</a> here</p>
+
       </div>
     </div>
+
+
+
   </div>
- {% endblock %}
+
+
+
+{%endblock%}

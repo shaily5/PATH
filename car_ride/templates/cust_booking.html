@@ -1,57 +1,89 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
-    <link rel="stylesheet" href="{% static 'styles/cust_booking.css'%}">
-  <div class="dashboard1">
-    <h3>MY BOOKINGS</h3>
-  </div>
-<div class="cssanimation sequence fadeInBottom">
-    {% if otherbookings %}
-    <table>
-        <tr>
-            <th>Booking Id</th>
-            <th>Customer Name</th>
-            <th>Customer Email</th>
-            <th>Customer Contact</th>
-            <th>Company</th>
-            <th>Car Name</th>
-            <th>Car Type</th>
-            <th>Booking Date</th>
-            <th>Pickup Date</th>
-            <th>Dropoff Date</th>
-            <th>Pickup Address</th>
-            <th>Dropoff Address</th>
-            <th>Seats Booked</th>
-            <th>Action</th>
-        </tr>
-        {% for booking in otherbookings %}
-        <tr>
-            <td>{{booking.id}}</td>
-            <td>{{booking.name.fname}}</td>
-            <td>{{booking.email}}</td>
-            <td>{{booking.contact}}</td>
-            <td>{{booking.car.company}}</td>
-            <td>{{booking.car.car_name}}</td>
-            <td>{{booking.car.car_type}}</td>
-            <td>{{booking.date_added}}</td>
-            <td>{{booking.pickup}}</td>
-            <td>{{booking.dropoff}}</td>
-            <td>{{booking.pick_add}}</td>
-            <td>{{booking.drop_add}}</td>
-            <td>{{booking.num_seats_booked}}</td>
-            <td>
-                <form action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Cancel</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p>
-        <center>No bookings yet!</center><br><br><br><br><br><br><br><br><br><br><br><br>
-    </p>
-    {% endif %}
-</div>
+
+    <style>
+    .booking-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding-left: 20px;
+        margin-top: 20px;
+        justify-content: flex-start;
+    }
+
+    .booking-card {
+        background-color: rgba(153, 97, 186, 0.2);
+        border: 2px solid #9961BA;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: calc(33% - 20px);
+        margin-right: 20px;
+    }
+
+    .booking-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .booking-card h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .booking-card p {
+        margin: 10px 0;
+    }
+
+    .booking-card button {
+        padding: 5px 10px;
+        background-color: #9961BA;
+        color: #fff;
+        border-color: #9961BA;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .booking-card button:hover {
+        background-color: #FFFFFF;
+        color: #9961BA;
+    }
+
+    .booking-card p{
+        margin-left: 10px;
+    }
+
+    </style>
+
+
+
+    <div class="cssanimation sequence fadeInBottom">
+        {% if otherbookings %}
+            <div class="booking-container">
+                {% for booking in otherbookings %}
+                    <div class="booking-card">
+                        <h4 style="margin-left: 20px">Booking ID: {{ booking.id }}</h4>
+                        <p><strong>Customer Name:</strong>{{ booking.name.fname }}</p>
+                        <p><strong>Customer Email:</strong> {{ booking.email }}</p>
+                        <p><strong>Customer Contact:</strong> {{ booking.contact }}</p>
+                        <p><strong>Pickup Date:</strong> {{ booking.pickup }}</p>
+                        <p><strong>Dropoff Date:</strong> {{ booking.dropoff }}</p>
+                        <p><strong>Pickup Address:</strong> {{ booking.pick_add }}</p>
+                        <p><strong>Dropoff Address:</strong> {{ booking.drop_add }}</p>
+                        <p><strong>Seats Booked:</strong> {{ booking.num_seats_booked }}</p>
+                        <form action="{% url 'cancel_booking' booking.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Cancel Booking</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>
+                <center>There are No Bookings</center>
+            </p>
+        {% endif %}
+    </div>
+
 {% endblock %}
