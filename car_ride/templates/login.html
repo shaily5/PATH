@@ -1,29 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css'%}">
-    <script src="{% static 'js/home.js'%}"></script>
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <center>{{ message }}</center>
+
+<link rel="stylesheet" href="{% static 'styles/login.css' %}">
+<link rel="stylesheet" href="{% static 'styles/home.css'%}">
+<link rel="stylesheet" href="{% static 'styles/base.css'%}">
+<script src="{% static 'js/home.js'%}"></script>
+
+<style>
+    body {
+        background-image: url("{% static 'images/img10.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    #link:hover {
+        color: black;
+    }
+</style>
+
+<div class="container" style="max-width: 2500px; margin-left: 5%">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'images/img9.jpg' %}" alt="Image" style="width: 100%; height: 50%; margin-top: 25%; padding-right: 20%">
         </div>
-        {% endfor %}
-        {% endif %}
-    </div>
-    <div class="cssanimation sequence fadeInBottom">
-        <div>
-            <form action="" method="post">
-                {% csrf_token %}
-                <h3>Login To Your Account</h3>
-                <label for="username">Username</label>
-                <input type="text" placeholder="Username" name="usern">
-                <label for="password">Password</label>
-                <input type="password" placeholder="Password" name="password">
-                <button>LOG IN</button></br></br>
-                <p style="text-align: center;">Or <a href="{% url 'car_ride:register'%}">REGISTER</a> here</p>
-            </form></br>
+        <div class="col-md-6">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div>
+                <form action="" method="post" style="width: 543px; height: 518px; background: rgba(153, 97, 186, 1); color: white; border-radius: 20px; box-shadow: none; margin-right: 30%">
+                    {% csrf_token %}
+                    <h4 style="text-align: center; margin-top: 5%" class="head-cont"><b style="color: white">Welcome Again</b></h4>
+                    <p style="color: white; text-align: center">New User? <a href="{% url "car_ride:register" %}" id="link" style="padding-left: 1%">Sign Up here</a> </p>
+
+
+                    <label for="username" style="color: white;">Enter Username</label>
+                    <input type="text" placeholder="Username" name="usern" style="border-radius: 50px; border-color: white; color: black; width: 100%; background-color: white">
+
+                    <label for="password" style="color: white">Password</label>
+                    <input type="password" placeholder="Password" name="password" style="color: black; border-radius: 50px; border-color: white;  width: 100%; background-color: white">
+
+                    <button style="background-color: white; color: black; border-color: white; border-radius: 50px; width: 100%;">Log In</button><br><br>
+
+                </form><br>
+            </div>
         </div>
     </div>
-{% endblock %}
+</div>
+
+{%endblock%}
