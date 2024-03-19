@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, date
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 # import mysql.connector as sql
+from django.utils import timezone
 from django.db import IntegrityError, transaction
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -10,10 +11,13 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import JsonResponse, HttpResponseForbidden, HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 # from requests import request
 from django.contrib.auth.hashers import make_password
-from .models import Customer, Mycar, ContactUs, Booking
+from .models import Customer, Mycar, ContactUs, Booking, Notification
 from django.contrib.auth.decorators import login_required
 from .forms import SearchForm, AddcarForm
+import random
+import string
 
+current_time = timezone.now().strftime("%H:%M:%S %d-%m-%Y")
 def LoginUser(request):
     if request.method == "GET":
         return render(request, "login.html")
@@ -26,10 +30,19 @@ def LoginUser(request):
         if user is not None:
             login(request, user)
             print("from login", user)
-            return redirect('dashboard')
+            print("current: ", timezone.now())
+
+            try:
+                customer = Customer.objects.get(usern=user)
+            except Customer.DoesNotExist:
+                customer = None
+            if customer:
+                login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
+                Notification.objects.create(user=customer, message=login_message)
+            return redirect('car_ride:dashboard')
         else:
             messages.error(request, "Invalid username or password!")
-            return redirect('login')
+            return redirect('car_ride:login')
     return render(request, "login.html")
 
 def Register(request):
@@ -56,10 +69,10 @@ def Register(request):
                 cust = Customer.objects.create(usern=obj, fname=fname, email=email, mobile=mobile, gender=gender,
                                                address=address, city=city, state=state)
                 messages.success(request, "Account created successfully!")
-                return redirect('login')
+                return redirect('car_ride:login')
             except IntegrityError:
                 messages.warning(request, "Account already exists!")
-                return redirect('register')
+                return redirect('car_ride:register')
         return render(request, "registration.html")
 
 # Home page
@@ -76,31 +89,34 @@ def dash(request):
 # Function to add user's car in the database
 # @login_required(login_url='login')
 def Addcar(request):
-    # print('Hello1')
+    print('Hello1')
     if request.method == 'GET':
-        # print('Hello2', request.user.is_authenticated, type(request.user))
+        print('Hello2', request.user.is_authenticated, type(request.user))
         if request.user.is_authenticated:
-            # print('Hello3')
+            print('Hello3')
             form = AddcarForm()
-            # print('Hello4')
+            print('Hello4')
             return render(request, "addmycar.html", {'form': form})
 
     if request.method == 'POST':
-        # print('Hello5')
+        print('Hello5')
         if request.user.is_authenticated:
             form = AddcarForm(request.POST, request.FILES)
             print(form)
             if form.is_valid():
                 form.instance.cust = request.user.customer
                 form.save()
-                return redirect('dashboard')
+
+                # Create a notification for the user
+                notification_message = f'{current_time}: Your car has been added successfully!'
+                Notification.objects.create(user=request.user.customer, message=notification_message)
+
+                return redirect('car_ride:dashboard')
             else:
                 # If form is invalid, render form again with errors
                 return render(request, "addmycar.html", {'form': form})
 
     return render(request, "addmycar.html")
-
-
 
 def CustomerBookings(request):
     if request.method == 'GET':
@@ -112,7 +128,6 @@ def CustomerBookings(request):
             otherbookings = Booking.objects.filter(car__in=mycar).exclude(name=cust)
             context = {'otherbookings': otherbookings}
             return render(request, "cust_booking.html", context)
-
 
 def Search(request):
     if request.method == "GET":
@@ -136,6 +151,10 @@ def Search(request):
                 cars = cars.filter(from_date=from_date)
             if to_date:
                 cars = cars.filter(to_date=to_date)
+
+            if request.user.is_authenticated:
+                search_notification = f"{current_time}: You searched for cars from {from_place} to {to_place} for {from_date} to {to_date}"
+                Notification.objects.create(user=request.user.customer, message=search_notification)
 
             return render(request, "searched_cars.html", {'cars': cars})
         else:

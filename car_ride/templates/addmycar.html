@@ -5,28 +5,20 @@
   <div>
     {% if messages %}
     {% for message in messages %}
-
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
       <center>{{ message }}</center>
-
     </div>
     {% endfor %}
     {% endif %}
   </div>
-
 <div class="cssanimation sequence fadeInBottom">
     <div class="addcar">
         <h3>Enter Journey Details</h3>
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-{#            <div class="col-25"><label>Car Type:</label></div>#}
-{#            <div class="col-75">#}
-{#                {{ form.car_type }}#}
-{#            </div>#}
             <button type="submit">SUBMIT</button>
         </form>
     </div>
 </div>
-
 {% endblock %}

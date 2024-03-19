@@ -2,13 +2,10 @@
 {% load static %}
 {% block body_block %}
     <link rel="stylesheet" href="{% static 'styles/cust_booking.css'%}">
-
   <div class="dashboard1">
     <h3>MY BOOKINGS</h3>
-</div>
-
+  </div>
 <div class="cssanimation sequence fadeInBottom">
-
     {% if otherbookings %}
     <table>
         <tr>
@@ -25,7 +22,7 @@
             <th>Pickup Address</th>
             <th>Dropoff Address</th>
             <th>Seats Booked</th>
-            <th>Action</th> <!-- New column for Cancel button -->
+            <th>Action</th>
         </tr>
         {% for booking in otherbookings %}
         <tr>
@@ -43,7 +40,7 @@
             <td>{{booking.drop_add}}</td>
             <td>{{booking.num_seats_booked}}</td>
             <td>
-                <form action="{% url 'cancel_booking' booking.id %}" method="post">
+                <form action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit">Cancel</button>
                 </form>
@@ -57,7 +54,4 @@
     </p>
     {% endif %}
 </div>
-
-
-
 {% endblock %}
