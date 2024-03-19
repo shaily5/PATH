@@ -23,9 +23,9 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # path('', include('PATH.urls')),
-    path('car_rental/', include('car_rental.urls')),
-    path('car_ride/', include('car_ride.urls')),
+    path('', include('PATH.urls')),
+    path('', include('car_rental.urls')),
+    path('', include('car_ride.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

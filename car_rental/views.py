@@ -152,7 +152,7 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
                       "if an account exists with the email you entered. You should receive them shortly." \
                       " If you don't receive an email, " \
                       "please make sure you've entered the address you registered with, and check your spam folder."
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('rentallogin')
 
 def rental_reservation_view(request):
     # Retrieve customer's details from the session
