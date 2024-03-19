@@ -1,16 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'styles/searched_cars.css'%}">#}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">#}
     <link rel="stylesheet" href="{% static 'styles/search.css'%}">
-    
-
     <div class="parentDiv">
-
-        {% for car in cars %}
-<div class="content1">
-        
+    {% for car in cars %}
+    <div class="content1">
     <img src="{{ car.car_img.url }}" alt="Car Image">
     <p>Owner Name: {{ car.cust.fname }} <br> Contact No.: {{ car.cust.mobile }} <br> 
         From: {{ car.from_place }} <br> To: {{ car.to_place }} <br>
@@ -24,8 +18,5 @@
     <center>No cars are available!</center><br><br><br><br><br><br><br><br><br><br><br><br>
 </p>
 {% endfor %}
-
     </div>
-
-
-       {% endblock %}
+{% endblock %}

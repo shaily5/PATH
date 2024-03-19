@@ -6,6 +6,7 @@ from car_rental import views
 from django.contrib.auth import views as auth_views
 from car_rental.views import ResetPasswordView
 
+
 urlpatterns = [
     path('cars/', views.car_list, name='car-list'),
     path('rental_reservation_list/', views.rental_reservation_list, name='rental_reservation_list'),

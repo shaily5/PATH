@@ -19,26 +19,24 @@
             </div>
         </ul>
     <ul id="rest">
-{#      <ul><a href="{% url 'home' %}" class="active">Home</a></ul>#}
-{#      <ul><a href="{% url 'searchmycar' %}">Book Your Car</a></ul>#}
-{#      {% if user.is_authenticated %}#}
-{#      <ul><a href="{% url 'dashboard' %}">Dashboard</a></ul>#}
-{#      <ul><a href="{% url 'allcars' %}">Cars</a></ul>#}
-{#      <ul><a href="{% url 'mycar_list' %}">My Cars</a></ul>#}
+      <ul><a href="{% url 'car_ride:home' %}" class="active">Home</a></ul>
+      <ul><a href="{% url 'car_ride:searchmycar' %}">Book Your Car</a></ul>
+      {% if user.is_authenticated %}
+      <ul><a href="{% url 'car_ride:dashboard' %}">Dashboard</a></ul>
+{#      <ul><a href="{% url 'car_ride:allcars' %}">Cars</a></ul>#}
+{#      <ul><a href="{% url 'car_ride:mycar_list' %}">My Cars</a></ul>#}
 {#      <ul><a href="{% url 'logout' %}">Logout</a></ul>#}
-{#      {% else %}#}
-{#      <ul><a href="{% url 'allcars' %}">Cars</a></ul>#}
-{#      <ul><a href="{% url 'register' %}">Register</a></ul>#}
-{#      <ul><a href="{% url 'login' %}">Login</a></ul>#}
-{#      <ul><a href="{% url 'contact' %}">Contact us</a></ul>#}
-{#      {% endif %}#}
+      {% else %}
+{#      <ul><a href="{% url 'car_ride:allcars' %}">Cars</a></ul>#}
+      <ul><a href="{% url 'car_ride:register' %}">Register</a></ul>
+      <ul><a href="{% url 'car_ride:login' %}">Login</a></ul>
+{#      <ul><a href="{% url 'car_ride:contact' %}">Contact us</a></ul>#}
+      {% endif %}
     </ul>
     </div>
-
 <div>
     {% block body_block %}*** {% endblock %}
 </div>
-    
   <div class="footer">
     <div class="section1">
       <h3>Contact us</h3>
@@ -46,14 +44,12 @@
       <i class="fa fa-phone">Mobile: 1234567890</i></br>
       <i class="fa fa-envelope">Email: abc@gmail.com</i></br>
     </div>
-
     <div class="section1">
       <h3>Project Links</h3>
-{#      <a href="{% url 'home' %}">Home</a></br>#}
-{#      <a href="{% url 'contact' %}">Contact</a></br>#}
-{#      <a href="{% url 'login' %}">Login</a></br>#}
-      <a href="{% url 'register' %}">Register</a></br>
-
+      <a href="{% url 'car_ride:home' %}">Home</a></br>
+{#      <a href="{% url 'car_ride:contact' %}">Contact</a></br>#}
+      <a href="{% url 'car_ride:login' %}">Login</a></br>
+      <a href="{% url 'car_ride:register' %}">Register</a></br>
     </div>
   </div>
 </html>
