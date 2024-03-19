@@ -1,0 +1,818 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.background-image {
+  background-image: url("../images/bghome.png"); /* Replace 'background.jpg' with your image path */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Set height of background image */
+  width: 100vw; /* Set width of background image */
+
+  /* Fix the background image */
+  z-index: -1; /* Ensure the background image is behind other elements */
+  top: 0;
+  left: 0;
+}
+
+.navbar {
+  align-items: center;
+  /* justify-content: space-between; */
+  background-color: #32213b;
+  z-index: 1;
+  border-radius: 20px;
+  position: fixed;
+
+  top: 32px; /* Adjust top position to add space between navbar and top of viewport */
+  left: 0;
+  right: 0;
+  padding: 14px 28px;
+  margin: 0 50px;
+
+  z-index: 1; /* Ensure navbar stays on top of the background image */
+}
+
+.containers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-logo {
+  display: contents;
+}
+.navbar-logo img {
+  height: 59px; /* Adjust logo height as needed */
+  width: 130px;
+  border-radius: 8px;
+}
+
+.navbar-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 26px 0 26px;
+  display: flex;
+  margin-right: 20px;
+}
+.navbar-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* margin-right: 20px; */ /* Add right margin to the menu */
+  gap: 20px;
+}
+
+.navbar-menu li {
+  margin: 0 10px;
+}
+
+.navbar-menu li a {
+  color: #838e9e;
+  font-size: 16px;
+  text-decoration: none;
+  position: relative;
+}
+.navbar-menu li a.active {
+  color: #ffff; /* Change text color to white for active link */
+}
+
+.navbar-menu li a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; /* Position the black line below the link */
+  left: 0;
+  width: 0; /* Initially set to zero width */
+  height: 2px; /* Height of the black line */
+  background-color: #ffff; /* Black color */
+  transition: width 0.3s; /* Smooth transition effect */
+  top: 49px;
+}
+
+.navbar-menu li a:hover::after,
+.navbar-menu li a.active::after {
+  /* Apply styles for hover and active states */
+  width: 100%; /* Expand the black line to full width */
+}
+
+.navbar-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.login-btn,
+.signup-btn {
+  padding: 16px 32px;
+  margin-left: 10px;
+  border: 1px solid #9961ba;
+  background: #32213b;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 7px;
+}
+.login-btn.active,
+.signup-btn.active {
+  background: #9961ba; /* Color for active login and signup buttons */
+}
+
+/* Existing CSS for navbar and background image */
+
+/* Existing CSS for navbar and background image */
+
+.box {
+  width: 837px; /* Fixed width */
+
+  position: absolute;
+  top: 180px;
+  left: 205px;
+  padding: 32px; /* Padding */
+  gap: 48px; /* Gap */
+  background-color: #00000036; /* Example background color with transparency */
+}
+
+.inner-box {
+  /* Adjusted width considering padding */
+  height: auto; /* Auto height */
+  padding: 12px 24px; /* Padding */
+  gap: 8px; /* Gap */
+  border-radius: 4px; /* Border radius */
+  background-color: #00000000; /* Example background color */
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+.inner-button {
+  width: 256px; /* Fixed width */
+  height: 60px; /* Hug height */
+  border-radius: 4px; /* Border radius */
+  padding: 12px 24px; /* Padding */
+  background-color: #9961bae9; /* Example background color */
+  color: #ffffff; /* Text color */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  font-family: "Montserrat", sans-serif; /* Font */
+}
+
+.inner-button:hover {
+  background-color: #9961ba; /* Darker background color on hover */
+}
+.inner-heading {
+  font-family: "Montserrat", sans-serif; /* Font */
+  font-weight: 800; /* Weight */
+  font-size: 48px; /* Size */
+  line-height: 58.51px; /* Line height */
+  margin: 0; /* Remove default margin */
+  text-align: left; /* Center left */
+  color: #ffffff; /* Text color */
+}
+.inner-paragraph {
+  font-family: "Poppins", sans-serif; /* Font */
+  font-weight: 500; /* Weight */
+  font-size: 24px; /* Size */
+  line-height: 40px; /* Line height */
+  margin: 0; /* Remove default margin */
+  text-align: left; /* Center left */
+  color: #ffffff; /* Text color */
+}
+
+.outer-box {
+  width: 1120px; /* Fixed width */
+  height: 441px; /* Hug height */
+  /* position: absolute; */
+  top: 745px;
+  left: 159.5px;
+  margin: 0 auto;
+}
+.inner2-box {
+  gap: 40px; /* Gap */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Example background color with transparency */
+  display: flex;
+  align-items: center;
+}
+
+.image-box {
+  width: 50%; /* 50% width for the image box */
+}
+
+.text-box {
+  width: 50%; /* 50% width for the text box */
+}
+
+.image-box img {
+  max-width: 100%; /* Ensure image stays within container */
+}
+
+.text-box {
+  width: 548px; /* Fixed width */
+  height: auto; /* Hug height */
+  gap: 24px; /* Gap */
+}
+
+.paragraph {
+  width: 548px; /* Fixed width */
+  height: 240px; /* Hug height */
+  font-family: "Poppins", sans-serif; /* Font family */
+  font-weight: 400; /* Font weight */
+  font-size: 24px; /* Font size */
+  line-height: 40px; /* Line height */
+  margin: 0; /* Remove default margin */
+  color: #000; /* Text color */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+.read-more {
+  /* width: 130px; Fixed width */
+  height: 36px; /* Fixed height */
+  font-family: "Poppins", sans-serif; /* Font family */
+  font-weight: 500; /* Font weight */
+  font-size: 24px; /* Font size */
+  line-height: 36px; /* Line height */
+  color: #9961baf4; /* Text color */
+  background-color: transparent; /* Transparent background */
+  border: none;
+  border-radius: 4px; /* Border radius */
+  cursor: pointer; /* Cursor style */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.read-more:hover {
+  color: #9961ba;
+}
+
+.about-heading {
+  font-family: "Poppins", sans-serif; /* Font family */
+  font-weight: 500; /* Font weight */
+  font-size: 32px; /* Font size */
+  line-height: 39.01px; /* Line height */
+
+  color: #141414;
+
+  text-align: center;
+}
+.about-heading hr {
+  border: 2px solid #9961ba;
+}
+
+.service-section {
+  width: 100%; /* Fixed width */
+  /* height: 394px; Hug height */
+
+  top: 1246px;
+  gap: 40px; /* Gap */
+}
+
+.section-heading {
+  font-family: "Poppins", sans-serif; /* Font family */
+  margin: 0; /* Remove default margin */
+  padding: 20px 0; /* Remove default padding */
+  font-size: 32px; /* Font size */
+  line-height: 48px; /* Line height */
+  text-align: center; /* Center align */
+  font-weight: 500;
+  color: #141414;
+}
+.section-heading hr {
+  width: 411px;
+  border: 2px solid #9961ba;
+}
+
+.content {
+  /* Calculated height considering section-heading and gap */
+  padding: 0 32px; /* Padding */
+  /* margin: 0 auto; */
+  background: #9961ba;
+}
+.content {
+  padding: 50px 32px; /* Padding */
+  background: #9961ba;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 20px;
+  width: 1142px;
+  margin: 30px auto;
+}
+
+.input-group {
+  width: 1040px; /* Fixed width for input groups */
+  /* height: 60px; Fixed height for input groups */
+}
+.input-group1 input[type="date"]::before {
+  content: attr(placeholder);
+  color: #999;
+}
+.input-group2 input[type="time"]::before {
+  content: attr(placeholder);
+  color: #999;
+}
+
+.input-group1 input {
+  width: 320px;
+  height: 50px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.input-group1 select {
+  width: 320px;
+  height: 67px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.input-group2 input {
+  width: 220px;
+  height: 50px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.input-group2 select {
+  width: 220px;
+  height: 67px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.input-group1 input:focus,
+.input-group2 input:focus {
+  outline: none; /* Removes the default focus outline */
+  border-color: white; /* Optionally change border color on focus */
+}
+.input-group1 select:focus,
+.input-group2 select:focus {
+  outline: none; /* Removes the default focus outline */
+  border-color: white; /* Optionally change border color on focus */
+}
+.book-now {
+  padding: 16px 69px;
+  background-color: #9961ba; /* Button background color */
+  color: #fff; /* Button text color */
+  border: 3px solid #ffffff; /* Remove button border */
+  border-radius: 4px; /* Border radius for the button */
+  cursor: pointer; /* Cursor style */
+  transition: background-color 0.3s ease; /* Smooth transition */
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.rental-ride {
+  /* position: absolute; */
+  top: 1691px;
+  left: 160px;
+  gap: 40px;
+}
+.rental-ride-heading {
+  margin: 50px 0;
+
+  font-family: "Poppins", sans-serif; /* Font family */
+  margin: 0; /* Remove default margin */
+  padding: 20px 0; /* Remove default padding */
+  font-size: 32px; /* Font size */
+  line-height: 48px; /* Line height */
+  text-align: center; /* Center align */
+  font-weight: 500;
+  color: #141414;
+}
+
+.rental-ride-heading hr {
+  width: 432px;
+  border: 2px solid #9961ba;
+}
+
+.box1 {
+  width: 1270px;
+  /* height: 547px; */
+  margin: 0 auto;
+}
+
+/* .car-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+} */
+.car-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.car {
+  width: 357px;
+  /* height: 403px; */
+  border: 1px solid #ccc;
+  border-radius: 13px;
+  padding: 18px 24px 23px 24px;
+  gap: 12px;
+  text-align: center;
+}
+
+.car img {
+  width: 353.5px;
+  height: 183px;
+  border-radius: 14px;
+}
+
+/* .car-details {
+  width: 315px;
+  height: 167px;
+} */
+
+.car-details {
+  /* width: 199px; */
+  /* height: 62px; */
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5px;
+  align-items: left;
+  margin: 10px 0px 50px 0;
+}
+
+.heading {
+  /* width: 199px; */
+  height: 23px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: left;
+}
+
+.details-row {
+  display: flex;
+  gap: 16px;
+  /* width: 309px; */
+}
+
+.detail {
+  /* width: 199px; */
+  height: 23px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22.5px;
+  text-align: center;
+}
+.detail i {
+  padding: 0 5px;
+}
+.additional-details {
+  /* width: 315px; */
+  /* height: 65px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.price {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+  text-align: left;
+}
+.car.hidden {
+  display: none;
+}
+.action-button {
+  width: 106px;
+  height: 35px;
+  border-radius: 4px;
+  padding: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #9961ba;
+  border: none;
+  color: white;
+}
+
+.premium-services {
+  width: 100%;
+  height: 552px;
+  /* position: relative; */
+  top: 2316px;
+
+  margin: 0 auto;
+}
+
+.premium-services-content {
+  width: 100%;
+  height: 330px;
+  /* position: relative; */
+  background: #9961ba;
+  top: 0;
+}
+
+.premium-heading {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  text-align: center;
+  color: #ffffff;
+  padding: 30px 0 0 0;
+  margin: 0;
+}
+.premium-heading hr {
+  width: 356px;
+  border: 2px solid #ffffff;
+  /* border-block: revert-layer; */
+}
+.section-paragraph {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  margin: 0 0 35px 0;
+  color: #ffffff;
+}
+
+.service-box-container {
+  width: 943px;
+  /* height: 506px; */
+  /* position: relative; */
+  top: 46px;
+  left: 248px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 0 auto;
+}
+
+.service-box {
+  width: calc((100% - 2 * 40px) / 3); /* Adjusted for gap */
+  /* height: 322px; */
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.service-box {
+  text-align: center;
+  border-radius: 14px;
+}
+
+.service-box img {
+  width: 56px;
+  height: 56px;
+  padding: 50px 0 20px 0;
+}
+
+.service-heading {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 33px;
+  margin-top: 20px;
+}
+
+.service-description {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22.5px;
+  margin-top: 10px; /* Adjust as needed */
+  padding: 20px 40px;
+}
+
+.clients-say {
+  width: 1120px;
+  height: 513px;
+
+  margin: 0 auto;
+}
+
+
+
+
+.clients-say-heading {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  text-align: center;
+  color: #141414;
+}
+.clients-say-heading hr {
+  width: 358px;
+  border: 2px solid #9961ba;
+}
+
+.client-feedback {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 31px;
+  align-items: center;
+}
+
+.client-feedback-left,
+.client-feedback-right {
+  display: flex;
+  align-items: center;
+}
+
+.client-feedback-right {
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.arrow {
+  background: none;
+  text-align: center;
+  border: none;
+}
+
+.client-box {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #c4c4c4;
+  border-radius: 14px;
+}
+.client-image{
+  display: ruby-text;
+}
+.client-image img {
+  width: 128px;
+  height: 128px;
+  padding: 20px 0 0 0;
+}
+
+.client-details {
+  text-align: center;
+}
+
+.client-name {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 31.69px;
+}
+
+.client-comment {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 0 20px 20px 20px;
+}
+
+
+
+
+
+.number-count {
+  padding: 64px 160px;
+  gap: 160px;
+  background: #9961ba;
+}
+.number-count-container {
+  width: 930px;
+  /* height: 417px; */
+  gap: 24px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.count-container {
+  border-radius: 4px;
+  gap: 8px;
+}
+.count-container h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  /* line-height: 60px; */
+  text-align: center;
+  color: white;
+  margin: 0;
+}
+.count-container p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  /* line-height: 36px; */
+  text-align: center;
+  color: white;
+  margin: 0;
+}
+
+.contact-us {
+  width: 1055px;
+  /* height: 638px; */
+  top: 3788px;
+  left: 192px;
+  margin: 0 auto;
+}
+.contact-us h2 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+  text-align: center;
+  color: #141414;
+}
+.contact-us hr {
+  width: 179px;
+  border: 2px solid #9961ba;
+}
+.contact-width {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 40px 56px;
+}
+.contact-container {
+  text-align: left;
+}
+.contact-container input {
+  width: 405px;
+  /* height: 60px; */
+  border-radius: 12px;
+  border: 1px solid;
+  padding: 20px 16px;
+  margin: 0 0 20px 0;
+  gap: 10px;
+  border: 1px solid #c4c4c4;
+  background: #fbfbfb;
+}
+.contact-container .send-message {
+  font-family: "Poppins", sans-serif;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: #9961ba;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.contact-image img {
+  width: 451px;
+  height: 462px;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbar-menu {
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .navbar-buttons {
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .login-btn,
+  .signup-btn {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+
