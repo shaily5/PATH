@@ -159,3 +159,22 @@ def Search(request):
             return render(request, "searched_cars.html", {'cars': cars})
         else:
             return render(request, "search.html", {'form': form})
+
+# Function to show logged in user's bookings from the dashboard
+def MyBookings(request):
+    print("from my booking", request.user, request.method)
+    if request.method == 'GET':
+        print("-----")
+        if request.user.is_authenticated:
+            user = request.user
+            cust = Customer.objects.get(usern=user)
+            print("User:", request.user)
+            print("Customer Name:", cust)
+            # Retrieve bookings excluding those related to canceled cars
+            custs = Booking.objects.filter(name=cust, car__isnull=False, car__in=Mycar.objects.all(), pickup__gte=datetime.now())
+            # custs = Booking.objects.filter(name=cust)
+            print("Bookings", custs)
+            context = {'book': custs}
+            return render(request, "mybooking.html", context)
+    else:
+        return HttpResponseForbidden("You are not authorized to perform this action.")

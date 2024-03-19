@@ -10,4 +10,5 @@ urlpatterns=[
     path('addmycar/', views.Addcar, name="addmycar"),
     path('customerbookings/', views.CustomerBookings, name="customerbookings"),
     path('searchmycar/', views.Search, name="searchmycar"),
+    path('mybookings/', views.MyBookings, name="mybookings"),
 ]
