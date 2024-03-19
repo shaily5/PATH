@@ -178,3 +178,13 @@ def MyBookings(request):
             return render(request, "mybooking.html", context)
     else:
         return HttpResponseForbidden("You are not authorized to perform this action.")
+
+
+def MyAccount(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            user = request.user
+            cust = Customer.objects.get(usern=user)
+            # print(cust)
+            context = {'cust': cust}
+            return render(request, "myaccount.html", context)
