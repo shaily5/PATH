@@ -28,9 +28,9 @@ def user_login(request):
 
     return render(request, 'PATH/login.html')  # Replace 'login.html' with the name of your login template
 
-def home(request):
+def homepage(request):
 
-    return render(request, 'PATH/home.html')  # Replace 'home.html' with the name of your home template
+    return render(request, 'PATH/homepage.html')  # Replace 'home.html' with the name of your home template
 
 def register_user(request):
     if request.method == 'POST':
