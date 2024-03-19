@@ -1,0 +1,20 @@
+.container1 {
+            margin-top: 50px;
+        }
+
+
+        button {
+            padding: 10px;
+            background-color: #50a0bb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            vertical-align: middle;
+            width: 100%;
+
+        }
+
+        button:hover {
+            background-color: #31464d;
+        }
