@@ -25,14 +25,30 @@
 
                 <form method="POST">
                   {% csrf_token %}
-                        {{ msg }}
+                <div style="padding: 0 0 50px 0;">
+                        <h2>Sign up</h2>
+                        <p>Alrady register? <a href="{% url 'rentallogin' %}" style="color: white;"> Sign in for free   </a></p>
+
+                    </div>
+                        {% if msg %}
+                            {{ msg }}
+                        {% endif %}
+
+
                         {% if errorMsg %}
                             <h1>Error</h1>
                             {{ errorMsg }}
-                        {% else %}
-                            <h2> No error</h2>
                         {% endif %}
                         {{ addUserForm }}
+                <div style="margin-bottom: 30px;">
+                            <div class="form-flex">
+                                <div class="check">
+                                    <input type="checkbox" id="checkbox1" class="checkbox-input">
+                                    <label for="checkbox1" class="checkbox-label">Remember me ?</label>
+                                </div>
+                                <a class="forg" href="">Forget password?</a>
+                            </div>
+                </div>
 
                     <button type="submit">Sign Up</button>
                 </form>

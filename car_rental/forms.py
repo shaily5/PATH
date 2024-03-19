@@ -45,6 +45,8 @@ class LoginForm(forms.ModelForm):
     email = forms.EmailField(required=True,
                              widget=forms.TextInput(attrs={'placeholder': 'Email',
                                                            'class': 'form-control',
+                                                           'id': 'email',
+                                                           'name': 'email',
                                                            }))
 
     password = forms.CharField(max_length=50,
@@ -55,8 +57,8 @@ class LoginForm(forms.ModelForm):
                                                                  'id': 'password',
                                                                  'name': 'password',
                                                                  }))
-    remember_me = forms.BooleanField(required=False)
+    # remember_me = forms.BooleanField(required=False, label='Remember me?', widget=forms.CheckboxInput(attrs={'class': 'checkbox-input', 'id': 'checkbox1'}))
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'password', 'remember_me']
+        fields = ['email', 'password']

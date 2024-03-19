@@ -28,19 +28,32 @@
                 {% if errMsg %}
                     {{ errMsg }}
                 {% endif %}
-                <form method="POST">
+                <form action="{% url 'rentallogin' %}" method="POST">
                     {% csrf_token %}
+                    <div style="padding: 0 0 50px 0;">
+                        <h2>Welcome again</h2>
+                        <p>New to PATH? <a href="{% url 'signup' %}" style="color: white;"> Sign up for free </a></p>
+                    </div>
                     {{ LoginForm }}
+                    <div style="margin-bottom: 30px;">
+                            <div class="form-flex">
+                                <div class="check">
+                                    <input type="checkbox" name="remember_me" id="checkbox1" class="checkbox-input">
+                                    <label for="checkbox1" class="checkbox-label">Remember me ?</label>
+                                </div>
+                                <a class="forg" href="">Forget password?</a>
+                            </div>
+                    </div>
                     <button type="submit">Login</button>
                 </form>
 
             </div>
-            <div class="card-footer text-center">
-                            <div class="small">
-                                <a href="{% url 'signup' %}">Don't have an account yet? Go to signup</a><br>
-                                <a href="{% url 'password_reset' %}"><i>Forgot Password?</i></a>
-                            </div>
-            </div>
+{#            <div class="card-footer text-center">#}
+{#                            <div class="small">#}
+{#                                <a href="{% url 'signup' %}">Don't have an account yet? Go to signup</a><br>#}
+{#                                <a href="{% url 'password_reset' %}"><i>Forgot Password?</i></a>#}
+{#                            </div>#}
+{#            </div>#}
         </div>
     </div>
     </div>

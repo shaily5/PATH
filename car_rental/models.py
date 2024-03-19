@@ -19,6 +19,8 @@ class CustomUser(models.Model):
 
     email = models.EmailField(max_length=80, unique=True,default='')
     password = models.CharField(max_length=128,null=False,default='')
+    id = models.BigAutoField(primary_key=True)  # Add this line to explicitly define the id field
+
     #
     # password = models.CharField(max_length=50,
     #                             required=True,

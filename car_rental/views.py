@@ -67,31 +67,20 @@ def forgot_password(request):
     return render(request, 'car_rental/authentication/forget_pass.html', )
 
 
-class CustomLoginView(LoginView):
-    form_class = LoginForm()
-
-    def form_valid(self, form):
-        remember_me = form.cleaned_data.get('remember_me')
-
-        if not remember_me:
-            # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
-            self.request.session.set_expiry(0)
-
-            # Set session as modified to force data updates/cookie to be saved.
-            self.request.session.modified = True
-
-        # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
-        return super(CustomLoginView, self).form_valid(form)
 
 def authenticate_user(email, password):
+    try:
         user = CustomUser.objects.get(email=email)
-        if not user:
-            return None
+
+        if not user:  # Use check_password method to compare passwords securely
+            return None # Return user object and success message
         else:
-            if password != user.password:
-                return None
+            if password == user.password:
+                return user.id, "Authentication Successfull"  # Return None and incorrect password message
             else:
-                return user
+                return None
+    except CustomUser.DoesNotExist:
+        return None  # Return None and email does not exist message
 
 
 def loginView(request):
@@ -105,7 +94,7 @@ def loginView(request):
 
         user = authenticate_user(email, password)
         if user is not None:
-            request.session['user_id'] = user.id
+            request.session['user_id'] = user
             return render(request, "car_rental/services/dashboard.html",{'id':request.session['user_id']})
 
         else:
@@ -117,7 +106,7 @@ def loginView(request):
 def signup(request):
     if request.method == 'GET':
         form= AddNewUser()
-        return render(request, "car_rental/authentication/signup.html",{'addUserForm':form})
+        return render(request, "car_rental/authentication/signup.html",{'addUserForm':form,"msg":''})
 
     if request.method == 'POST':
         usern = request.POST['fullname']
@@ -134,8 +123,8 @@ def signup(request):
             newUser = form.save(commit=False)
             newUser.save()
             msg = "Data Saved Successfully"
-            # form = AddNewUser()
-            return render(request, 'car_rental/authentication/login.html', {"msg": msg})
+            form = LoginForm()
+            return render(request, 'car_rental/authentication/login.html', {"LoginForm":form,"msg": msg})
         else:
             msg = "Failed"
             return render(request, 'car_rental/authentication/signup.html', {'SignUpForm': form,'msg':msg})
