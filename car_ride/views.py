@@ -256,3 +256,18 @@ def Booked(request, car_id):
             print("Checking:", book)
             context = {'book': book}
             return render(request, "mybooking.html", context)
+
+def edit_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    if request.method == 'POST':
+        form = BookingEditForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            edit_message = f"{current_time}: Your booking details for {booking.car.car_name} have been updated."
+            edit_message_owner = f"{current_time}: Booking details for your car {booking.car.car_name} have been updated."
+            Notification.objects.create(user=booking.name, message=edit_message)
+            Notification.objects.create(user=booking.car.cust, message=edit_message_owner)
+            return redirect('car_ride:mybookings')
+    else:
+        form = BookingEditForm(instance=booking)
+    return render(request, 'edit_booking.html', {'form': form, 'booking': booking})

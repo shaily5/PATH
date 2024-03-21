@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+<style>
+    body {
+        position: relative;
+        height: 95vh;
+        width: 100%;
+        background-image: url("{% static 'images/img7.jpg' %}");
+        background-size: cover;
+        background-position: center;
+    }
+    form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff; /* Adjust background color */
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        font-weight: bold;
+        text-align: center;
+    }
+    .form-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Ensure two fields in one row */
+        margin-bottom: 15px; /* Adjust margin between rows */
+    }
+    .form-group label {
+        width: 50%; /* Adjust width of labels */
+        margin-bottom: 5px; /* Add margin below labels */
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="number"],
+    .form-group select {
+        width: 340px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        background-color: #9961BA;
+        color: #FFFFFF;
+        border-color: #9961BA;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 25%;
+    }
+    button:hover {
+        background-color: #FFFFFF;
+        color: #9961BA;
+    }
+    p {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+</style>
+<form id="edit_booking_form" action="{% url 'car_ride:edit_booking' booking.id %}" method="post">
+    <h3 style="color: #9961BA; margin-bottom: 30px">Edit Booking Details</h3>
+    <div class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+    </div>
+    <button type="submit" id="update_button">Update</button>
+</form>
+	<script>
+        document.getElementById("edit_booking_form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var confirmation = confirm("Are you sure want to update the booking details?");
+            if (confirmation) {
+                document.getElementById("edit_booking_form").submit();
+            }
+        });
+    </script>
+{% endblock %}
