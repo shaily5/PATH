@@ -39,10 +39,10 @@ def LoginUser(request):
             if customer:
                 login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
                 Notification.objects.create(user=customer, message=login_message)
-            return redirect('dashboard')
+            return redirect('car_ride:dashboard')
         else:
             messages.error(request, "Invalid username or password!")
-            return redirect('login')
+            return redirect('car_ride:login')
     return render(request, "login.html")
 
 def Register(request):
@@ -206,3 +206,8 @@ def MyAccount(request):
             # print(cust)
             context = {'cust': cust}
             return render(request, "myaccount.html", context)
+
+def Cars(request):
+    if request.method == 'GET':
+        mycars = Mycar.objects.all()
+        return render(request, "allcars.html", {'mycars': mycars})

@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+<style>
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+.box-element-product {
+  width: calc(50% - 20px);
+  margin-bottom: 20px;
+  background-color: rgba(153, 97, 186, 0.2); 
+  border-radius: 10px;
+  border: 2px solid #9961BA;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+
+  .box-element-product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .box-element-product .car-intro {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .car-intro .thumbnail {
+    width: 75%;
+    max-height: 150px; /* Adjust the maximum height of the image */
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 50px; /* Add spacing between the image and table */
+  }
+
+  .box-element-product table {
+    flex: 1; /* Take remaining space */
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+
+
+
+  .box-element-product th,
+  .box-element-product td {
+    margin: 5px 0;
+      padding: 5px;
+    border-bottom: 1px solid #E5E5E5;
+    font-size: 16px; /* Decrease font size */
+  }
+
+  .box-element-product th {
+      font-weight: bold;
+    color: #333333;
+      font-size: 16px !important;
+  }
+  
+
+  .box-element-product button {
+    padding: 8px 16px;
+    background-color: #9961BA;
+    color: #FFFFFF;
+    border-color: #9961BA;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-top: 40px;
+    display: inline-block;
+    text-decoration: none;
+      width: 150px;
+  }
+
+  .box-element-product button:hover {
+    background-color:  rgba(153, 97, 186, 0.2);
+    transform: scale(1.05);
+      color: #a028ec;
+  }
+</style>
+
+<div class="cssanimation sequence fadeInBottom">
+  <div class="row" style="margin-left: 3%; margin-right: 3%;">
+    {% for mycar in mycars %}
+    <div class="box-element-product">
+    <div class="car-intro">
+      <img class="thumbnail" src="{{mycar.imageURL}}">
+        {% if user.is_authenticated %}
+            {% if mycar.cust != user.customer %}
+                <a href="{% url 'car_ride:cardetails' mycar.pk %}"><button name="book_car_{{mycar.pk}}">Book This Car</button></a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'car_ride:login' %}?next={% url 'car_ride:cardetails' mycar.pk %}"><button name="book_car_{{mycar.pk}}">Book This Car</button></a>
+        {% endif %}
+    </div>
+      <table>
+        <tr class="route-info">
+          <th>Route:</th>
+          <td>{{mycar.from_place}}-{{mycar.to_place}}</td>
+        </tr>
+        <tr class="travel-dates">
+          <th>Travel Dates:</th>
+          <td>{{mycar.from_date}}-{{mycar.to_date}}</td>
+        </tr>
+        <tr class="seats-info">
+          <th>Seats Left:</th>
+          <td>{{mycar.total_seats}}</td>
+        </tr>
+        <tr class="seats-info">
+          <th>Reserved:</th>
+          <td>{{mycar.seats_booked}}</td>
+        </tr>
+        <tr class="car-info">
+          <th>Car:</th>
+          <td>{{mycar.company}} {{mycar.car_name}}</td>
+        </tr>
+        <tr class="price-info">
+          <th>Price:</th>
+          <td>CAD ${{mycar.price}}</td>
+        </tr>
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
