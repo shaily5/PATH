@@ -271,3 +271,23 @@ def edit_booking(request, booking_id):
     else:
         form = BookingEditForm(instance=booking)
     return render(request, 'edit_booking.html', {'form': form, 'booking': booking})
+
+def Contactus(request):
+    if request.method == "GET":
+        return render(request, "contact.html")
+
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        msg = request.POST['msg']
+        if len(phone) != 10 or not phone.isdigit():
+            messages.warning(request, "The phone number provided is not 10 digits!")
+        elif phone.startswith('0'):
+            messages.warning(request, "The phone number provided is not valid!")
+        else:
+            contact_us = ContactUs.objects.create(name=name, email=email, phone=phone, msg=msg)
+            contact_us.save()
+            messages.success(request, "Thank you for contacting us, we will reach you soon.")
+
+        return render(request, "contact.html")
