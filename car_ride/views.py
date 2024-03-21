@@ -222,3 +222,8 @@ def MyCarList(request):
             print("from MyCarList: ", custs)
             context = {'custs': custs}
             return render(request, "mycar_list.html", context)
+
+def logout_user(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('car_ride:home')
