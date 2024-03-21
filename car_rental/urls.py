@@ -11,7 +11,7 @@ urlpatterns = [
     path('cars/', views.car_list, name='car-list'),
     path('rental_reservation_list/', views.rental_reservation_list, name='rental_reservation_list'),
     path('invoice/<str:invoice_number>/', views.rental_invoice_detail, name='rental_invoice_detail'),
-    path('rental/dashboard/', views.dashboard, name='car-list'),
+    path('rental/dashboard/', views.homepage, name='dashboard'),
     path('create_new_car/', views.create_car, name='create_car'),
     path('show_photos/', views.show_photos, name='show_photos'),
 
@@ -20,23 +20,18 @@ urlpatterns = [
     path('forgot_password/', views.forgot_password, name='forgot_password'),
     path('car_rental/login/', views.loginView, name='rentallogin'),
     path('car_rental/signup/', views.signup, name='signup'),
-
-    # path('reset_password/', auth_views.PasswordResetView.as_view(), name='reset_password'),
-    #
-    # path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('password-reset/', ResetPasswordView.as_view(), name='password_reset'),
-
     path('password-reset-confirm/<uidb64>/<token>/',
          auth_views.PasswordResetConfirmView.as_view(template_name='car_rental/authentication/password_reset_confirm.html'),
          name='password_reset_confirm'),
-
-    # path('reset/<uidb64>/<token>/',
-    #      auth_views.PasswordResetConfirmView.as_view(),
-    #      name='password_reset_confirm'),
-
     path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='car_rental/authentication/password_reset_complete.html'),
          name='password_reset_complete'),
+
+    path('car_rental/bookaCar/',views.bookRentalCar,name='bookRentalCar'),
+    path('car_rental/getCars/<str:param>/', views.getCars, name='getCars')
+
+
 
 ]
 

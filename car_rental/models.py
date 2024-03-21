@@ -21,16 +21,6 @@ class CustomUser(models.Model):
     password = models.CharField(max_length=128,null=False,default='')
     id = models.BigAutoField(primary_key=True)  # Add this line to explicitly define the id field
 
-    #
-    # password = models.CharField(max_length=50,
-    #                             required=True,
-    #                             label=("Password"),
-    #                             widget=models.PasswordInput(attrs={'placeholder': 'Password',
-    #                                                               'class': 'form-control',
-    #                                                               'data-toggle': 'password',
-    #                                                               'id': 'password',
-    #                                                               }))
-
 
     fullname =models.CharField(max_length=100, null=False,default='')
     country = models.CharField(max_length=100, blank=True, null=False,default='')
@@ -50,6 +40,16 @@ class CustomUser(models.Model):
 
 
 class Car(models.Model):
+    car_type_choices = [
+        ('sedan', 'Sedan'),
+        ('suv', 'SUV'),
+        ('truck', 'Truck'),
+        ('van', 'Van'),
+        ('sports','Sports')
+        # Add more choices as needed
+    ]
+    car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
+
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     year = models.PositiveIntegerField()
@@ -59,7 +59,7 @@ class Car(models.Model):
     photo = models.ImageField(upload_to='car_photos/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.year} {self.make} {self.model}"
+        return f"{self.make} {self.model}        {self.car_type}"
 
 # Rental Reservation Model
 class RentalReservation(models.Model):

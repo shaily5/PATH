@@ -6,7 +6,7 @@ from .models import Car, RentalReservation, CustomUser
 class CarForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = ['make', 'model', 'year', 'color', 'photo','daily_rate','available']
+        fields = ['make', 'model', 'year', 'color', 'photo','daily_rate','available','car_type']
 
 
 class RentalReservationForm(forms.ModelForm):
@@ -62,3 +62,25 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ['email', 'password']
+
+class CarRentalForm(forms.Form):
+    PICKUP_LOCATIONS = [
+        ('Windsor', 'Windsor'),
+        ('Toronto', 'Toronto'),
+        ('London', 'London'),
+    ]
+
+    CAR_TYPES = [
+        ('sedan', 'Sedan'),
+        ('suv', 'SUV'),
+        ('truck', 'Truck'),
+        ('van', 'Van'),
+    ]
+
+    pickup_location = forms.ChoiceField(choices=PICKUP_LOCATIONS, required=True, widget=forms.Select(attrs={'class': 'input-group1'}))
+    pickup_date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': 'Pickup Date', 'class': 'input-group1'}), required=True)
+    return_date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': 'Return Date', 'class': 'input-group1'}), required=True)
+    car_type = forms.ChoiceField(choices=CAR_TYPES, required=True, widget=forms.Select(attrs={'class': 'input-group2'}))
+    pickup_time = forms.TimeField(widget=forms.TimeInput(attrs={'placeholder': 'Pickup Time', 'class': 'input-group2'}), required=True)
+    return_time = forms.TimeField(widget=forms.TimeInput(attrs={'placeholder': 'Return Time', 'class': 'input-group2'}), required=True)
+

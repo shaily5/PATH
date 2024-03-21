@@ -9,14 +9,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import CarForm, RentalReservationForm, AddNewUser, LoginForm
+from .forms import CarForm, RentalReservationForm, AddNewUser, LoginForm, CarRentalForm
 from car_rental.models import Car, RentalReservation, RentalInvoice, CustomUser
 from django.urls import reverse_lazy
 
 # views.py
 
 def dashboard(request):
-    return render(request, 'car_rental/dashboard.html')
+    data = Car.objects.all()
+    return render(request, 'car_rental/dashboard.html',{'cars':data})
 
 # Create your views here.
 def car_list(request):
@@ -59,6 +60,11 @@ def create_car(request):
         form = CarForm()
     return render(request, 'car_rental/create_car.html', {'form': form})
 
+def getCars(request,param):
+    data = Car.objects.filter(car_type=param)
+    return render(request, 'car_rental/services/availableCars.html',{'data':data})
+
+
 def show_photos(request):
     photos = Car.objects.all()
     return render(request, 'car_rental/show_uploaded_image.html', {'cars': photos})
@@ -81,6 +87,28 @@ def authenticate_user(email, password):
                 return None
     except CustomUser.DoesNotExist:
         return None  # Return None and email does not exist message
+
+def homepage(request):
+    data = Car.objects.all()
+    return render(request, "car_rental/services/dashboard.html",{"cars":data})
+
+
+def bookRentalCar(request):
+    if request.method == "GET":
+        form=LoginForm()
+        return render(request, "car_rental/authentication/login.html",{'LoginForm':form})
+
+    if request.method == "POST":
+        rental_start_date = request.POST['rental_start_date']
+        rental_end_date = request.POST['rental_end_date']
+        pickup_time = request.POST['pickup_time']
+        return_time = request.POST['return_time']
+        pickup_location = request.POST['pickup_location']
+        car_type = request.POST['car_type']
+
+        cars = Car.objects.filter(car_type=car_type)
+
+        return render(request, "car_rental/services/availableCars.html",{'cars':cars})
 
 
 def loginView(request):

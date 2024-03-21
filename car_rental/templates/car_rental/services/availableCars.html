@@ -96,7 +96,7 @@
         <ul class="navbar-menu">
           <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
 
-          <li><a href="car_rental/login" class="active">Rental car</a></li>
+          <li><a href="#" class="active">Rental car</a></li>
           <li><a href="login">Rides</a></li>
             <li><a href="#">Parcel service</a></li>
         </ul>
@@ -110,85 +110,25 @@
 </header>
 
 <body>
-<div class="background-image">
- <section>
-    <div class="service-section">
-      <h2 class="section-heading">
-        <hr class="section-heading-HR" />
-      </h2>
+<br><br><br><br><br><br>
 
-      <div class="content">
-          <form name="bookRentalCar" method="POST" action="http://localhost:8000/car_rental/bookaCar/">
-                {% csrf_token %}
-                <div class="row">
-                      <div class="input-group1">
-
-                        <select name="pickup_location" required>
-                          <option value="" disabled selected>Pickup Location</option>
-                          <!-- Add options for pickup locations -->
-                          <option value="Windsor">Windsor</option>
-                          <option value="Toronto">Toronto</option>
-                          <option value="London">London</option>
-                        </select>
-
-                      </div>
-
-                      <div class="input-group1">
-                        <input name="rental_start_date" type="date" placeholder="Pickup Date">
-                      </div>
-
-                      <div class="input-group1">
-                        <input name="rental_end_date" type="date" placeholder="Return Date">
-                      </div>
-
-                </div>
-
-                <div class="row">
-                      <div class="input-group2">
-                        <select name="car_type" required>
-                          <option value="" disabled selected>Car Type</option>
-                          <option value="sedan">Sedan</option>
-                          <option value="suv">SUV</option>
-                          <option value="truck">Truck</option>
-                          <option value="van">Van</option>
-                        </select>
-                      </div>
-                      <div class="input-group2">
-                        <input name="pickup_time" type="time" placeholder="Pickup Time">
-                      </div>
-                      <div class="input-group2">
-                        <input name="return_time" type="time" placeholder="Return Time">
-                      </div>
-                      <button type="submit" class="book-now">Book Now</button>
-                </div>
-
-          </form>
-      </div>
-
-    </div>
-  </section>
-</div>
   <section style="margin: 0 0 50px 0;">
     <div class="rental-ride">
 
-      <h1 class="rental-ride-heading">Our Rental or Ride Services
+      <h1 class="rental-ride-heading">Our Rental Services
         <hr>
       </h1>
 
       <div class="box1">
- <div class="car-box">
-          <!-- Car 1 -->
-              {% for car in cars %}
+        <div class="car-box">
+         {% for car in cars %}
 
           <div class="car">
             <img src="{{ car.photo.url }}" alt="Car 2">
-
             <div>
-
               <div class="car-details">
-
                 <div class="heading">
-                {{ car.make }}  {{ car.model }}
+                  {{ car.make }}  {{ car.model }}
                 </div>
 
                 <div class="details-row">
@@ -196,23 +136,18 @@
                   <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>
                   <div class="detail"> <i class="fa-solid fa-car"></i>{{ car.car_type }}</div>
                 </div>
-
               </div>
-
               <div class="additional-details">
-
                 <div>
                   <p style="margin: 0;">Daily rate from</p>
                   <h1 style="margin: 0;" class="price">${{ car.daily_rate }}</h1>
                 </div>
-
                 <button class="action-button">Book Now</button>
-
               </div>
             </div>
-
           </div>
-        {% endfor %}
+
+         {% endfor %}
         </div>
       </div>
     </div>

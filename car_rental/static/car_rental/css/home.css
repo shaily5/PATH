@@ -290,15 +290,16 @@ body {
   border: 2px solid #9961ba;
 }
 
-.content {
-  /* Calculated height considering section-heading and gap */
-  padding: 0 32px; /* Padding */
-  /* margin: 0 auto; */
-  background: #9961ba;
-}
+/*.content {*/
+/*  !* Calculated height considering section-heading and gap *!*/
+/*  padding: 0 32px; !* Padding *!*/
+/*  !* margin: 0 auto; *!*/
+/*  background: #9961ba;*/
+/*}*/
 .content {
   padding: 50px 32px; /* Padding */
-  background: #9961ba;
+  background: rgba(141, 125, 125, 0.5);
+  margin-top: 180px;
 }
 
 .row {
@@ -400,7 +401,7 @@ body {
 }
 
 .box1 {
-  /*width: 1270px;*/
+  width: 1270px;
   /* height: 547px; */
   margin: 0 auto;
 }
