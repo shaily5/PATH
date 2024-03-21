@@ -44,3 +44,7 @@ class BookingEditForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['contact', 'email', 'pickup', 'dropoff', 'pick_add', 'drop_add']
+
+class ResetPasswordForm(forms.Form):
+    email = forms.EmailField(label='Email')
+    username = forms.CharField(label='Username', max_length=100)
