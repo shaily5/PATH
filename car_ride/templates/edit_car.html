@@ -65,7 +65,7 @@
     }
     </style>
     <div class="background-image">
-        <form id="edit_car_form" action="{% url 'edit_car' car.id %}" method="post">
+        <form id="edit_car_form" action="{% url 'car_ride:edit_car' car.id %}" method="post">
             <h3>Edit Your Car Details</h3>
             <div class="form-group">
                 {% csrf_token %}

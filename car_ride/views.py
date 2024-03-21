@@ -219,7 +219,7 @@ def MyCarList(request):
 def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect('car_ride:home')
+    return redirect('PATH:homepage')
 
 def cancel_booking(request, booking_id):
     if request.method == 'POST':
