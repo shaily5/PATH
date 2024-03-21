@@ -2,61 +2,78 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.utils import timezone
+from .models import Customuser, Notification
+from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 from PATH.forms import ContactForm
 
-def user_login(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-
-        # Authenticate user
-        user = authenticate(request, email=email, password=password)
-
-        if user is not None:
-            # Log in the user
-            login(request, user)
-            messages.success(request, 'Login successful.')
-            return redirect('home')  # Replace 'home' with the name of your home view
-        else:
-            messages.error(request, 'Invalid login credentials. Please try again.')
-
-    return render(request, 'PATH/login.html')  # Replace 'login.html' with the name of your login template
 
 def homepage(request):
 
     return render(request, 'PATH/homepage.html')  # Replace 'home.html' with the name of your home template
 
-def register_user(request):
+current_time = timezone.now().strftime("%H:%M:%S %d-%m-%Y")
+def LoginUser(request):
+    if request.method == "GET":
+        return render(request, "PATH/login.html")
+
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print("from login", user)
+            print("current: ", timezone.now())
+
+            try:
+                customer = Customuser.objects.get(username=user)
+            except Customuser.DoesNotExist:
+                customer = None
+            if customer:
+                login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
+                Notification.objects.create(user=customer, message=login_message)
+            return render(request,'PATH/homepage.html',{"username":username})
+        else:
+            messages.error(request, "Invalid username or password!")
+            return redirect('PATH:login')
+    return render(request, "PATH/login.html")
+
+def Register(request):
+    if request.method == 'GET':
+        return render(request, "PATH/register.html")
+
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)  # Log in the user after registration
-            return redirect('home')  # Redirect to home or any other desired page
-    else:
-        form = UserCreationForm()
-    return render(request, 'PATH/register.html', {'form': form})
-
-def contact_us(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            msg = 'Form Submitted Successfully'
-            return render(request,'PATH/contactUs.html',{'form':form,'msg':msg})
-    else:
-        form = ContactForm()
-        return render(request, 'PATH/contactUs.html', {'form':form})
-
-
-def carInventory(request):
-    return render(request, 'PATH/carsInventory.html', )
-
-
-def rentedCars(request):
-    return render(request, 'PATH/rentedCars.html', )
+        username = request.POST['username']
+        firstname = request.POST['firstname']
+        email = request.POST['email']
+        password = request.POST['password']
+        mobile = request.POST['mobile']
+        gender = request.POST['gender']
+        address = request.POST['address']
+        city = request.POST['city']
+        state = request.POST['state']
+        if len(mobile) != 10 or not mobile.isdigit():
+            messages.warning(request, "The phone number provided is not 10 digits!")
+        elif mobile.startswith('0'):
+            messages.warning(request, "The phone number provided is not valid!")
+        else:
+            try:
+                obj = User.objects.create_user(username=username, email=email, password=password)
+                cust = Customuser.objects.create(username=obj, firstname=firstname, email=email, mobile=mobile, gender=gender,
+                                               address=address, city=city, state=state)
+                messages.success(request, "Account created successfully!")
+                return redirect('PATH:login')
+            except IntegrityError:
+                messages.warning(request, "Account already exists!")
+                return redirect('PATH:register')
+        return render(request, "PATH/register.html")

@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import CustomUser
-from .models import Post
+from .models import Customuser, Notification
 
-admin.site.register(CustomUser)
-admin.site.register(Post)
+
+admin.site.register(Customuser)
+admin.site.register(Notification)
 

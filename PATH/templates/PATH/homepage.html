@@ -101,8 +101,13 @@
             <li><a href="#">Parcel service</a></li>
         </ul>
         <div class="navbar-buttons">
-          <a href="/signup.html"><button class="signup-btn">Sign Up</button></a>
-         <a href="/login.html"> <button class="login-btn active">Login</button></a>
+            {% if username %}
+                <h1 style="color: white;">Welcome, {{ username }}!</h1>
+            {% else %}
+            <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>
+            <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>
+            {% endif %}
+
         </div>
       </div>
     </nav>
