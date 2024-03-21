@@ -30,3 +30,17 @@ class SearchForm(forms.ModelForm):
         model = Mycar
         fields = ['from_place', 'to_place', 'from_date', 'to_date']
         labels = {'from_place': 'From Place', 'to_place': 'To Place', 'from_date': 'From Date', 'to_date':'ToDate'}
+
+class BookingForm(forms.ModelForm):
+    pickup = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    dropoff = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    num_seats_booked = forms.IntegerField(required=True, min_value=1)
+
+    class Meta:
+        model = Booking
+        fields = ['contact', 'email', 'pickup', 'dropoff', 'pick_add', 'drop_add', 'num_seats_booked']
+
+class BookingEditForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['contact', 'email', 'pickup', 'dropoff', 'pick_add', 'drop_add']

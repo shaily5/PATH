@@ -11,7 +11,7 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Mycar, ContactUs, Booking, Notification
 from django.contrib.auth.decorators import login_required
-from .forms import SearchForm, AddcarForm
+from .forms import SearchForm, AddcarForm, BookingForm, BookingEditForm
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import random
