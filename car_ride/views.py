@@ -87,14 +87,12 @@ def Register(request):
 def home(request):
     return render(request, "home.html")
 
-# Function to show dashboard to the logged in users
 @login_required(login_url='login')
 def dash(request):
     if request.user.is_authenticated:
         print("from dashboard", request.user)
         return render(request, "dashboard.html")
 
-# Function to add user's car in the database
 # @login_required(login_url='login')
 def Addcar(request):
     print('Hello1')
@@ -116,13 +114,11 @@ def Addcar(request):
                 car_name = form.cleaned_data.get('car_name')
                 form.save()
 
-                # Create a notification for the user
                 notification_message = f'{current_time}: Your new car {car_name} has been added successfully!'
                 Notification.objects.create(user=request.user.customer, message=notification_message)
 
                 return redirect('car_ride:dashboard')
             else:
-                # If form is invalid, render form again with errors
                 return render(request, "addmycar.html", {'form': form})
 
     return render(request, "addmycar.html")
@@ -179,7 +175,6 @@ def Search(request):
         else:
             return render(request, "search.html", {'form': form})
 
-# Function to show logged in user's bookings from the dashboard
 def MyBookings(request):
     print("from my booking", request.user, request.method)
     if request.method == 'GET':
@@ -189,7 +184,6 @@ def MyBookings(request):
             cust = Customer.objects.get(usern=user)
             print("User:", request.user)
             print("Customer Name:", cust)
-            # Retrieve bookings excluding those related to canceled cars
             custs = Booking.objects.filter(name=cust, car__isnull=False, car__in=Mycar.objects.all(), pickup__gte=datetime.now())
             # custs = Booking.objects.filter(name=cust)
             print("Bookings", custs)
@@ -235,7 +229,6 @@ def cancel_booking(request, booking_id):
         booking.delete()
         car.update_seats_after_cancellation(num_seats_canceled)
 
-        # Generate notification for the user whose booking was canceled
         foryou = f"{current_time}: Your booking of {booking.car.cust}'s car {car.car_name} has been canceled"
         forowner = f"{current_time}: User {booking.name.fname} has canceled the booking of your car {booking.car.car_name}"
         Notification.objects.create(user=booking.name, message=foryou)
@@ -244,6 +237,22 @@ def cancel_booking(request, booking_id):
         print("cancel msg: ", foryou)
         print("message2: ", forowner)
 
-        return render(request, 'cancel_booking.html')  # Rendering a success message page
+        return render(request, 'cancel_booking.html')
     else:
         return redirect('car_ride:customerbookings')
+
+def Booked(request, car_id):
+    if request.method == "GET":
+        if request.user.is_authenticated:
+            user = request.user
+            cust = Customer.objects.get(usern=user)
+            try:
+                book = Booking.objects.filter(car_id=car_id, name=cust)
+            except Booking.DoesNotExist:
+                messages.error(request, "No booking found for this car yet.")
+                return redirect('home')
+
+            # total_price = sum(booking.price for booking in book)
+            print("Checking:", book)
+            context = {'book': book}
+            return render(request, "mybooking.html", context)

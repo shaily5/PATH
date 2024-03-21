@@ -16,4 +16,5 @@ urlpatterns=[
     path('mycar_list/', views.MyCarList, name="mycar_list"),
     path('logout/',views.logout_user, name="logout"),
     path('cancel_booking/<int:booking_id>/', views.cancel_booking, name='cancel_booking'),
+    path('bookedcar/<int:car_id>/',views.Booked,name="bookedcar"),
 ]
