@@ -1,19 +1,19 @@
-from datetime import datetime, date
+from datetime import datetime
+from decimal import Decimal
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
-# import mysql.connector as sql
-from django.utils import timezone
 from django.db import IntegrityError, transaction
+from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.db.models import Q
 from django.contrib.auth import login, logout, authenticate
-from django.http import JsonResponse, HttpResponseForbidden, HttpResponseRedirect, HttpResponseNotFound, HttpResponse
-# from requests import request
+from django.http import HttpResponseForbidden
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Mycar, ContactUs, Booking, Notification
 from django.contrib.auth.decorators import login_required
 from .forms import SearchForm, AddcarForm
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 import random
 import string
 
@@ -39,10 +39,10 @@ def LoginUser(request):
             if customer:
                 login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
                 Notification.objects.create(user=customer, message=login_message)
-            return redirect('car_ride:dashboard')
+            return redirect('dashboard')
         else:
             messages.error(request, "Invalid username or password!")
-            return redirect('car_ride:login')
+            return redirect('login')
     return render(request, "login.html")
 
 def Register(request):
@@ -59,6 +59,14 @@ def Register(request):
         address = request.POST['address']
         city = request.POST['city']
         state = request.POST['state']
+
+        # Validate password
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            messages.warning(request, e.messages[0])
+            return render(request, "registration.html")
+
         if len(mobile) != 10 or not mobile.isdigit():
             messages.warning(request, "The phone number provided is not 10 digits!")
         elif mobile.startswith('0'):
@@ -105,10 +113,11 @@ def Addcar(request):
             print(form)
             if form.is_valid():
                 form.instance.cust = request.user.customer
+                car_name = form.cleaned_data.get('car_name')
                 form.save()
 
                 # Create a notification for the user
-                notification_message = f'{current_time}: Your car has been added successfully!'
+                notification_message = f'{current_time}: Your new car {car_name} has been added successfully!'
                 Notification.objects.create(user=request.user.customer, message=notification_message)
 
                 return redirect('car_ride:dashboard')
@@ -142,11 +151,21 @@ def Search(request):
             from_date = form.cleaned_data['from_date']
             to_date = form.cleaned_data['to_date']
 
-            # Filter cars based on provided criteria
+            # Validate from_place and to_place
+            if not from_place or not to_place:
+                messages.error(request, "Both 'From' and 'To' places are required.")
+                return render(request, "search.html", {'form': form})
+
+            # Validate from_date and to_date
+            if from_date and to_date and from_date > to_date:
+                messages.error(request, "The 'From' date cannot be later than the 'To' date.")
+                return render(request, "search.html", {'form': form})
+
             cars = Mycar.objects.filter(
-                from_place=from_place,
-                to_place=to_place,
+                Q(from_place__icontains=from_place) &
+                Q(to_place__icontains=to_place)
             )
+
             if from_date:
                 cars = cars.filter(from_date=from_date)
             if to_date:
@@ -178,7 +197,6 @@ def MyBookings(request):
             return render(request, "mybooking.html", context)
     else:
         return HttpResponseForbidden("You are not authorized to perform this action.")
-
 
 def MyAccount(request):
     if request.method == 'GET':

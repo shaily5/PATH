@@ -48,11 +48,12 @@
             flex-wrap: wrap;
             justify-content: space-evenly;
             gap: 10px;
+            font-weight: bold;
         }
 
         form label {
             width: auto;
-            text-align: left;
+
         }
 
         form input[type="text"],
@@ -76,15 +77,16 @@
             font-size: 16px;
             width: 25%;
             height: 7%;
-            margin-top: 3%;
+            margin-top: 0%;
             margin-left: 35%;
         }
 
         p {
             display: flex;
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
         }
 
         button:hover {
@@ -93,7 +95,6 @@
         }
     </style>
      <div class="background-image">
-
     <div>
         {% if messages %}
         {% for message in messages %}
@@ -103,7 +104,6 @@
         {% endfor %}
         {% endif %}
     </div>
-
     <div class="cssanimation sequence fadeInBottom">
         <div class="addcar">
             <div class="form-container">
@@ -116,6 +116,5 @@
             </div>
         </div>
     </div>
-     </div>
-
-{%endblock%}
+  </div>
+{% endblock %}

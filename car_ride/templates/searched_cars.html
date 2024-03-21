@@ -9,7 +9,6 @@
         gap: 20px;
         padding: 0 3%;
     }
-
     .content1 {
         width: calc(50% - 20px);
         margin-bottom: 20px;
@@ -24,63 +23,74 @@
         justify-content: space-between;
         flex-direction: row;
     }
-
     .content1:hover {
         transform: translateY(-5px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
-
     .content1 img {
-        width: 35%;
+        width:45%;
         max-height: 150px;
         object-fit: cover;
         border-radius: 5px;
         margin-right: 20px;
     }
-
     .content1 table {
         width: 65%;
-        margin-left: 10px;
+        margin-right: 8%;
     }
-
     .content1 th,
     .content1 td {
-        padding: 8px;
-        font-size: 15px;
+        padding: 5px;
+        font-size: 16px;
     }
-
     .content1 th {
         text-align: left;
-        width: 30%;
+        width: 45%;
     }
-
-      .parentDiv button {
-    padding: 8px 16px;
-    background-color: #9961BA;
-    color: #FFFFFF;
-    border-color: #9961BA;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    margin-top: 200px;
-    display: inline-block;
-    text-decoration: none;
-    width: 150px;
-  }
-
-  .parentDiv button:hover {
-    background-color:  rgba(153, 97, 186, 0.2);
-    transform: scale(1.05);
-      color: #a028ec;
-  }
+    .parentDiv button {
+        padding: 8px 16px;
+        background-color: #9961BA;
+        color: #FFFFFF;
+        border-color: #9961BA;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+        margin-top: 40px;
+        display: inline-block;
+        text-decoration: none;
+        width: 150px;
+    }
+    .parentDiv button:hover {
+        background-color:  rgba(153, 97, 186, 0.2);
+        transform: scale(1.05);
+        color: #0a0a0a;
+    }
+    .car-intro .thumbnail {
+        width: 85%;
+        max-height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
 </style>
-
 <div class="parentDiv">
     {% for car in cars %}
     <div class="content1">
-        <img src="{{ car.car_img.url }}" alt="Car Image">
-
+    <div class="car-intro">
+        <img class="thumbnail" src="{{ car.car_img.url }}" alt="Car Image">
+        {% if user.is_authenticated %}
+            {% if car.cust != user.customer %}
+                <a href="{% url 'car_ride:cardetails' car.pk %}">
+                    <button name="book_car_{{ car.pk }}">Book Now</button>
+                </a>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}?next={% url 'car_ride:cardetails' car.pk %}">
+                <button name="book_car_{{ car.pk }}">Book Now</button>
+            </a>
+        {% endif %}
+    </div>
         <table>
             <tr>
                 <th>Rider:</th>
@@ -91,25 +101,29 @@
                 <td>{{ car.cust.mobile }}</td>
             </tr>
             <tr>
-                <th>From Place:</th>
-                <td>{{ car.from_place }}</td>
+                <th>Route:</th>
+                <td><h6>{{ car.from_place }} To {{ car.to_place }}</h6></td>
             </tr>
             <tr>
-                <th>To Place:</th>
-                <td>{{ car.to_place }}</td>
+                <th>Travel Dates:</th>
+                <td>{{ car.from_date }} - {{ car.to_date }}</td>
+            </tr>
+            <tr>
+                <th>Seats Left:</th>
+                <td>{{ car.total_seats }}</td>
+            </tr>
+            <tr>
+                <th>Reserved:</th>
+                <td>{{ car.seats_booked }}</td>
             </tr>
             <tr>
                 <th>Price:</th>
-                <td>{{ car.price }}/-</td>
+                <td>CAD ${{ car.price }}</td>
             </tr>
         </table>
-<a href="{% url 'cardetails' car.pk %}">
-            <button name="book_car_{{ car.pk }}">Book Ride</button>
-        </a>
-    </div>
+</div>
     {% empty %}
-    <p>No rides are available!</p>
+    <p>No cars are available!</p>
     {% endfor %}
 </div>
-
 {% endblock %}

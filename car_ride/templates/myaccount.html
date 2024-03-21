@@ -4,49 +4,58 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/myaccount.css'%}">
-    <div class="cssanimation sequence fadeInBottom">
-    <div class="container1">
-        <div class="title">
-            <h3>Details of User</h3>
-        </div>
-        <div class="content">
-            <form action="#" method="post">
-                {% if user.is_authenticated %}
-                <div class="user-details">
-                    <div class="input-box">
-                        <span class="details">Full Name</span>
-                        <input name="Name" value="{{cust.fname}}">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Username</span>
-                        <input name="Name" value="{{cust.usern}}">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Email</span>
-                        <input name="Name" value="{{cust.email}}">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Phone Number</span>
-                        <input name="Name" value="{{cust.mobile}}">
-                    </div>
-                    <div class="input-box" style="width: 100%;">
-                        <span class="details">Address</span>
-                        <input name="Name" value="{{cust.address}}">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">City</span>
-                        <input name="Name" value="{{cust.city}}">
-                    </div>
 
-                    <div class="input-box">
-                        <span class="details">State</span>
-                        <input name="Name" value="{{cust.state}}">
+    <style>
+        .container1 {
+            background-color: #9961BA;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: none;
+        }
+    </style>
+
+    <div class="cssanimation sequence fadeInBottom">
+        <div class="container1">
+            <div class="title">
+                <h3 style="color: white">User Details</h3>
+            </div>
+            <div class="content">
+                <form action="#" method="post">
+                    {% if user.is_authenticated %}
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details" style="color: white">Full Name</span>
+                            <input name="Name" value="{{cust.fname}}" style="border-radius: 50px; border-color: white">
+                        </div>
+                        <div class="input-box">
+                            <span class="details" style="color: white">Username</span>
+                            <input name="Name" value="{{cust.usern}}" style="border-radius: 50px; border-color: white">
+                        </div>
+                        <div class="input-box">
+                            <span class="details" style="color: white">Email</span>
+                            <input name="Name" value="{{cust.email}}" style="border-radius: 50px; border-color: white">
+                        </div>
+                        <div class="input-box">
+                            <span class="details" style="color: white">Phone Number</span>
+                            <input name="Name" value="{{cust.mobile}}" style="border-radius: 50px; border-color: white">
+                        </div>
+                        <div class="input-box" style="width: 100%;">
+                            <span class="details" style="color: white">Address</span>
+                            <input name="Name" value="{{cust.address}}" style="border-radius: 50px; border-color: white">
+                        </div>
+                        <div class="input-box">
+                            <span class="details" style="color: white">City</span>
+                            <input name="Name" value="{{cust.city}}" style="border-radius: 50px; border-color: white">
+                        </div>
+                        <div class="input-box">
+                            <span class="details" style="color: white">State</span>
+                            <input name="Name" value="{{cust.state}}" style="border-radius: 50px; border-color: white">
+                        </div>
                     </div>
+                    </form>
+                    {% endif %}
                 </div>
-             
-            </form>
-            {% endif %}
+            </div>
         </div>
     </div>
-    </div>
-{% endblock %}
+{%endblock%}

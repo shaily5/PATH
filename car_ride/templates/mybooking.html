@@ -1,89 +1,207 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/mybooking.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/registration.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
-  <div class="dashboard1">
-    <h3>MY BOOKINGS</h3>
-  </div>
-  <div class="cssanimation sequence fadeInBottom">
-{% if book %}
-{% for i in book %}
-       <div class="container2" id="container2">
-    <div class="abc">
-      <img src="{{i.car.imageURL}}">
-      <table>
-        <tr>
-          <td style="background-color: #50a0bb;color: white;">Rider Name</td>
-          <td>{{i.car.cust.fname}}</td>
-        </tr>
-        <tr>
-          <td style="background-color: #50a0bb;color: white;">Rider Email</td>
-          <td>{{i.car.cust.email}}</td>
-        </tr>
-        <tr>
-          <td style="background-color: #50a0bb;color: white;">Contact</td>
-          <td>{{i.car.cust.mobile}}</td>
-        </tr>
-      </table>
-    </div>
-    <h3>Your Booking Details</h3>
-    <div class="title">
-      <div class="table-container">
-        <table class="table1">
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">Booking Reference Number</td>
-            <td>{{i.id}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">Booking Date</td>
-            <td>{{i.date_added}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">Customer Name</td>
-            <td>{{i.name}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">Contact Number</td>
-            <td>{{i.contact}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">Email</td>
-            <td>{{i.email}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">PickUp Date</td>
-            <td>{{i.pickup}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">Drop Date</td>
-            <td>{{i.dropoff}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">PickUp Address</td>
-            <td>{{i.pick_add}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #50a0bb;color: white;">Drop Address</td>
-            <td>{{i.drop_add}}</td>
-          </tr>
-            <tr>
-            <td style="background-color: #50a0bb;color: white;">Total Seats</td>
-            <td>{{i.num_seats_booked}}</td>
-          </tr>
-        </table>
-          <form action="{% url 'car_ride:cancel_booking' i.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="cancel-btn">Cancel Booking</button>
-            </form>
-          <form action="{% url 'car_ride:edit_booking' i.id %}" method="get">
-          <button type="submit" class="edit-btn">Edit Booking</button>
-          </form>
-      </div>
-    </div>
-  </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+body {
+    position: relative;
+    height: 95vh;
+    width: 100%;
+    background-image: url("{% static 'images/img7.jpg' %}");
+    background-size: cover;
+    background-position: center;
+}
+.dashboard1 h3 {
+    font-size: 24px;
+}
+.booking-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+.booking-box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 600px; /* Adjust the width as needed */
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+}
+.image-and-details-container {
+    display: flex;
+}
+.image-container img {
+    max-width: 180px;
+    height: auto;
+    border-radius: 5px;
+}
+.details-container {
+    margin-left: 10%;
+    width: 900px;
+    border-collapse: collapse;
+    height:110px;
+    text-align: left;
+    background-color: rgba(153, 97, 186, 0.3);
+    border-radius: 10px;
+}
+.details-container .t1{
+    padding: 200px;
+    border: none;
+    border-bottom: 1px solid #c3c1c5;
+}
+.details-container t1:first-child {
+    background-color: #FFFFFF;
+    color: black;
+    font-weight: bold;
+    width: 30%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.details-container .t1 th,
+.details-container .t1 td {
+    padding: 6px 0; /* Adjust the padding as needed */
+}
+.booking-details-container {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    width: 100%; /* Adjust the width as needed */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+h4{
+    text-align: center;
+    color: #9961BA;
+    margin-top: 30px;
+}
+.abc table {
+    width: 50%;
+}
+.booking-box table {
+    width: 100%;
+}
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row; /* Display buttons in a column */
+    align-items: left; /* Center buttons horizontally */
+}
+.action-buttons a,
+.action-buttons button {
+    margin-top: 5px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9961BA;
+    font-size: 15px;
+    margin-right: 40px;
+}
+.action-buttons a:hover,
+.action-buttons button:hover {
+    color: #32213B;
+}
+</style>
+    <div class="booking-container">
+    {% if book %}
+        {% for i in book %}
+            <div class="booking-box">
+                <div class="image-and-details-container">
+                    <div class="image-container">
+                        <img src="{{i.car.imageURL}}">
+                    </div>
+                    <div class="details-container">
+                        <table>
+                            <tr class="t1">
+                                <th>Rider Name</th>
+                                <td>{{i.car.cust.fname}}</td>
+                            </tr>
+                            <tr class="t1">
+                                <th>Rider Email</th>
+                                <td>{{i.car.cust.email}}</td>
+                            </tr>
+                            <tr class="t1" style="border-bottom: none">
+                                <th>Contact</th>
+                                <td>{{i.car.cust.mobile}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <h4>Your Booking deatils</h4>
+                <div class="booking-details-container">
+                <table class="t2">
+                    <tr>
+                        <th>Booking Reference Number:</th>
+                        <td>{{i.id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Booking Date:</th>
+                        <td>{{i.date_added}}</td>
+                    </tr>
+                    <tr>
+                        <th>Customer Name:</th>
+                        <td>{{i.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Contact Number:</th>
+                        <td>{{i.contact}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{i.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>PickUp Date:</th>
+                        <td>{{i.pickup}}</td>
+                    </tr>
+                    <tr>
+                        <th>Drop Date:</th>
+                        <td>{{i.dropoff}}</td>
+                    </tr>
+                    <tr>
+                        <th>PickUp Address:</th>
+                        <td>{{i.pick_add}}</td>
+                    </tr>
+                    <tr>
+                        <th>Drop Address:</th>
+                        <td>{{i.drop_add}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Seats:</th>
+                        <td>{{i.num_seats_booked}}</td>
+                    </tr>
+					<tr>
+						<th>Total Price:</th>
+						<td>{{i.price}}</td>
+					</tr>
+                </table>
+                    <div class="action-buttons">
+				<form id="cancel-form-{{ i.id }}" action="{% url 'car_ride:cancel_booking' i.id %}" method="post">
+                    {% csrf_token %}
+					<button type="button" class="cancel-btn" onclick="showConfirmation('{{ i.id }}')">
+                    <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </form>
+				<script>
+                    function showConfirmation(bookingId) {
+                        if (confirm('Are you sure want to cancel this booking?')) {
+                            document.getElementById('cancel-form-' + bookingId).submit();
+                        }
+                    }
+                </script>
+                <form action="{% url 'car_ride:edit_booking' i.id %}" method="get">
+                    <button type="submit" class="edit-btn">
+                    <i class="fas fa-edit"></i> Update
+                    </button>
+                </form>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 </div>
-{% endfor %}
-{% endif %}
 {% endblock %}

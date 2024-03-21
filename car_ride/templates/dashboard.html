@@ -3,87 +3,98 @@
 {% block body_block %}
 
 <style>
-    .dashboard1 {
-        text-align: center;
-        margin-top: 30px;
+    .dashboard-container {
+        margin-top: 3%;
+        margin-bottom: 3%;
+        padding: 50px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
     }
 
-    .dashboard1 h3 {
-        font-size: 24px;
+    .dashboard-section {
+        width: calc(30% - 5px);
+        border: 2px solid #9961BA;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        background-color: rgba(153, 97, 186, 0.2);
+        cursor: pointer;
+    }
+
+    .dashboard-section:hover {
+        transform: translateY(-5px);
+    }
+
+    .dashboard-section-content {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .dashboard-section h5 {
+        font-size: 20px;
+        margin-bottom: 15px;
         color: #333;
     }
 
-    .dashboard {
-        display: flex;
-        {#justify-content: center;#}
-        flex-direction: column;
-        margin-top: 50px;
-    }
-
-    .circle-container {
-        {#margin: 0 20px;#}
-        margin: 0;
-    }
-
-    .circle-section {
-        display: flex;
-        flex-direction: column;
-        {#align-items: center;#}
-    }
-
-    .circles {
-        {#width: 160px;#}
-        {#height: 160px;#}
-        width: 50%;
-        background-color: #9961BA;
-        color: #fff;
-        text-align: center;
-        line-height: 160px;
-        margin-bottom: 20px;
-        transition: background-color 0.3s ease;
-        border-radius: 10px;
-    }
-
-    .circles a {
-        color: #fff;
+    .dashboard-section a {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #32213B;
         text-decoration: none;
-        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
     }
 
-    .circles:hover {
-        background-color: rgba(153, 97, 186, 0.8);
+
+    .dashboard-section img {
+        width: 120px;
+        height: auto;
+        margin-bottom: 15px;
     }
 </style>
 
-<div class="dashboard1">
-    <h3>DASHBOARD</h3>
-</div>
+<div class="dashboard-container">
+    <div class="dashboard-section">
+        <div class="dashboard-section-content">
+            <img src="{% static 'images/driver.png' %}" alt="For Drivers">
+            <h5>For Drivers</h5>
+            <i class="fa fa-car"></i>
+            <a href="{% url 'car_ride:addmycar' %}">
+                 Add My Car
+            </a>
+            <i class="fa fa-users"></i>
+            <a href="{% url 'car_ride:customerbookings' %}">
+                 Customer Bookings
+            </a>
+        </div>
+    </div>
 
-<div class="cssanimation sequence fadeInBottom">
-    <div class="dashboard">
-        <div class="circle-container">
-            <h5 >For Drivers</h5>
-             <img src="{% static 'images/img9.png' %}" alt="Image" style="width: 50%; position: absolute; right: 0px;">
-            <div class="circle-section">
-                <div class="circles" ><a href="{% url 'car_ride:addmycar' %}">Add My Car</a></div>
-                <div class="circles"><a href="{% url 'car_ride:customerbookings' %}">Customer Bookings</a></div>
-{#                <div class="circles"><a href="{% url 'car_ride:mycar_list' %}">Posted Ride</a></div>#}
-            </div>
+    <div class="dashboard-section">
+        <div class="dashboard-section-content">
+            <img src="{% static 'images/passenger.png' %}" alt="For Passengers" style="width: 38%">
+            <h5>For Passengers</h5>
+            <i class="fa fa-search"></i>
+            <a href="{% url 'car_ride:searchmycar' %}">
+                 Book My Ride
+            </a>
+            <i class="fa fa-list"></i>
+            <a href="{% url 'car_ride:mybookings' %}">
+                 My Bookings
+            </a>
         </div>
-        <div class="circle-container">
-            <h5 >For Passengers</h5>
-            <div class="circle-section">
-                <div class="circles"><a href="{% url 'car_ride:searchmycar' %}">Book My Ride</a></div>
-                <div class="circles"><a href="{% url 'car_ride:mybookings' %}">My Bookings</a></div>
-            </div>
-        </div>
-        <div class="circle-container">
-            <h5 > Account Details</h5>
-            <div class="circle-section">
-                <div class="circles"><a href="{% url 'car_ride:myaccount' %}">My Account</a></div>
-{#                <div class="circles"><a href="{% url 'car_ride:changepassword' %}">Change Password</a></div>#}
-            </div>
+    </div>
+
+    <div class="dashboard-section">
+        <div class="dashboard-section-content">
+            <img src="{% static 'images/account.png' %}" alt="Account Details" style="height: 100%; width: 56%">
+            <h5>Account Details</h5>
+            <i class="fa fa-user"></i>
+            <a href="{% url 'car_ride:myaccount' %}">
+                 My Account
+            </a>
         </div>
     </div>
 </div>
-{% endblock %}
+{%endblock%}
