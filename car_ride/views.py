@@ -212,7 +212,6 @@ def Cars(request):
         mycars = Mycar.objects.all()
         return render(request, "allcars.html", {'mycars': mycars})
 
-
 def MyCarList(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -227,3 +226,24 @@ def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('car_ride:home')
+
+def cancel_booking(request, booking_id):
+    if request.method == 'POST':
+        booking = get_object_or_404(Booking, id=booking_id)
+        car = booking.car
+        num_seats_canceled = booking.num_seats_booked
+        booking.delete()
+        car.update_seats_after_cancellation(num_seats_canceled)
+
+        # Generate notification for the user whose booking was canceled
+        foryou = f"{current_time}: Your booking of {booking.car.cust}'s car {car.car_name} has been canceled"
+        forowner = f"{current_time}: User {booking.name.fname} has canceled the booking of your car {booking.car.car_name}"
+        Notification.objects.create(user=booking.name, message=foryou)
+        Notification.objects.create(user=booking.car.cust, message=forowner)
+
+        print("cancel msg: ", foryou)
+        print("message2: ", forowner)
+
+        return render(request, 'cancel_booking.html')  # Rendering a success message page
+    else:
+        return redirect('car_ride:customerbookings')

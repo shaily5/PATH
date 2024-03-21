@@ -64,7 +64,7 @@
     align-items: left; /* Center buttons horizontally */
     margin-left: 40px;
 }
-.action-buttons a,
+.action-buttons a, 
 .action-buttons button {
     margin-top: 5px;
     text-decoration: none;
@@ -75,8 +75,8 @@
     font-size: 15px;
     margin-bottom: 10px;
 }
-.action-buttons a:hover,
-.action-buttons button:hover {
+.action-buttons a:hover, 
+.action-buttons button:hover {     
     color: #32213B;
 }
 .booking-card p{
@@ -128,7 +128,7 @@
                         </tr>
                         </table>
                         <div class="action-buttons">
-                        <form action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
+                        <form action="{% url 'cancel_booking' booking.id %}" method="post">
                             {% csrf_token %}
                             <button type="submit">
                                 <i class="fas fa-trash-alt"></i> Delete
