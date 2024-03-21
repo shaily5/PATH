@@ -211,3 +211,14 @@ def Cars(request):
     if request.method == 'GET':
         mycars = Mycar.objects.all()
         return render(request, "allcars.html", {'mycars': mycars})
+
+
+def MyCarList(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            user = request.user
+            username = Customer.objects.get(usern=user)
+            custs = Mycar.objects.filter(cust=username)
+            print("from MyCarList: ", custs)
+            context = {'custs': custs}
+            return render(request, "mycar_list.html", context)

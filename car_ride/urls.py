@@ -13,4 +13,5 @@ urlpatterns=[
     path('mybookings/', views.MyBookings, name="mybookings"),
     path('myaccount', views.MyAccount,name="myaccount"),
     path('allcars/', views.Cars, name="allcars"),
+    path('mycar_list/', views.MyCarList, name="mycar_list"),
 ]
