@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+    <h1>Notifications</h1>
+{% for notification in notifications %}
+    {% if not notification.read %}
+        <li>{{ notification.message }}<br></li>
+    {% else %}
+        {{ notification.message }}<br>
+    {% endif %}
+{% endfor %}
+{% endblock %}

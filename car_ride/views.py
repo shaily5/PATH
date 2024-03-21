@@ -291,3 +291,14 @@ def Contactus(request):
             messages.success(request, "Thank you for contacting us, we will reach you soon.")
 
         return render(request, "contact.html")
+
+def user_notifications(request):
+    if request.user.is_authenticated:
+        user = request.user.customer
+        notifications = Notification.objects.filter(user=user)
+        print("notify: ", notifications)
+        context = {'notifications': notifications}
+        return render(request, 'user_notifications.html', context)
+    else:
+        messages.warning(request, "Please log in to see your notifications")
+        return redirect('car_ride:login')
