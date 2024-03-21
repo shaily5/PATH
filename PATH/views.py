@@ -1,14 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
 from .models import Customuser, Notification
+from car_ride.models import Customer
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -17,7 +16,7 @@ from PATH.forms import ContactForm
 
 
 def homepage(request):
-
+    print("C Home")
     return render(request, 'PATH/homepage.html')  # Replace 'home.html' with the name of your home template
 
 current_time = timezone.now().strftime("%H:%M:%S %d-%m-%Y")
@@ -42,7 +41,8 @@ def LoginUser(request):
             if customer:
                 login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
                 Notification.objects.create(user=customer, message=login_message)
-            return render(request,'PATH/homepage.html',{"username":username})
+            return redirect('PATH:homepage')
+            # return render(request,'PATH/homepage.html',{"username":username})
         else:
             messages.error(request, "Invalid username or password!")
             return redirect('PATH:login')
@@ -71,6 +71,9 @@ def Register(request):
                 obj = User.objects.create_user(username=username, email=email, password=password)
                 cust = Customuser.objects.create(username=obj, firstname=firstname, email=email, mobile=mobile, gender=gender,
                                                address=address, city=city, state=state)
+                ride = Customer.objects.create(usern=obj, fname=firstname, email=email, mobile=mobile, gender=gender,
+                                               address=address, city=city, state=state)
+                print("check:", ride)
                 messages.success(request, "Account created successfully!")
                 return redirect('PATH:login')
             except IntegrityError:
