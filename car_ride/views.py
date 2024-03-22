@@ -417,3 +417,25 @@ def Cardetails(request, car_id):
             car = Mycar.objects.get(pk=car_id)
             context = {'car': car, 'form': form}
             return render(request, "cardetails.html",context)
+
+def edit_car(request, car_id):
+    car = get_object_or_404(Mycar, id=car_id)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CarForm(request.POST, instance=car)
+            if form.is_valid():
+                form.save()
+                edit_message = f"{current_time}: The details of your car {car.car_name} have been updated."
+                Notification.objects.create(user=car.cust, message=edit_message)
+                bookings = car.booking_set.all()
+                for booking in bookings:
+                    edit_message_user = f"{current_time}: The details of the car you booked {car.car_name} have been updated."
+                    Notification.objects.create(user=booking.name, message=edit_message_user)
+                print("edit car1: ", bookings)
+
+                return redirect('car_ride:mycar_list')
+        else:
+            form = CarForm(instance=car)
+            print("get")
+
+    return render(request, 'edit_car.html', {'form': form, 'car': car})

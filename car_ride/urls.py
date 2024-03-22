@@ -23,4 +23,5 @@ urlpatterns=[
     path('changepassword/', views.Change, name="changepassword"),
     path('cancel_car/<int:car_id>/', views.cancel_car, name='cancel_car'),
     path('cardetails/<int:car_id>/', views.Cardetails, name="cardetails"),
+    path('edit_car/<int:car_id>/', views.edit_car, name='edit_car'),
 ]
