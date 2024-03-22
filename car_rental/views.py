@@ -121,7 +121,7 @@ def bookRentalCar(request):
 
 
             if request.session.get('username') is not None:
-                cars = Car.objects.filter(car_type=car_type)
+                cars = Car.objects.filter(car_type=request.session.get('car_type'))
                 return render(request, "car_rental/services/availableCars.html", {'cars': cars})
             else:
                 return render(request, "PATH/login.html")

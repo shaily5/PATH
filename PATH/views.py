@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
+
+from car_rental.models import Car
 from .models import Customuser, Notification
 from car_ride.models import Customer
 from django.db import IntegrityError
@@ -42,8 +44,13 @@ def LoginUser(request):
             except Customuser.DoesNotExist:
                 customer = None
             if customer:
-                login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
-                Notification.objects.create(user=customer, message=login_message)
+                request.session['username']=user.username
+                if request.session.get('car_type') is not None:
+                    cars = Car.objects.filter(car_type=request.session.get('car_type'))
+                    return render(request, "car_rental/services/availableCars.html", {'cars': cars})
+                else:
+                    login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
+                    Notification.objects.create(user=customer, message=login_message)
             return redirect('PATH:homepage')
             # return render(request,'PATH/homepage.html',{"username":username})
         else:
