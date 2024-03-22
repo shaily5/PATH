@@ -48,3 +48,8 @@ class BookingEditForm(forms.ModelForm):
 class ResetPasswordForm(forms.Form):
     email = forms.EmailField(label='Email')
     username = forms.CharField(label='Username', max_length=100)
+
+class CarForm(forms.ModelForm):
+    class Meta:
+        model = Mycar
+        fields = ['car_name', 'car_type', 'company', 'car_num', 'from_place', 'to_place', 'from_date', 'to_date', 'price','total_seats', 'car_img']

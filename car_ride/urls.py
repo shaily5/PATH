@@ -20,4 +20,5 @@ urlpatterns=[
     path('edit_booking/<int:booking_id>/', views.edit_booking, name='edit_booking'),
     path('contact/', views.Contactus, name='contact'),
     path('user_notifications/', views.user_notifications, name='user_notifications'),
+    path('changepassword/', views.Change, name="changepassword"),
 ]

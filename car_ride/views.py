@@ -11,7 +11,7 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.hashers import make_password
 from .models import Customer, Mycar, ContactUs, Booking, Notification
 from django.contrib.auth.decorators import login_required
-from .forms import SearchForm, AddcarForm, BookingForm, BookingEditForm
+from .forms import SearchForm, AddcarForm, BookingForm, BookingEditForm, CarForm, ResetPasswordForm
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 import random
@@ -302,3 +302,40 @@ def user_notifications(request):
     else:
         messages.warning(request, "Please log in to see your notifications")
         return redirect('car_ride:login')
+
+def Change(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return render(request, "change.html")
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            user = request.user
+            print(user)
+            old_password = request.POST['old_password']
+            print(old_password)
+            new_password = request.POST['new_password']
+            print(new_password)
+            confirm_password = request.POST['confirm_password']
+            print(confirm_password)
+            usern = authenticate(request, username=user, password=old_password)
+            print(usern)
+            if usern is None:
+                messages.error(request, 'The old password is incorrect!')
+                return redirect('car_ride:changepassword')
+
+            if new_password != confirm_password:
+                messages.error(request, 'The new password and confirm password does not match!')
+                return redirect('car_ride:changepassword')
+
+            print(user.password)
+            user.password = make_password(new_password)
+            user.save()
+
+            notification_message = f'{current_time}: Your password has been changed successfully!'
+            Notification.objects.create(user=user.customer, message=notification_message)
+
+            login(request, user)
+            messages.success(request, 'Password changed successfully!')
+            return redirect('car_ride:changepassword')
+    return render(request, 'change.html')
