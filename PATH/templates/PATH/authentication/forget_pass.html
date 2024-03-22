@@ -8,58 +8,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Login Form</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'PATH/css/login.css' %}">
+    <title>Forgot Password </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'car_rental/css/style.css' %}">
+
 </head>
 
 <body>
-
     <div class="container">
         <div class="header">
-            <img src="{% static 'PATH/images/logo.png' %}" alt="Logo" class="logo"> <!-- Path to your logo image -->
+            <img src="{% static 'car_rental/images/logo.png' %}" alt="Logo" class="logo"> <!-- Path to your logo image -->
         </div>
         <div class="content">
             <div class="side-image">
                 <img src="{% static 'car_rental/images/Frame.png' %}" alt="Side Image"> <!-- Path to your side image -->
             </div>
             <div class="login-form">
-                <form action="http://localhost:8000/login/" method="post">
-                    {% csrf_token %}
+
+                <form>
                     <div style="padding: 0 0 50px 0;">
-                        <h2>Welcome again</h2>
-                        <p>New to Design Space? <a href="{% url 'PATH:register' %}" style="color: white;"> Sign up
-                                for free </a></p><br>
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <center>{{ message }}</center>
-                        </div>
-                        {% endfor %}
-                        {% endif %}
+                        <h2>Forgot password</h2>
+                        
                     </div>
 
 
                     <div class="form-flex">
-                        <label style="font-size: 16px;" class="label" for="username">Enter username / Email</label>
+                        <label style="font-size: 16px;" class="label" for="password">Password</label>
+                            <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>
                     </div>
-                    <input type="text" id="username" name="username" required>
+                    <input type="password" id="password" name="password" required>
 
                     <div>
                         <div class="form-flex">
-                            <label style="font-size: 16px;" class="label" for="password">Password</label>
+                            <label style="font-size: 16px;" class="label" for="password">Confirm password</label>
                             <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>
                         </div>
                         <div style="margin-bottom: 30px;">
                             <input type="password" id="password" name="password" required>
                             <div class="form-flex">
-                                <!-- <div class="check">
+                                <div class="check">
                                     <input type="checkbox" id="checkbox1" class="checkbox-input">
                                     <label for="checkbox1" class="checkbox-label">Remember me ?</label>
-                                </div> -->
-                                <a class="forg" href="{% url 'PATH:password_reset' %}">Forget password?</a>
+                                </div>
+                                <a class="forg" href="">Forget password?</a>
                             </div>
                         </div>
                     </div>
+
+
+
                     <button type="submit">Login</button>
                 </form>
 

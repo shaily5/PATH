@@ -154,7 +154,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kushankpatel305@gmail.com'
-EMAIL_HOST_PASSWORD = 'bwkyggbmxegjzcgx'
+EMAIL_HOST_PASSWORD = 'haysamiphcjxgdwt'
 
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
