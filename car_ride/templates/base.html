@@ -69,17 +69,19 @@
                   <ul><a class="loginBtn" href="{% url 'car_ride:login' %}">Login</a></ul>
           </div>
       {% endif %}
-	  <ul><a href="{% url 'car_ride:user_notifications' %}">Notifications</a></ul>
+	 <ul><a href="{% url 'car_ride:user_notifications' %}" class="nav__link">
+            <i class="fa fa-bell"></i>
+     </a></ul>
         </ul>
     </div>
 <div>
     {% block body_block %}*** {% endblock %}
 </div>
-<div class="footer" style="overflow: hidden; display: flex; justify-content: center; flex-direction: column; align-content: center;
-align-items: center">
-      <h6 style="margin:10px; padding: 0">Copyrights @2024</h6>
-      <h6>University Of Windsor, Windsor, ON
-Canada</h6>
-</div>
+{#<div class="footer" style="overflow: hidden; display: flex; justify-content: center; flex-direction: column; align-content: center;#}
+{#align-items: center">#}
+{#      <h6 style="margin:10px; padding: 0">Copyrights @2024</h6>#}
+{#      <h6>University Of Windsor, Windsor, ON#}
+{#Canada</h6>#}
+{#</div>#}
      </body>
 </html>
