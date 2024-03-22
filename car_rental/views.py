@@ -94,22 +94,37 @@ def homepage(request):
 
 
 def bookRentalCar(request):
-    if request.method == "GET":
-        form=LoginForm()
-        return render(request, "car_rental/authentication/login.html",{'LoginForm':form})
 
-    if request.method == "POST":
-        rental_start_date = request.POST['rental_start_date']
-        rental_end_date = request.POST['rental_end_date']
-        pickup_time = request.POST['pickup_time']
-        return_time = request.POST['return_time']
-        pickup_location = request.POST['pickup_location']
-        car_type = request.POST['car_type']
+        if request.method == "GET":
+            if request.session.get('car_type') is None:
+                return render(request, "PATH/login.html")
+            else:
+                cars = Car.objects.filter(car_type=request.session.get('car_type'))
+                return render(request, "car_rental/services/availableCars.html", {'cars': cars})
 
-        cars = Car.objects.filter(car_type=car_type)
+        if request.method == "POST":
 
-        return render(request, "car_rental/services/availableCars.html",{'cars':cars})
+            if request.session.get('car_type') is None:
+                rental_start_date = request.POST['rental_start_date']
+                rental_end_date = request.POST['rental_end_date']
+                pickup_time = request.POST['pickup_time']
+                return_time = request.POST['return_time']
+                pickup_location = request.POST['pickup_location']
+                car_type = request.POST['car_type']
 
+                request.session['car_type'] = car_type
+                request.session['rental_start_date'] = rental_start_date
+                request.session['rental_end_date'] = rental_end_date
+                request.session['pickup_time'] = pickup_time
+                request.session['return_time'] = return_time
+                request.session['pickup_location'] = pickup_location
+
+
+            if request.session.get('username') is not None:
+                cars = Car.objects.filter(car_type=car_type)
+                return render(request, "car_rental/services/availableCars.html", {'cars': cars})
+            else:
+                return render(request, "PATH/login.html")
 
 def loginView(request):
     if request.method == "GET":

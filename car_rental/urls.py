@@ -13,9 +13,7 @@ urlpatterns = [
     path('invoice/<str:invoice_number>/', views.rental_invoice_detail, name='rental_invoice_detail'),
     path('rental/dashboard/', views.homepage, name='dashboard'),
     path('create_new_car/', views.create_car, name='create_car'),
-    path('show_photos/', views.show_photos, name='show_photos'),
 
-    path('rent_a_car/', views.rental_reservation_view, name='rent_a_car'),
 
     path('forgot_password/', views.forgot_password, name='forgot_password'),
     path('car_rental/login/', views.loginView, name='rentallogin'),

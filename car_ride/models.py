@@ -40,8 +40,8 @@ class Mycar(models.Model):
     to_date = models.DateField(null=True)
     price = models.FloatField()
     car_img = models.ImageField(upload_to="cars", default="", null=True, blank=True)
-    total_seats = models.IntegerField()  # Total number of seats available
-    seats_booked = models.IntegerField(default=0)  # Number of seats already booked
+    total_seats = models.IntegerField()
+    seats_booked = models.IntegerField(default=0)
 
     def update_seats_after_cancellation(self, num_seats_canceled):
         """
@@ -81,6 +81,7 @@ class Booking(models.Model):
     drop_add = models.CharField(max_length=100, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
     num_seats_booked = models.IntegerField(default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return str(self.id)

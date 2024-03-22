@@ -128,7 +128,7 @@
                         </tr>
                         </table>
                         <div class="action-buttons">
-                        <form action="{% url 'cancel_booking' booking.id %}" method="post">
+                        <form action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
                             {% csrf_token %}
                             <button type="submit">
                                 <i class="fas fa-trash-alt"></i> Delete

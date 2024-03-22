@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
+from PATH.models import Customuser
 from car_ride.models import Customer
 
 
@@ -90,7 +91,9 @@ class RentalReservation(models.Model):
     pickup_time = models.DateTimeField(default=timezone.now)
     return_time = models.DateTimeField(default=timezone.now)
 
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,default=None)  # Use Customer model here
+    # customer = models.ForeignKey(Customuser, on_delete=models.CASCADE)  # Use Customuser model here
+
+    customer = models.ForeignKey(Customuser, on_delete=models.CASCADE,default=None)  # Use Customer model here
     pickup_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
 
     car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
