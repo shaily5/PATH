@@ -103,6 +103,7 @@
         <div class="navbar-buttons">
             {% if request.user.username %}
                 <h1 style="color: white;">Welcome, {{ request.user.username }}!</h1>
+                <a href="{% url 'PATH:logout' %}"><button class="signup-btn">Log Out</button></a>
             {% else %}
             <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>
             <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>

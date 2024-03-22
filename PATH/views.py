@@ -2,13 +2,16 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
 from .models import Customuser, Notification
 from car_ride.models import Customer
 from django.db import IntegrityError
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
@@ -80,3 +83,19 @@ def Register(request):
                 messages.warning(request, "Account already exists!")
                 return redirect('PATH:register')
         return render(request, "PATH/register.html")
+
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'PATH/authentication/password_reset.html'
+    email_template_name = 'PATH/authentication/password_reset_email.html'
+    subject_template_name = 'PATH/authentication/password_reset_subject'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_url = reverse_lazy('PATH:login')
+
+@login_required
+def logoutView(request):
+    logout(request)
+    return redirect('PATH:homepage')

@@ -29,7 +29,7 @@
                     {% csrf_token %}
                     <div style="padding: 0 0 50px 0;">
                         <h2>Welcome again</h2>
-                        <p>New to Design Space? <a href="{% url 'car_ride:register'%}" style="color: white;"> Sign up
+                        <p>New to Design Space? <a href="{% url 'PATH:register' %}" style="color: white;"> Sign up
                                 for free </a></p><br>
                         {% if messages %}
                         {% for message in messages %}
@@ -58,7 +58,7 @@
                                     <input type="checkbox" id="checkbox1" class="checkbox-input">
                                     <label for="checkbox1" class="checkbox-label">Remember me ?</label>
                                 </div> -->
-                                <a class="forg" href="">Forget password?</a>
+                                <a class="forg" href="{% url 'PATH:password_reset' %}">Forget password?</a>
                             </div>
                         </div>
                     </div>
