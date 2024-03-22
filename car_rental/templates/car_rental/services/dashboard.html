@@ -101,8 +101,13 @@
             <li><a href="#">Parcel service</a></li>
         </ul>
         <div class="navbar-buttons">
-          <a href="/signup.html"><button class="signup-btn">Sign Up</button></a>
-         <a href="/login.html"> <button class="login-btn active">Login</button></a>
+            {% if request.user.username %}
+                <h1 style="color: white;">Welcome, {{ request.user.username }}!</h1>
+                <a href="{% url 'PATH:logout' %}"><button class="signup-btn">Log Out</button></a>
+            {% else %}
+            <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>
+            <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>
+            {% endif %}
         </div>
       </div>
     </nav>
@@ -171,7 +176,7 @@
   <section style="margin: 0 0 50px 0;">
     <div class="rental-ride">
 
-      <h1 class="rental-ride-heading">Our Rental or Ride Services
+      <h1 class="rental-ride-heading">Our Rental Services
         <hr>
       </h1>
 
