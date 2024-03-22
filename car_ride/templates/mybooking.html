@@ -154,13 +154,21 @@ h4{
                         <th>Email:</th>
                         <td>{{i.email}}</td>
                     </tr>
-                    <tr>
-                        <th>PickUp Date:</th>
-                        <td>{{i.pickup}}</td>
+{#                    <tr>#}
+{#                        <th>PickUp Date:</th>#}
+{#                        <td>{{i.pickup}}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Drop Date:</th>#}
+{#                        <td>{{i.dropoff}}</td>#}
+{#                    </tr>#}
+                    <tr class="t1" style="border-bottom: none">
+                        <th>Route:</th>
+                        <td>{{i.car.from_place}} - {{i.car.to_place}}</td>
                     </tr>
-                    <tr>
-                        <th>Drop Date:</th>
-                        <td>{{i.dropoff}}</td>
+                    <tr class="t1" style="border-bottom: none">
+                        <th>Travel Dates:</th>
+                        <td>{{i.car.from_date}} - {{i.car.to_date}}</td>
                     </tr>
                     <tr>
                         <th>PickUp Address:</th>

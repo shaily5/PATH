@@ -105,24 +105,24 @@
                         <table>
                         <tr>
                         <th>Name:</th>
-                        <td>{{ c.car_name }}</td>
+                        <td>{{ c.company }} {{ c.car_name }}</td>
                         </tr>
                          <tr>
                              <th>Type:</th>
                              <td>{{ c.car_type }}</td>
                          </tr>
                         <tr>
-                             <th>Number:</th>
+                            <th>Number:</th>
                             <td>{{ c.car_num }}</td>
                         </tr>
                         <tr>
-                             <th>From Location:</th>
-                            <td>{{ c.from_place }}</td>
+                             <th>Route:</th>
+                            <td>{{ c.from_place }} - {{ c.to_place }}</td>
                         </tr>
-                       <tr>
-                             <th>To Location:</th>
-                           <td>{{ c.to_place }}</td>
-                       </tr>
+                        <tr>
+                             <th>Travel Dates:</th>
+                            <td>{{ c.from_date }} - {{ c.to_date }}</td>
+                        </tr>
                         <tr>
                              <th>Price:</th>
                             <td>{{ c.price }}</td>
