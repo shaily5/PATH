@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+  <link rel="stylesheet" href="{% static 'styles/home.css'%}">
+    <p>Your booking has been cancelled.</p>
+    <a href="{% url 'mybookings' %}">My Bookings</a>
+{% endblock %}
