@@ -22,4 +22,5 @@ urlpatterns=[
     path('user_notifications/', views.user_notifications, name='user_notifications'),
     path('changepassword/', views.Change, name="changepassword"),
     path('cancel_car/<int:car_id>/', views.cancel_car, name='cancel_car'),
+    path('cardetails/<int:car_id>/', views.Cardetails, name="cardetails"),
 ]

@@ -361,3 +361,59 @@ def cancel_car(request, car_id):
             else:
                 return HttpResponseForbidden("You are not authorized to perform this action.")
     return HttpResponseForbidden("You are not authorized to perform this action.")
+
+@login_required(login_url='login')
+def Cardetails(request, car_id):
+    if request.method == "GET":
+        car = Mycar.objects.get(pk=car_id)
+        form = BookingForm()
+        context = {'car': car, 'form': form}
+        return render(request, "cardetails.html", context)
+
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            contact = form.cleaned_data['contact']
+            email = form.cleaned_data['email']
+            pickup = form.cleaned_data['pickup']
+            dropoff = form.cleaned_data['dropoff']
+            pick_add = form.cleaned_data['pick_add']
+            drop_add = form.cleaned_data['drop_add']
+            num_seats_booked = form.cleaned_data['num_seats_booked']
+            user = request.user
+            cust = Customer.objects.get(usern=user)
+            car = Mycar.objects.get(pk=car_id)
+            if car.from_date != pickup:
+                messages.error(request, "This Car is not available. Please check Pick up date.")
+                return redirect('car_ride:cardetails', car_id=car_id)
+            if car.to_date != dropoff:
+                messages.error(request, "This Car is not available. Please check Drop off date.")
+                return redirect('car_ride:cardetails', car_id=car_id)
+            if car.total_seats < num_seats_booked:
+                messages.error(request, "Not enough seats available.")
+                return redirect('car_ride:cardetails', car_id=car_id)
+
+            # Calculate price based on number of seats booked
+            price_per_seat = car.price
+            total_price = Decimal(price_per_seat) * Decimal(num_seats_booked)
+
+            with transaction.atomic():
+                booking = Booking.objects.create(name=cust, car=car, email=email, contact=contact, pickup=pickup, dropoff=dropoff, pick_add=pick_add, drop_add=drop_add, num_seats_booked=num_seats_booked, price=total_price)
+                booking.save()
+                car.seats_booked += num_seats_booked
+                car.total_seats -= num_seats_booked
+                car.save()
+
+                # Create a notification for the car owner
+                owner_notification = f"{current_time}: A new booking has been made for your car: {car.car_name} by {cust.fname}."
+                Notification.objects.create(user=car.cust, message=owner_notification)
+
+                # Create a notification for the user who made the booking
+                user_notification = f"{current_time}: Your booking for car: {car.car_name} has been confirmed."
+                Notification.objects.create(user=cust, message=user_notification)
+
+            return redirect('car_ride:bookedcar', car_id=car_id)
+        else:
+            car = Mycar.objects.get(pk=car_id)
+            context = {'car': car, 'form': form}
+            return render(request, "cardetails.html",context)
