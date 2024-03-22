@@ -1,12 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils import timezone
-
 from car_rental.models import Car
 from .models import Customuser, Notification
 from car_ride.models import Customer
@@ -16,9 +14,7 @@ from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChan
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-
 from PATH.forms import ContactForm
-
 
 def homepage(request):
     print("C Home")

@@ -301,7 +301,7 @@ def user_notifications(request):
         return render(request, 'user_notifications.html', context)
     else:
         messages.warning(request, "Please log in to see your notifications")
-        return redirect('car_ride:login')
+        return redirect('PATH:login')
 
 def Change(request):
     if request.method == 'GET':

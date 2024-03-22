@@ -12,11 +12,11 @@ class Customer(models.Model):
     address = models.CharField(max_length=100, null=False)
     city = models.CharField(max_length=100, null=False)
     state = models.CharField(max_length=100, null=False)
+    #
+    # def __str__(self):
+    #     return f"{self.usern} - {self.email}"
 
     def __str__(self):
-        return f"{self.usern} - {self.email}"
-
-    def _str_(self):
         return str(self.fname)
 
 class ContactUs(models.Model):
@@ -25,7 +25,7 @@ class ContactUs(models.Model):
     phone = models.CharField(max_length=11, null=False, blank=True)
     msg = models.CharField(max_length=200)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class Mycar(models.Model):
@@ -51,7 +51,7 @@ class Mycar(models.Model):
         self.total_seats += num_seats_canceled
         self.save()
 
-    def _str_(self):
+    def __str__(self):
         return self.car_num
 
     @property
