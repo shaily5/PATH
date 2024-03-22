@@ -439,3 +439,30 @@ def edit_car(request, car_id):
             print("get")
 
     return render(request, 'edit_car.html', {'form': form, 'car': car})
+
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+
+        # Check if email and phone match a user in the database
+        try:
+            user = User.objects.get(email=email, username=username)
+        except User.DoesNotExist:
+            messages.error(request, 'Invalid email.')
+            return redirect('car_ride:forget_password')
+
+        # Generate a random password
+        new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+
+        # Update user's password in the database
+        user.set_password(new_password)
+        user.save()
+
+        # Pass the new password to the template context
+        context = {'new_password': new_password}
+
+        # Display the new password to the user
+        return render(request, 'password_display.html', context)
+
+    return render(request, 'forget_password.html')
