@@ -339,3 +339,25 @@ def Change(request):
             messages.success(request, 'Password changed successfully!')
             return redirect('car_ride:changepassword')
     return render(request, 'change.html')
+
+def cancel_car(request, car_id):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            # Ensure that the user is a Customer instance
+            if hasattr(request.user, 'customer'):
+                car = get_object_or_404(Mycar, id=car_id, cust=request.user.customer)
+                bookings = car.booking_set.all()
+
+                cancel_message = f"{current_time}: Hello {car.cust}, You have cancelled car {car.car_name}."
+                Notification.objects.create(user=car.cust, message=cancel_message)
+
+                # Create notifications for users who have booked this car
+                for booking in bookings:
+                    cancel_message_user = f"{current_time}: Sorry!! The owner of car {car.car_name} has cancelled posting of the car. The car is no longer available."
+                    Notification.objects.create(user=booking.name, message=cancel_message_user)
+                print("cancel: ", bookings)
+                car.delete()
+                return render(request, 'cancel_car.html')
+            else:
+                return HttpResponseForbidden("You are not authorized to perform this action.")
+    return HttpResponseForbidden("You are not authorized to perform this action.")

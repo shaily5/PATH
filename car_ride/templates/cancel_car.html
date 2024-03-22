@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+<style>
+    body {
+        position: relative;
+        height: 95vh;
+        width: 100%;
+        background-image: url("{% static 'images/img7.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .icon {
+        color: #9961BA;
+        font-size: 90px;
+        margin-bottom: 20px;
+    }
+    h1 {
+        color: #9961BA;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    p {
+        color: #333;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    .redirect-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #9961BA;
+        color: #fff;
+        border: 1px solid #9961BA;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+    .redirect-button:hover {
+        background-color: #FFFFFF;
+        color: #9961BA;
+        border-color: #9961BA;
+    }
+</style>
+<div class="container">
+    <i class="icon fas fa-times-circle"></i>
+    <h1>Cancellation Confirmation</h1>
+    <p>Your Posted Ride has been Canceled Successfully</p>
+    <a href="{% url 'mycar_list' %}" class="redirect-button">Back to My Car List</a>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</div>
+{% endblock %}
