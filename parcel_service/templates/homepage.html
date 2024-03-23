@@ -1,0 +1,753 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#  <meta charset="UTF-8" />#}
+{#  <meta name="viewport" content="width=device-width, initial-scale=1.0" />#}
+{#  <title>Responsive Navbar with Background Image</title>#}
+{#    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />#}
+{##}
+{#  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"#}
+{#    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="#}
+{#    crossorigin="anonymous" referrerpolicy="no-referrer" />#}
+{#  <script>#}
+{#    document.addEventListener("DOMContentLoaded", function () {#}
+{#      const links = document.querySelectorAll(".navbar-menu li a");#}
+{##}
+{#      links.forEach((link) => {#}
+{#        link.addEventListener("click", function (event) {#}
+{#          links.forEach((link) => link.classList.remove("active"));#}
+{#          this.classList.add("active");#}
+{#        });#}
+{#      });#}
+{#    });#}
+{#    document.addEventListener("DOMContentLoaded", function () {#}
+{#      const loginBtn = document.querySelector(".login-btn");#}
+{#      const signupBtn = document.querySelector(".signup-btn");#}
+{##}
+{#      loginBtn.addEventListener("click", function () {#}
+{#        loginBtn.classList.add("active");#}
+{#        signupBtn.classList.remove("active");#}
+{#      });#}
+{##}
+{#      signupBtn.addEventListener("click", function () {#}
+{#        signupBtn.classList.add("active");#}
+{#        loginBtn.classList.remove("active");#}
+{#      });#}
+{#    });#}
+{##}
+{#// our clientFeedbackRight();#}
+{##}
+{#    document.addEventListener('DOMContentLoaded', function() {#}
+{#  const prevButton = document.getElementById('prevButton');#}
+{#  const nextButton = document.getElementById('nextButton');#}
+{#  const clientFeedbackRight = document.getElementById('clientFeedbackRight');#}
+{##}
+{#  let currentSlide = 0;#}
+{#  const slides = clientFeedbackRight.querySelectorAll('.client-box');#}
+{##}
+{#  function showSlide(index) {#}
+{#    slides.forEach((slide, i) => {#}
+{#      slide.style.display = i === index ? 'flex' : 'none';#}
+{#    });#}
+{#  }#}
+{##}
+{#  function nextSlide() {#}
+{#    slides[currentSlide].style.display = 'none'; // Hide current slide#}
+{#    currentSlide = (currentSlide + 1) % slides.length; // Move to next slide#}
+{#    slides[currentSlide].style.display = 'flex'; // Show next slide#}
+{##}
+{#    // If it's the last slide, hide the first one#}
+{#    if (currentSlide === slides.length - 1) {#}
+{#      slides[0].style.display = 'none';#}
+{#    }#}
+{#  }#}
+{##}
+{#  function prevSlide() {#}
+{#    slides[currentSlide].style.display = 'none'; // Hide current slide#}
+{#    currentSlide = (currentSlide - 1 + slides.length) % slides.length; // Move to previous slide#}
+{#    slides[currentSlide].style.display = 'flex'; // Show previous slide#}
+{##}
+{#    // If it's the first slide, hide the last one#}
+{#    if (currentSlide === 0) {#}
+{#      slides[slides.length - 1].style.display = 'none';#}
+{#    }#}
+{#  }#}
+{##}
+{#  prevButton.addEventListener('click', prevSlide);#}
+{#  nextButton.addEventListener('click', nextSlide);#}
+{##}
+{#  // Initially show the first slide#}
+{#  showSlide(currentSlide);#}
+{#});#}
+{##}
+{##}
+{##}
+{#  </script>#}
+{#</head>#}
+{#<header>#}
+{#  <div class="background-image">#}
+{#<nav class="navbar">#}
+{#            <div class="containers">#}
+{#              <div class="navbar-logo">#}
+{#                <img src="../../static/PATH/images/logo.png" alt="Logo" />#}
+{#              </div>#}
+{#              <ul class="navbar-menu">#}
+{#                <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>#}
+{##}
+{#                <li><a href="http://localhost:8000/rental/dashboard/" >Rental car</a></li>#}
+{#                <li><a href="login">Rides</a></li>#}
+{#                  <li><a href="#" class="active">Parcel service</a></li>#}
+{#              </ul>#}
+{#              <div class="navbar-buttons">#}
+{#                  {% if request.user.username %}#}
+{#                      <h1 style="color: white;">Welcome, {{ request.user.username }}!</h1>#}
+{#                      <a href="{% url 'PATH:logout' %}"><button class="signup-btn">Log Out</button></a>#}
+{#                  {% else %}#}
+{#                  <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>#}
+{#                  <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>#}
+{#                  {% endif %}#}
+{#              </div>#}
+{#            </div>#}
+{#          </nav>#}
+{##}
+{#<br><br><br><br><br><br><br><br>#}
+{#  </div>#}
+{##}
+{#</header>#}
+{##}
+{#<body>#}
+{##}
+{#  <section>#}
+{#    <div class="service-section">#}
+{#      <h2 class="section-heading">Book your parcel services#}
+{#        <hr class="section-heading-HR" />#}
+{#      </h2>#}
+{#      <div class="content">#}
+{##}
+{#        <div class="row">#}
+{#          <div class="input-group1">#}
+{##}
+{#            <select>#}
+{#              <option value="" disabled selected>Pickup Location</option>#}
+{#              <!-- Add options for pickup locations -->#}
+{#              <option value="location1">Location 1</option>#}
+{#              <option value="location2">Location 2</option>#}
+{#              <option value="location3">Location 3</option>#}
+{#            </select>#}
+{##}
+{#          </div>#}
+{#          <div class="input-group1">#}
+{#            <input type="date" placeholder="Pickup Date">#}
+{#          </div>#}
+{#          <div class="input-group1">#}
+{#            <input type="date" placeholder="Return Date">#}
+{#          </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#          <div class="input-group2">#}
+{#            <select>#}
+{#              <option value="" disabled selected>Car Type</option>#}
+{#              <!-- Add options for car types -->#}
+{#              <option value="car1">Car Type 1</option>#}
+{#              <option value="car2">Car Type 2</option>#}
+{#              <option value="car3">Car Type 3</option>#}
+{#            </select>#}
+{##}
+{#          </div>#}
+{#          <div class="input-group2">#}
+{#            <input type="time" placeholder="Pickup Time">#}
+{#          </div>#}
+{#          <div class="input-group2">#}
+{#            <input type="time" placeholder="Return Time">#}
+{##}
+{#          </div>#}
+{#          <button class="book-now">Book Now</button>#}
+{#        </div>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+{##}
+{#  <section style="margin: 0 0 50px 0;">#}
+{#    <div class="rental-ride">#}
+{##}
+{#      <h1 class="rental-ride-heading">Our Rental or Ride Services#}
+{#        <hr>#}
+{#      </h1>#}
+{##}
+{#      <div class="box1">#}
+{#        <div class="car-box">#}
+{#          <!-- Car 1 -->#}
+{#          <div class="car">#}
+{#            <img src="./images/thar.png" alt="Car 2">#}
+{#            <div>#}
+{#              <div class="car-details">#}
+{#                <div class="heading">#}
+{#                  Jeep XD#}
+{#                </div>#}
+{##}
+{#                <div class="details-row">#}
+{#                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>#}
+{#                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>#}
+{#                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>#}
+{#                </div>#}
+{#              </div>#}
+{#              <div class="additional-details">#}
+{#                <div>#}
+{#                  <p style="margin: 0;">Daily rate from</p>#}
+{#                  <h1 style="margin: 0;" class="price">$200</h1>#}
+{#                </div>#}
+{#                <button class="action-button">Book Now</button>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#          <!-- Car 2 -->#}
+{#          <div class="car">#}
+{#            <img src="./images/thar.png" alt="Car 2">#}
+{#            <div>#}
+{#              <div class="car-details">#}
+{#                <div class="heading">#}
+{#                  Jeep XD#}
+{#                </div>#}
+{##}
+{#                <div class="details-row">#}
+{#                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>#}
+{#                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>#}
+{#                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>#}
+{#                </div>#}
+{#              </div>#}
+{#              <div class="additional-details">#}
+{#                <div>#}
+{#                  <p style="margin: 0;">Daily rate from</p>#}
+{#                  <h1 style="margin: 0;" class="price">$200</h1>#}
+{#                </div>#}
+{#                <button class="action-button">Book Now</button>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#          <!-- Car 3 -->#}
+{#          <div class="car">#}
+{#            <img src="./images/thar.png" alt="Car 2">#}
+{#            <div>#}
+{#              <div class="car-details">#}
+{#                <div class="heading">#}
+{#                  Jeep XD#}
+{#                </div>#}
+{##}
+{#                <div class="details-row">#}
+{#                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>#}
+{#                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>#}
+{#                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>#}
+{#                </div>#}
+{#              </div>#}
+{#              <div class="additional-details">#}
+{#                <div>#}
+{#                  <p style="margin: 0;">Daily rate from</p>#}
+{#                  <h1 style="margin: 0;" class="price">$200</h1>#}
+{#                </div>#}
+{#                <button class="action-button">Book Now</button>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{##}
+{#  </section>#}
+{#  <section>#}
+{#    <div class="pres">#}
+{#      <div class="premium-services">#}
+{#        <div class="premium-services-content">#}
+{#          <div>#}
+{#            <div style="line-height: 13px;">#}
+{#              <h2 class="premium-heading">Our Premium Services#}
+{#                <hr />#}
+{#              </h2>#}
+{#            </div>#}
+{#            <p class="section-paragraph">Carent is a reputable car rental company that offers a wide range of useful#}
+{#              services for every taste.</p>#}
+{#          </div>#}
+{#          <div class="service-box-container">#}
+{#            <div class="service-box">#}
+{#              <img src="./images/square.png" alt="Service Image" width="56" height="56">#}
+{#              <h3 class="service-heading">24 Hours Support</h3>#}
+{#              <p class="service-description">We support you all hours of the day.</p>#}
+{#            </div>#}
+{#            <div class="service-box">#}
+{#              <img src="./images/medal-star.png" alt="Service Image" width="56" height="56">#}
+{#              <h3 class="service-heading">Qualified Assurance</h3>#}
+{#              <p class="service-description">We support you all hours of the day.</p>#}
+{#            </div>#}
+{#            <div class="service-box">#}
+{#              <img src="./images/gps.png" alt="Service Image" width="56" height="56">#}
+{#              <h3 class="service-heading">GPS on Cars</h3>#}
+{#              <p class="service-description">We support you all hours of the day.</p>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+{#  <section>#}
+{##}
+{#    <div class="clients-say">#}
+{#      <h2 class="clients-say-heading">What Our Clients Say?#}
+{#        <hr>#}
+{#      </h2>#}
+{#      <div class="client-feedback">#}
+{##}
+{#        <div class="client-feedback-left">#}
+{#          <button class="arrow" id="prevButton"><i style="color: #9961BA;" class="fa-solid fa-chevron-left fa-2xl"></i></button>#}
+{#        </div>#}
+{#        <div class="client-feedback-right" id="clientFeedbackRight">#}
+{#          <div class="client-box">#}
+{#            <div class="client-image">#}
+{#              <img src="./images/p1.png" alt="Client Image" width="128" height="128">#}
+{#            </div>#}
+{#            <div class="client-details">#}
+{#              <h3 class="client-name">Kristin Watson</h3>#}
+{#              <p class="client-comment">I rented a car for a one-week trip from Carnet on the recommendation of my#}
+{#                friend. Actually, I am satisfied with them.</p>#}
+{#            </div>#}
+{#          </div>#}
+{#          <div class="client-box">#}
+{#            <div class="client-image">#}
+{#              <img src="./images/p2.png" alt="Client Image" width="128" height="128">#}
+{#            </div>#}
+{#            <div class="client-details">#}
+{#              <h3 class="client-name">Robert Fox</h3>#}
+{#              <p class="client-comment">During my last trip, I used a Carent sport car . The car was completely clean#}
+{#                and had enough gas.</p>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{##}
+{#        <div class="client-feedback-left ">#}
+{#          <button class="arrow" id="nextButton"><i style="color: #9961BA;" class="fa-solid fa-chevron-right fa-2xl"></i></button>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+{#  <section>#}
+{#    <div class="number-count">#}
+{#      <div class="number-count-container">#}
+{#        <div class="count-container">#}
+{#          <h1>450+</h1>#}
+{#          <p>Cars For Rent</p>#}
+{#        </div>#}
+{#        <div class="count-container">#}
+{#          <h1>800+</h1>#}
+{#          <p>Happy Clients</p>#}
+{#        </div>#}
+{#        <div class="count-container">#}
+{#          <h1>750+</h1>#}
+{#          <p>Rental Locations</p>#}
+{#        </div>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+{#  <section style="margin: 0 0 200px 0;">#}
+{##}
+{#    <div class="contact-us">#}
+{#      <h2>Contact Us#}
+{#        <hr>#}
+{#      </h2>#}
+{#      <div class=" contact-width">#}
+{#        <div class="contact-container">#}
+{##}
+{#          <input type="text" placeholder="Your Name">#}
+{#          <input type="email" placeholder="Your Email">#}
+{#          <input type="text" placeholder="Your Message">#}
+{##}
+{#          <button class="send-message">Send A Message</button>#}
+{##}
+{#        </div>#}
+{#        <div class="contact-image">#}
+{#          <img src="images/handkey.jpg" alt="">#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+{#</body>#}
+{##}
+{#</html>#}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Navbar with Background Image</title>
+    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const links = document.querySelectorAll(".navbar-menu li a");
+
+      links.forEach((link) => {
+        link.addEventListener("click", function (event) {
+          links.forEach((link) => link.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginBtn = document.querySelector(".login-btn");
+      const signupBtn = document.querySelector(".signup-btn");
+
+      loginBtn.addEventListener("click", function () {
+        loginBtn.classList.add("active");
+        signupBtn.classList.remove("active");
+      });
+
+      signupBtn.addEventListener("click", function () {
+        signupBtn.classList.add("active");
+        loginBtn.classList.remove("active");
+      });
+    });
+
+// our clientFeedbackRight();
+
+    document.addEventListener('DOMContentLoaded', function() {
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
+  const clientFeedbackRight = document.getElementById('clientFeedbackRight');
+
+  let currentSlide = 0;
+  const slides = clientFeedbackRight.querySelectorAll('.client-box');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.style.display = i === index ? 'flex' : 'none';
+    });
+  }
+
+  function nextSlide() {
+    slides[currentSlide].style.display = 'none'; // Hide current slide
+    currentSlide = (currentSlide + 1) % slides.length; // Move to next slide
+    slides[currentSlide].style.display = 'flex'; // Show next slide
+
+    // If it's the last slide, hide the first one
+    if (currentSlide === slides.length - 1) {
+      slides[0].style.display = 'none';
+    }
+  }
+
+  function prevSlide() {
+    slides[currentSlide].style.display = 'none'; // Hide current slide
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length; // Move to previous slide
+    slides[currentSlide].style.display = 'flex'; // Show previous slide
+
+    // If it's the first slide, hide the last one
+    if (currentSlide === 0) {
+      slides[slides.length - 1].style.display = 'none';
+    }
+  }
+
+  prevButton.addEventListener('click', prevSlide);
+  nextButton.addEventListener('click', nextSlide);
+
+  // Initially show the first slide
+  showSlide(currentSlide);
+});
+
+
+
+  </script>
+</head>
+<header>
+{#  <div class="background-image">#}
+<nav class="navbar">
+            <div class="containers">
+              <div class="navbar-logo">
+                <img src="../../static/PATH/images/logo.png" alt="Logo" />
+              </div>
+              <ul class="navbar-menu">
+                <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
+
+                <li><a href="http://localhost:8000/rental/dashboard/" >Rental car</a></li>
+                <li><a href="login">Rides</a></li>
+                  <li><a href="#" class="active">Parcel service</a></li>
+              </ul>
+              <div class="navbar-buttons">
+                  {% if request.user.username %}
+                      <h1 style="color: white;">Welcome, {{ request.user.username }}!</h1>
+                      <a href="{% url 'PATH:logout' %}"><button class="signup-btn">Log Out</button></a>
+                  {% else %}
+                  <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>
+                  <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>
+                  {% endif %}
+              </div>
+            </div>
+          </nav>
+
+<br><br><br><br><br><br><br><br>
+{#  </div>#}
+
+</header>
+
+<body>
+
+  <section>
+    <div class="service-section">
+      <h2 class="section-heading">Book your parcel services
+        <hr class="section-heading-HR" />
+      </h2>
+      <div class="content">
+
+        <div class="row">
+          <div class="input-group1">
+
+            <select>
+              <option value="" disabled selected>Pickup Location</option>
+              <!-- Add options for pickup locations -->
+              <option value="location1">Location 1</option>
+              <option value="location2">Location 2</option>
+              <option value="location3">Location 3</option>
+            </select>
+
+          </div>
+          <div class="input-group1">
+            <input type="date" placeholder="Pickup Date">
+          </div>
+          <div class="input-group1">
+            <input type="date" placeholder="Return Date">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-group2">
+            <select>
+              <option value="" disabled selected>Car Type</option>
+              <!-- Add options for car types -->
+              <option value="car1">Car Type 1</option>
+              <option value="car2">Car Type 2</option>
+              <option value="car3">Car Type 3</option>
+            </select>
+
+          </div>
+          <div class="input-group2">
+            <input type="time" placeholder="Pickup Time">
+          </div>
+          <div class="input-group2">
+            <input type="time" placeholder="Return Time">
+
+          </div>
+          <button class="book-now">Book Now</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="margin: 0 0 50px 0;">
+    <div class="rental-ride">
+
+      <h1 class="rental-ride-heading">Our Rental or Ride Services
+        <hr>
+      </h1>
+
+      <div class="box1">
+        <div class="car-box">
+          <!-- Car 1 -->
+          <div class="car">
+            <img src="./images/thar.png" alt="Car 2">
+            <div>
+              <div class="car-details">
+                <div class="heading">
+                  Jeep XD
+                </div>
+
+                <div class="details-row">
+                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>
+                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>
+                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>
+                </div>
+              </div>
+              <div class="additional-details">
+                <div>
+                  <p style="margin: 0;">Daily rate from</p>
+                  <h1 style="margin: 0;" class="price">$200</h1>
+                </div>
+                <button class="action-button">Book Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- Car 2 -->
+          <div class="car">
+            <img src="./images/thar.png" alt="Car 2">
+            <div>
+              <div class="car-details">
+                <div class="heading">
+                  Jeep XD
+                </div>
+
+                <div class="details-row">
+                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>
+                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>
+                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>
+                </div>
+              </div>
+              <div class="additional-details">
+                <div>
+                  <p style="margin: 0;">Daily rate from</p>
+                  <h1 style="margin: 0;" class="price">$200</h1>
+                </div>
+                <button class="action-button">Book Now</button>
+              </div>
+            </div>
+          </div>
+          <!-- Car 3 -->
+          <div class="car">
+            <img src="./images/thar.png" alt="Car 2">
+            <div>
+              <div class="car-details">
+                <div class="heading">
+                  Jeep XD
+                </div>
+
+                <div class="details-row">
+                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>
+                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>
+                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>
+                </div>
+              </div>
+              <div class="additional-details">
+                <div>
+                  <p style="margin: 0;">Daily rate from</p>
+                  <h1 style="margin: 0;" class="price">$200</h1>
+                </div>
+                <button class="action-button">Book Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <section>
+    <div class="pres">
+      <div class="premium-services">
+        <div class="premium-services-content">
+          <div>
+            <div style="line-height: 13px;">
+              <h2 class="premium-heading">Our Premium Services
+                <hr />
+              </h2>
+            </div>
+            <p class="section-paragraph">Carent is a reputable car rental company that offers a wide range of useful
+              services for every taste.</p>
+          </div>
+          <div class="service-box-container">
+            <div class="service-box">
+              <img src="./images/square.png" alt="Service Image" width="56" height="56">
+              <h3 class="service-heading">24 Hours Support</h3>
+              <p class="service-description">We support you all hours of the day.</p>
+            </div>
+            <div class="service-box">
+              <img src="./images/medal-star.png" alt="Service Image" width="56" height="56">
+              <h3 class="service-heading">Qualified Assurance</h3>
+              <p class="service-description">We support you all hours of the day.</p>
+            </div>
+            <div class="service-box">
+              <img src="./images/gps.png" alt="Service Image" width="56" height="56">
+              <h3 class="service-heading">GPS on Cars</h3>
+              <p class="service-description">We support you all hours of the day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+
+    <div class="clients-say">
+      <h2 class="clients-say-heading">What Our Clients Say?
+        <hr>
+      </h2>
+      <div class="client-feedback">
+
+        <div class="client-feedback-left">
+          <button class="arrow" id="prevButton"><i style="color: #9961BA;" class="fa-solid fa-chevron-left fa-2xl"></i></button>
+        </div>
+        <div class="client-feedback-right" id="clientFeedbackRight">
+          <div class="client-box">
+            <div class="client-image">
+              <img src="./images/p1.png" alt="Client Image" width="128" height="128">
+            </div>
+            <div class="client-details">
+              <h3 class="client-name">Kristin Watson</h3>
+              <p class="client-comment">I rented a car for a one-week trip from Carnet on the recommendation of my
+                friend. Actually, I am satisfied with them.</p>
+            </div>
+          </div>
+          <div class="client-box">
+            <div class="client-image">
+              <img src="./images/p2.png" alt="Client Image" width="128" height="128">
+            </div>
+            <div class="client-details">
+              <h3 class="client-name">Robert Fox</h3>
+              <p class="client-comment">During my last trip, I used a Carent sport car . The car was completely clean
+                and had enough gas.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="client-feedback-left ">
+          <button class="arrow" id="nextButton"><i style="color: #9961BA;" class="fa-solid fa-chevron-right fa-2xl"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="number-count">
+      <div class="number-count-container">
+        <div class="count-container">
+          <h1>450+</h1>
+          <p>Cars For Rent</p>
+        </div>
+        <div class="count-container">
+          <h1>800+</h1>
+          <p>Happy Clients</p>
+        </div>
+        <div class="count-container">
+          <h1>750+</h1>
+          <p>Rental Locations</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section style="margin: 0 0 200px 0;">
+
+    <div class="contact-us">
+      <h2>Contact Us
+        <hr>
+      </h2>
+      <div class=" contact-width">
+        <div class="contact-container">
+
+          <input type="text" placeholder="Your Name">
+          <input type="email" placeholder="Your Email">
+          <input type="text" placeholder="Your Message">
+
+          <button class="send-message">Send A Message</button>
+
+        </div>
+        <div class="contact-image">
+          <img src="images/handkey.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
