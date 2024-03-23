@@ -15,9 +15,12 @@
     <body>
     <div class="topnav" id="myTopnav">
         <ul>
-            <div id="name" class="name" style="margin-top: 15px">
-                <img alt="logo" src="https://s3-alpha-sig.figma.com/img/b47a/cd04/2ce54eab4ad0df124f136b646202b058?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PmkirwFkRyN3Lk-tTl9olQ19KKa6KiGlCVr2HzBcVRvsBGxhZMDoQ~f-m9q8Jw075bEhkZGDPoUdxlu4QhQ6ct4DdFLP2VNbiLPXp1JzQE6TQ7W81pTCsLayFCbDfPEReKXVavM~Ltupuqb3evNlL26yw-sI~nuQ4eLgqoTDt9~udcz08T~9wV6hY2uZHt-JFwKW1et9ZZXPLcVkSZHgQwK~x1IO1E~iOIHXvkcwbOInZ~m3kpzRFYYyUN5gNn9iipG5Uua-DNZ-RJRNpJM~7i0MLbFYhtmaHU0r1j9Bb79uLPbTTIUFq-tmtZV1IEBMKkZHbSrWOGh75ootwu4yjA__"/>
+            <div class="name" style="margin-top: 15px">
+                <a href="{% url 'PATH:homepage' %}">
+                    <img alt="logo" src="https://s3-alpha-sig.figma.com/img/b47a/cd04/2ce54eab4ad0df124f136b646202b058?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PmkirwFkRyN3Lk-tTl9olQ19KKa6KiGlCVr2HzBcVRvsBGxhZMDoQ~f-m9q8Jw075bEhkZGDPoUdxlu4QhQ6ct4DdFLP2VNbiLPXp1JzQE6TQ7W81pTCsLayFCbDfPEReKXVavM~Ltupuqb3evNlL26yw-sI~nuQ4eLgqoTDt9~udcz08T~9wV6hY2uZHt-JFwKW1et9ZZXPLcVkSZHgQwK~x1IO1E~iOIHXvkcwbOInZ~m3kpzRFYYyUN5gNn9iipG5Uua-DNZ-RJRNpJM~7i0MLbFYhtmaHU0r1j9Bb79uLPbTTIUFq-tmtZV1IEBMKkZHbSrWOGh75ootwu4yjA__"/>
+                </a>
             </div>
+
         </ul>
         <ul id="rest" class="rest">
             <div class="nav-links">
@@ -49,7 +52,8 @@
 
               <ul class="nav__list">
                 <li class="nav__el">
-                    <a class="nav__link" href="{% url 'car_ride:logout' %}">Logout</a>
+{#                    <a class="nav__link" href="{% url 'car_ride:logout' %}">Logout</a>#}
+                    <a class="nav__link" href="{% url 'PATH:logout' %}">Logout</a>
                 </li>
               </ul>
               {% else %}
@@ -65,8 +69,8 @@
               </ul>
           </div>
               <div class="register">
-                  <ul><a class="registerBtn" href="{% url 'car_ride:register' %}">Register</a></ul>
-                  <ul><a class="loginBtn" href="{% url 'car_ride:login' %}">Login</a></ul>
+                  <ul><a class="registerBtn" href="{% url 'PATH:register' %}">Register</a></ul>
+                  <ul><a class="loginBtn" href="{% url 'PATH:login' %}">Login</a></ul>
           </div>
       {% endif %}
 	 <ul><a href="{% url 'car_ride:user_notifications' %}" class="nav__link">

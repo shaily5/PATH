@@ -184,7 +184,8 @@ def MyBookings(request):
             cust = Customer.objects.get(usern=user)
             print("User:", request.user)
             print("Customer Name:", cust)
-            custs = Booking.objects.filter(name=cust, car__isnull=False, car__in=Mycar.objects.all(), pickup__gte=datetime.now())
+            # custs = Booking.objects.filter(name=cust, car__isnull=False, car__in=Mycar.objects.all(), pickup__gte=datetime.now())
+            custs = Booking.objects.filter(name=cust, car__isnull=False, car__in=Mycar.objects.all())
             # custs = Booking.objects.filter(name=cust)
             print("Bookings", custs)
             context = {'book': custs}
@@ -301,7 +302,7 @@ def user_notifications(request):
         return render(request, 'user_notifications.html', context)
     else:
         messages.warning(request, "Please log in to see your notifications")
-        return redirect('car_ride:login')
+        return redirect('PATH:login')
 
 def Change(request):
     if request.method == 'GET':
@@ -375,20 +376,20 @@ def Cardetails(request, car_id):
         if form.is_valid():
             contact = form.cleaned_data['contact']
             email = form.cleaned_data['email']
-            pickup = form.cleaned_data['pickup']
-            dropoff = form.cleaned_data['dropoff']
+            # pickup = form.cleaned_data['pickup']
+            # dropoff = form.cleaned_data['dropoff']
             pick_add = form.cleaned_data['pick_add']
             drop_add = form.cleaned_data['drop_add']
             num_seats_booked = form.cleaned_data['num_seats_booked']
             user = request.user
             cust = Customer.objects.get(usern=user)
             car = Mycar.objects.get(pk=car_id)
-            if car.from_date != pickup:
-                messages.error(request, "This Car is not available. Please check Pick up date.")
-                return redirect('car_ride:cardetails', car_id=car_id)
-            if car.to_date != dropoff:
-                messages.error(request, "This Car is not available. Please check Drop off date.")
-                return redirect('car_ride:cardetails', car_id=car_id)
+            # if car.from_date != pickup:
+            #     messages.error(request, "This Car is not available. Please check Pick up date.")
+            #     return redirect('car_ride:cardetails', car_id=car_id)
+            # if car.to_date != dropoff:
+            #     messages.error(request, "This Car is not available. Please check Drop off date.")
+            #     return redirect('car_ride:cardetails', car_id=car_id)
             if car.total_seats < num_seats_booked:
                 messages.error(request, "Not enough seats available.")
                 return redirect('car_ride:cardetails', car_id=car_id)
@@ -398,7 +399,8 @@ def Cardetails(request, car_id):
             total_price = Decimal(price_per_seat) * Decimal(num_seats_booked)
 
             with transaction.atomic():
-                booking = Booking.objects.create(name=cust, car=car, email=email, contact=contact, pickup=pickup, dropoff=dropoff, pick_add=pick_add, drop_add=drop_add, num_seats_booked=num_seats_booked, price=total_price)
+                # booking = Booking.objects.create(name=cust, car=car, email=email, contact=contact, pickup=pickup, dropoff=dropoff, pick_add=pick_add, drop_add=drop_add, num_seats_booked=num_seats_booked, price=total_price)
+                booking = Booking.objects.create(name=cust, car=car, email=email, contact=contact, pick_add=pick_add, drop_add=drop_add, num_seats_booked=num_seats_booked, price=total_price)
                 booking.save()
                 car.seats_booked += num_seats_booked
                 car.total_seats -= num_seats_booked

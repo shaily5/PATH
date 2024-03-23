@@ -86,7 +86,7 @@
                 </a>
             {% endif %}
         {% else %}
-            <a href="{% url 'car_ride:login' %}?next={% url 'car_ride:cardetails' car.pk %}">
+            <a href="{% url 'PATH:login' %}?next={% url 'car_ride:cardetails' car.pk %}">
                 <button name="book_car_{{ car.pk }}">Book Now</button>
             </a>
         {% endif %}

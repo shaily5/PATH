@@ -1,67 +1,208 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block body_block %}
-    <div id="wrapper">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="stylesheet" href="{% static 'styles/home.css'%}">
-    <div id="carouselExampleIndicators" class="carousel slide overflow overflow-hidden" data-ride="carousel"
-        style="margin-top: -7px; overflow: visible;">
-        <div class="carousel-inner">
+<style>
+    body {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+    }
+
+    #background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 35%;
+        width: 100%;
+        background-image: url("{% static 'images/bg.png' %}");
+        background-size: cover;
+        background-position: center;
+
+    }
+
+    #wrapper {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel {
+        margin-top: -7px;
+        overflow: visible;
+    }
+
+    .main-block {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .block {
+        width: 90%;
+        max-width: 1200px;
+        margin: 50px 0;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+
+    .block-heading {
+        font-size: 32px;
+        color: #9961BA;
+        margin-bottom: 20px;
+    }
+
+    .underline-purple {
+        width: 80px;
+        height: 3px;
+        background-color: #9961BA;
+        margin: 0 auto 30px auto;
+    }
+
+.block-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1px;
+    }
+
+    .block-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        margin-right: 20px;
+    }
+
+    .block-text {
+        flex: 1;
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .new-block {
+        background-color: #f7f7f7;
+        padding: 50px 0;
+    }
+
+    .features {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 50px;
+    }
+
+    .box {
+        flex: 1;
+        margin: 0 10px;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .card h5 {
+        color: #9961BA;
+        margin-top: 10px;
+    }
+
+    .card p {
+        font-size: 16px;
+        color: #444;
+    }
+
+ .image-text {
+ {#position: absolute;#}{#top: 50%;#}{#left: 50%;#} transform: translate(-50%, -50%);
+     text-align: left;
+     font-size: 30px;
+     color: white;
+     width: 83%;
+     padding: 20px; /* Add padding to create space between text and background */
+     background-color: rgba(0, 0, 0, 0.3);
+     margin-top: 20%;
+     margin-left: 50%;
+ }
+</style>
+
+<div id="background-image"></div>
+
+<div id="wrapper">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="background-image">
             <div class="img-up active">
-                <img class="background-image" src="{% static  'images/img7.jpg' %}" alt="First slide"
-                    style="height: 110vh; width: 100%">
+                <div class="image-text" >
+                    <p>Embrace the journey. <br>
+                        Let Path be your guide to seamless travels and unforgettable adventures.</p>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Main block with two blocks -->
+
     <div class="main-block">
-        <div class="block purple-bg"></div>
-            <div class="head-text">Our Services</div>
-            <div class="head-content">
-                <p>We are a specialized team committed to providing reliable car rental services.
-                One of the advantages of renting a car from us is offering competitive and transparent prices.
-                By providing services such as comprehensive insurance ......</p>
-            </div>
-        <div class="block white-bg"></div>
-        <!-- Components on top of the main block -->
-        <div class="features" style="margin-top: -500px;"> <!-- Adjust margin-top as needed -->
-            <div class="box">
-                <div class="card">
-                    <img src="{% static 'images/img4.jpg' %}">
-                    <h5>Rent a Car</h5>
-                    <p>An online shop that evokes the physical analogy of buying products and services at a regular "bricks and
-                        mortar" retailer-or-shopping center.</p>
+        <div class="block purple-bg">
+            <div class="underline-purple"></div>
+            <div class="block-content">
+                <div class="features">
+                    <div class="box">
+                        <div class="card">
+                            <img src="{% static 'images/rideshare.jpg' %}">
+                            <h5>Ride Share</h5>
+                            <p>Enjoy hassle-free travel with Path Ride Share. From work commutes to city exploration, our reliable drivers ensure a smooth journey every time. With simple booking, competitive rates, and top-notch safety, we've got your ride covered efficiently.</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="card">
+                            <img src="{% static 'images/carrent.png' %}">
+                            <h5>Search Ride</h5>
+                            <p>Find the perfect ride for your journey with our convenient car category search. Whether you're seeking luxury, economy, or something in between, explore our diverse range of vehicles to match your needs and preferences effortlessly.</p>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="card">
+                            <img src="{% static 'images/parcelservice.png' %}">
+                            <h5>Book Ride Online</h5>
+                            <p>Booking your ride with Path is a breeze. Just hop online, pick your destination, and select your ride – we'll handle the rest things. Whether it's for work or play, our seamless service ensures you get where you need to be without any hassle.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="box">
-                <div class="card">
-                    <img src="{% static 'images/img2.png' %}">
-                    <h5>Search Car by Category</h5>
-                    <p>We provide various car types you can book car of your choice as per  availability.</p>
-                </div>
-            </div>
-            <div class="box">
-                <div class="card">
-                    <img src="{% static 'images/img1.jpeg' %}">
-                    <h5>Book Your Car Online</h5>
-                    <p>Simply search for your destination, choose the date you want to travel</p>
+        </div>
+
+        <div class="new-block" style="border-radius: 10px">
+            <h3 class="block-heading">About Us</h3>
+            <div class="underline-purple"></div>
+            <div class="block-content">
+                <img src="{% static 'images/img1.png' %}" class="block-image" style="margin-left: 50px; border-radius: 10px">
+                <div class="block-text" style="margin-right: 50px; margin-left: 50px; border-radius: 10px">
+                    <p>Welcome to Path, where every trip is an opportunity to experience seamless travel. With a focus on
+                        accessibility and reliability, we're dedicated to making transportation effortless for everyone.
+                        From your daily commute to spontaneous adventures, our cutting-edge technology and dedicated drivers
+                        ensure a smooth ride every time. But we're more than just a transportation service – we're a community
+                        united by a vision of sustainable travel and positive impact. Join us on this journey as we pave the way
+                        for a brighter, more connected future, one ride at a time.</p>
                 </div>
             </div>
         </div>
     </div>
-    <h1>About Car Pooling System</h1><br>
-    <!-- New block between image and main block -->
-<div class="new-block">
-    <h3 class="block-heading">About Us</h3>
-    <div class="underline-purple"></div>
-    <div class="block-content">
-        <img src="{% static 'images/img5.jpg' %}" class="block-image">
-        <div class="block-text">
-            <p>We are a specialized team committed to providing reliable car rental services.
-                One of the advantages of renting a car from us is offering competitive and transparent prices.
-                By providing services such as comprehensive insurance ......</p>
-        </div>
-    </div>
-</div>
 </div>
 {% endblock %}

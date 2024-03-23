@@ -27,7 +27,7 @@
 
     </style>
 
-    <h1>Notifications</h1>
+    <h1>User Activity</h1>
     {% for notification in notifications %}
         <div class="notification {% if not notification.read %}unread{% endif %}">
             {{ notification.message }}
