@@ -27,9 +27,9 @@ urlpatterns = [
          name='password_reset_complete'),
 
     path('car_rental/bookaCar/',views.bookRentalCar,name='bookRentalCar'),
-    path('car_rental/getCars/<str:param>/', views.getCars, name='getCars')
+    path('car_rental/getCars/<str:param>/', views.getCars, name='getCars'),
 
-
+    path('car_rental/getCarDetail/<int:car_id>/', views.getCarDetail, name='getCarDetail')
 
 ]
 

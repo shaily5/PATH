@@ -1,0 +1,362 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/form.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/CarDetail.css' %}" />
+
+</head>
+<header>
+
+        <nav class="navbar">
+            <div class="containers">
+              <div class="navbar-logo">
+                <img src="../../static/PATH/images/logo.png" alt="Logo" />
+              </div>
+              <ul class="navbar-menu">
+                <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
+
+                <li><a href="car_rental/login" class="active">Rental car</a></li>
+                <li><a href="login">Rides</a></li>
+                  <li><a href="#">Parcel service</a></li>
+              </ul>
+              <div class="navbar-buttons">
+                  {% if request.user.username %}
+                      <h1 style="color: white;">Welcome, {{ request.user.username }}!</h1>
+                      <a href="{% url 'PATH:logout' %}"><button class="signup-btn">Log Out</button></a>
+                  {% else %}
+                  <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>
+                  <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>
+                  {% endif %}
+              </div>
+            </div>
+          </nav>
+</header>
+
+<body>
+    <section class="main-section-car-detail">
+        <div class="section">
+
+            <div class="right-box">
+                <img src="{{ car.photo.url }}" alt="Right Side Image">
+            </div>
+            <div class="left-box">
+                <div class="jaugar">
+                    <div class="sub-box1">
+                        <h6>{{ car.model }} {{ car.make }}</h6>
+                        <p>Teixeira Design Studio</p>
+                    </div>
+                    <div class="sub-box2">
+                        <div class="heartnum">
+                            <div>
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                            <h4>109</h4>
+                        </div>
+                        <div class="savebutton">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </div>
+                        <div class="sharebutton">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </div>
+                    </div>
+                </div>
+                <hr style="width: 582px; border: 1px soild #E4E4E4;margin: 25px 0;">
+                <div class="pricing-box">
+                    <div class="dollar">
+                        <h1>${{ car.daily_rate }}</h1>
+                        <p style="margin: 0;"><del>$200</del></p>
+
+                    </div>
+                    <div class="rating">
+                        <div class="stre">
+                            <div class="star">
+                                <div>
+                                    <i style="color: #D48D3B;" class="fa-regular fa-star"></i>
+                                </div>
+                                <h4>4.8</h4>
+                            </div>
+                            <div class="review">
+                                <div>
+                                    <i style="color: #3A4980;" class="fa-regular fa-message"></i>
+                                </div>
+                                <h4>67 Reviews</h4>
+                            </div>
+                        </div>
+                        <p style=" margin: 7px 0 0 0;">93% <span style="font-weight: 400; color: #B9BBBF; ;"> of buyers
+                                have recommended this. </span></p>
+                    </div>
+
+                </div>
+                <hr style="width: 582px; border: 1px soild #E4E4E4; margin: 25px 0;">
+                <div class="radiobutton">
+                    <div class="petrol">
+                        <input type="radio" name="option" value="x" />
+                        <p>Petrol</p>
+                    </div>
+                </div>
+                <div class="btns">
+                    <div class="btn">
+                        <div>
+                            <i style="color: white;" class="fa-solid fa-phone fa-xl"></i>
+                        </div>
+                        <button class="rent">Rent Now</button>
+                    </div>
+                </div>
+
+                <div class="delivery-box">
+                    <div class="free-delivery">
+                        <div style="height: 44px; width:30px; margin: 5px 0 0 0 ;color: #D75951;">
+                            <i class="fa-solid fa-truck"></i>
+
+                        </div>
+                        <div>
+                            <h1 class="fre-head">Free Delivery</h1>
+                            <p class="fre-pera">Enter your Postal code for Delivery Availability</p>
+                        </div>
+                    </div>
+                    <hr style="width: 546px; border: 1px soild #E4E4E4;margin: 25px 0;">
+                    <div class="return-delivery">
+                        <div style="height: 44px; width:30px; margin: 5px 0 0 0 ;color: #D75951;">
+                            <i class="fa-solid fa-bag-shopping"></i>
+
+                        </div>
+                        <div>
+                            <h1 class="fre-head">Return Delivery</h1>
+                            <p class="fre-pera">Free 30 days Delivery Return. Details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider">
+            <div class="arrow left-arrow"><i style="color: #9961BA;" class="fa-solid fa-chevron-left fa-2xl"></i></div>
+            <div class="boxxes">
+                {% for data in data %}
+                <div class="image-container">
+                    <img class="image" src="{{ data.photo.url }}" alt="Image 1">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="arrow right-arrow"><i style="color: #9961BA;" class="fa-solid fa-chevron-right fa-2xl"></i>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="description-reviews">
+            <div class="description-box">
+                <div class="des-head" >
+                    <h3>Description</h3>
+                </div>
+                <div class="des-head">
+                    <h3>Reviews</h3>
+                </div>
+            </div>
+            <div class="big-line">
+                <div class="small-line"></div>
+            </div>
+
+        </div>
+    </section>
+    <section>
+        <div class="discription-and-reviews">
+
+            <div class="about-the-car">
+                <h1>About the car</h1>
+                <p>The Renault Triber RXT AMT is a compact and versatile 7seater crossover designed for urban and
+                    suburban adventures It features an automatic transmission for smooth and convenient driving making
+                    it a familyfriendly car with ample space smart features and a stylish design Perfect for those who
+                    seek a balance between functionality and style in their everyday commute
+                </p>
+            </div>
+            <div class="benifts" style="height: 360px;">
+                <h1>Benefits</h1>
+                <li>Anti-lock Braking System (ABS)</li>
+                <li>Electric ORVM</li>
+                <li>USB charger</li>
+                <li>Aux Cable</li>
+                <li>Air Freshener</li>
+                <li>Music System</li>
+                <li>Power Windows</li>
+            </div>
+            <div class="benifts" style="height: 135px;">
+                <h1>Product Details</h1>
+                <li>Not intended for use as Personal Protective Equipment (PPE)</li>
+                <li>Water-repellent finish and internal membrane help keep your feet dry.</li>
+
+            </div>
+            <div class="benifts" style="height: 260px;">
+                <h1>More Details</h1>
+                <li>Lunarlon midsole delivers ultra-plush responsiveness</li>
+                <li>Encapsulated Air-Sole heel unit for lightweight cushioning</li>
+                <li>Colour Shown: Ale Brown/Black/Goldtone/Ale Brown</li>
+                <li>Style: 805899-202</li>
+
+            </div>
+            <div class="review-graph">
+                <div style="display: flex; justify-content: space-between;align-items: center;">
+                    <div class="number-review">
+                        <div class="five-star-line">
+                            <h1>5</h1>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <p class="five"></p>
+                        </div>
+                        <div class="five-star-line">
+                            <h1>4</h1>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <p class="four"></p>
+
+                        </div>
+                        <div class="five-star-line">
+                            <h1>3</h1>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <p class="three"></p>
+
+                        </div>
+                        <div class="five-star-line">
+                            <h1>2</h1>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <p class="two"></p>
+
+                        </div>
+                        <div class="five-star-line">
+                            <h1>1</h1>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <p class="one"></p>
+
+                        </div>
+
+                    </div>
+                    <div class="rating-review">
+                        <h1>4.0</h1>
+                        <div style="display: flex; justify-content: space-between;">
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                            <i style="color:#DDDDDD;" class="fa-regular fa-star"></i>
+                        </div>
+                        <h2>52 Reviews</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-review" style="margin: 40px 0;">
+                <div class="image-name-star">
+                    <div class="under-image-name-star">
+                        <img src="./images/testi1.png" alt="">
+                        <div style="width: 320px;">
+                            <h1 class="testo-heading">Courtney Henry</h1>
+                            <div style="display: flex; justify-content: space-between; margin: 5px 0 0 0;">
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+
+                                <p class="day-date" style="margin: 0;">1 Day ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testo-pera"> Positive reviews can provide reassurance about the quality and reliability of
+                        the service.</p>
+                </div>
+                <hr style="width: 1185px; border: 1.55px soild #D9D9D9;margin: 15px 0;">
+
+                <div class="image-name-star" style="height: 126px;">
+                    <div class="under-image-name-star">
+                        <img src="./images/testi2.png" alt="">
+                        <div style="width: 320px;">
+                            <h1 class="testo-heading">Cameron Williamson</h1>
+                            <div style="display: flex; justify-content: space-between; margin: 5px 0 0 0;">
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color:#DDDDDD;" class="fa-regular fa-star"></i>
+                                <p class="day-date" style="margin: 0;">2 dayof ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testo-pera"> A reputable babysitting website should prioritize safety and security. This
+                        may include background checks on babysitters, verification of credentials, secure payment
+                        options, and privacy protections for user data.</p>
+                </div>
+                <hr style="width: 1185px; border: 1.55px soild #D9D9D9;margin: 15px 0;">
+
+                <div class="image-name-star" style="height: 155px;">
+                    <div class="under-image-name-star">
+                        <img src="./images/testi3.png" alt="">
+                        <div style="width: 320px;">
+                            <h1 class="testo-heading">Jane Cooper</h1>
+                            <div style="display: flex; justify-content: space-between; margin: 5px 0 0 0;">
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color: #E4A70A;" class="fa-solid fa-star"></i>
+                                <i style="color:#DDDDDD;" class="fa-regular fa-star"></i>
+                                <i style="color:#DDDDDD;" class="fa-regular fa-star"></i>
+                                <p class="day-date" style="margin: 0;">1 month ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testo-pera"> If the website features profiles of babysitters, assess the level of detail
+                        provided. Each profile should include relevant information about the babysitter's experience,
+                        qualifications, certifications, background checks, and possibly reviews or ratings from previous
+                        clients.</p>
+                </div>
+            </div>
+            <div class="similar-cars">
+                <h1>Similar Cars You Might Also Like</h1>
+
+                <div class="three-car-box">
+                  {% for car in data %}
+                    <div class="single-car-box">
+                        <div class="car-image-box">
+                            <div style="padding: 52px 32px;">
+                                <img src="{{ car.photo.url }}" width="330px" height="220px" alt="">
+                            </div>
+                        </div>
+                        <div class="car-detail-box">
+
+                            <div style="padding: 5px 15px;">
+                                <p class="car-name">{{ car.make }} {{car.model  }} </p>
+                            </div>
+                            <div
+                                style="display: flex;align-items: center; justify-content: space-between;padding: 5px 15px">
+
+                                <p class="car-price">$ {{ car.daily_rate }}<sub>/ Day</sub></p>
+                                <p class="car-location"><i class="fa-solid fa-location-dot"></i> Djakarta</p>
+
+                            </div>
+                            <div class="car-button-border">
+                                <div style="padding: 15px;">
+                                    <div class="car-button">
+                                        <div style="padding: 10px 25px;">
+
+                                            <div class="main-btns">
+                                                <i style="color: white;" class="fa-solid fa-phone fa-xl"></i>
+                                                                  <a href="http://localhost:8000/car_rental/getCarDetail/{{ car.id }}"><button class="action-button">Book Now</button> </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

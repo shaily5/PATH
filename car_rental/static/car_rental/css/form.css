@@ -1,0 +1,174 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.container {
+    /* display: flex; */
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background-image: url('./images/mapbg.png'); 
+    background-size: cover;
+    background-position: center;
+}
+.containerss {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+}
+.header {
+    text-align: left;
+    padding: 20px;
+}
+/* .logo {
+    max-width: 120px;
+   
+    margin: 0 auto;
+} */
+.contents {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 130px;
+}
+.side-image {
+    max-width: 50%;
+}
+.login-form {
+    max-width: 50%;
+   
+}
+.login-form form {
+    background: #9961BA;
+    padding: 42px;
+    border-radius: 24px;
+    color: white;
+    width: 500px;
+    
+}
+.login-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    margin: 0;
+}
+.login-form p {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
+.label{
+    font-size: 16px;
+    font-weight: 400;
+}
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form button {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #ffff;
+    border-radius: 44px;
+    box-sizing: border-box;
+    background: #9961BA;
+    color: white;
+}
+.login-form input[type="password"]{
+    margin-bottom: 10px;
+
+}
+.login-form button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600px;
+
+}
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    outline: none; /* Removes the default focus outline */
+    border-color: white; /* Optionally change border color on focus */
+}
+
+.form-flex{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 15px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center; /* Center items vertically */
+    }
+    .side-image, .login-form {
+        max-width: 90%; /* Adjust width for smaller screens */
+    }
+    .header {
+        text-align: center; /* Center header text */
+    }
+    .login-form form {
+        width: 90%; /* Adjust form width for smaller screens */
+    }
+}
+
+/* For smaller screens or mobile devices */
+@media (max-width: 480px) {
+    .login-form input[type="text"],
+    .login-form input[type="password"],
+    .login-form button {
+        padding: 15px; /* Decrease padding for smaller screens */
+        margin-bottom: 20px; /* Adjust margin for smaller screens */
+    }
+    .login-form h2 {
+        font-size: 30px; /* Decrease heading font size for smaller screens */
+    }
+}
+
+/* Checkbox styles */
+.check{
+    align-items: center;
+    display: flex;
+}
+
+
+.checkbox-label {
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    appearance: none;
+    border: 2px solid white;
+    border-radius: 4px;
+    background-color: #9961BA;
+    outline: none;
+    cursor: pointer;
+}
+
+.checkbox-input:checked {
+    background-color: white;
+    background-image: url('path/to/checked-icon.svg');
+    background-size: cover;
+}
+
+/* Hide default checkbox */
+.checkbox-input::-webkit-check-box {
+    display: none;
+}
+.forg{
+    font-size: 16px;
+    color: white;
+}

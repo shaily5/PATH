@@ -1,0 +1,830 @@
+.main-section-car-detail{
+    width: 1250px;
+    height: 848px;
+    margin: 155px auto 0 auto;
+    
+}
+
+
+.section {
+    top: 120px;
+    
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right-box {
+    width: 633px;
+    height: 691px;
+    /* position: absolute; */
+    top: 200px;
+    left: 80px;
+}
+.right-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 17px;
+    object-fit: cover;
+}
+.left-box {
+    width: 582px;
+    height: 583px;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    
+    border-radius: 17px;
+}
+.jaugar{
+    display: flex;
+    justify-content: space-between;
+    width: 582px;
+    height: 77px;
+    
+}
+.sub-box1 {
+    width: 211px;
+    height: 77px;
+    
+    ;
+}
+.sub-box1 h6{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 600; /* Weight */
+    font-size: 28px; /* Size */
+    line-height: 42px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center left */
+    color: #000000    ; /* Text color */
+}
+.sub-box1 p{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 400; /* Weight */
+    font-size: 16px; /* Size */
+    line-height: 24px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center left */
+    color: #B9BBBF    ; /* Text color */
+}
+.sub-box2 {
+    width: 170px;
+    height: 34px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.heartnum{
+    width: 48px;
+    height: 16px;
+    border-radius: 10px;
+    padding: 7px 10px;
+    gap: 7px;
+    background: #FFF0F0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+}
+.heartnum div i{
+    color: #D46F77;
+}
+.heartnum h4{
+    color: #D46F77
+}
+.savebutton{
+    width: 15px;
+    height: 16px;
+    border-radius: 10px;
+    padding: 7px 10px;
+    gap: 7px;
+    background: #EDF0F8    ;
+    text-align: center;
+}
+.sharebutton{
+    width: 15px;
+    height: 16px;
+    border-radius: 10px;
+    padding: 7px 10px;
+    gap: 7px;
+    background: #EDF0F8    ;
+    text-align: center;
+}
+
+.pricing-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 431px;
+    height: 72px;
+   
+    gap: 41px
+   
+}
+
+.dollar{
+    width: 113px;
+    height: 72px;
+    gap: 6px;
+    
+}
+.dollar h1{
+    font-family: "Inter", sans-serif; /* Font */
+    font-weight: 700; /* Weight */
+    font-size: 34px; /* Size */
+    line-height: 41.15px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center left */
+    color: #3A4980; /* Text color */
+
+}
+.dollar p del{
+    font-family: "Inter", sans-serif; /* Font */
+    font-weight: 400; /* Weight */
+    font-size: 21px; /* Size */
+    line-height: 25.41px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center left */
+    color: #000000; /* Text color */
+
+}
+
+.rating{
+    width: 277px;
+    height: 72px;
+    gap: 14px;
+   
+   
+}
+.stre{
+    width: 205px;
+    height: 35px;
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.star{
+    width: 65px;
+    height: 20px;
+    border-radius: 27px;
+    padding: 7px 10px;
+    gap: 7px;
+    background: #FBF3EA;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.star h4{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 600; /* Weight */
+    font-size: 14px; /* Size */
+    line-height: 21px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center left */
+    color: #D48D3B; /* Text color */
+    
+}
+
+.review{
+    width: 121px;
+    height: 20px;
+    border-radius: 27px;
+    padding: 7px 10px;
+    gap: 7px;
+    background: #EDF0F8;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review h4{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 600; /* Weight */
+    font-size: 14px; /* Size */
+    line-height: 21px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center left */
+  color: #3A4980;
+}
+
+.rating p{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 600; /* Weight */
+    font-size: 14px; /* Size */
+    line-height: 21px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Center left */
+  color: #3E9242
+  ;
+  
+}
+.radiobutton{
+    width: 450px;
+    height: 35px;
+   
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 10px;
+}
+
+
+input[type="radio"] + p {
+    cursor: pointer;
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 500; /* Weight */
+    font-size: 14px; /* Size */
+    line-height: 21px; /* Line height */
+    
+    text-align: left; /* Center left */
+    margin: 0;
+}
+input[type="radio"]:checked + p {
+    /* Change text color and radio button color when radio button is checked */
+    color: #3A4980;
+}
+.petrol{
+    width: 85px;
+    height: 21px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    gap: 8px;
+    
+    align-items: center;
+    align-items: center;
+    display: flex;
+    background: #F3F3F3;
+    
+}
+.diesel{
+    width: 87px;
+    height: 21px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    gap: 8px;
+    
+    align-items: center;
+    align-items: center;
+    display: flex;
+    background: #F3F3F3;
+    
+}
+.cng{
+    width: 76px;
+    height: 21px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    gap: 8px;
+    
+    align-items: center;
+    align-items: center;
+    display: flex;
+    background: #F3F3F3;
+    
+}
+.autopilot{
+    width: 121px;
+    height: 21px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    gap: 8px;
+    
+    align-items: center;
+    display: flex;
+    background: #F3F3F3;
+    
+}
+
+.btns {
+    width: 368.1px;
+    
+    border-radius: 12px;
+    margin: 25px 0px;
+    gap: 10px;
+    background: #9961BA;
+    cursor: pointer;
+}
+
+.btn {
+    width: 318.1px;
+    
+    border-radius: 12px;
+    padding: 15px 25px;
+    gap: 10px;
+    background: #9961BA;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.rent{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 500; /* Weight */
+    font-size: 24px; /* Size */
+    line-height: 28.8px; /* Line height */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center left */
+  color: #ffffff;
+  border: none;
+  background: none;
+  width: 257.1px;
+  cursor: pointer;
+}
+
+.delivery-box {
+    width: 547px;
+    height: 145px;
+    border-radius: 14px;
+   border: 1px solid #E4E4E4;
+    padding: 17px;
+    gap: 21px;
+}
+.free-delivery{
+    width:546px ;
+    height: 45px;
+    
+   display: flex;
+}
+.fre-head{
+    font-family: "Inter", sans-serif; /* Font */
+    font-weight: 700; /* Weight */
+    font-size: 17px; /* Size */
+    line-height: 20.57px; /* Line height */
+    margin: 0;
+  color: #1D364D;
+   
+}
+.fre-pera{
+    font-family: "Inter", sans-serif; /* Font */
+    font-weight: 400; /* Weight */
+    font-size: 14px; /* Size */
+    line-height: 16.94px; /* Line height */
+    margin: 0;
+  color: #726C6C;
+}
+.return-delivery{
+    width:546px ;
+    height: 45px;
+    
+   display: flex;
+}
+
+
+
+
+
+  /* Slider */
+  .slider {
+    position: relative;
+    width: 630px;
+    height: 115px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  /* boxxes */
+  .boxxes {
+    width: 585px;
+    height: 115px;
+    /* background-color: #ccc; */
+    position: relative;
+  }
+
+  /* Arrows */
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    /* background-color: #000; */
+    cursor: pointer;
+  }
+
+  .left-arrow {
+    left: 0;
+  }
+
+  .right-arrow {
+    right: 0;
+  }
+
+  /* Images */
+  .image-container {
+    width: 115px;
+    height: 115px;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 3px solid #fff;
+    margin: 0px 11px; /* Adjust gap between images */
+    display: inline-block;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  .description-reviews{
+    width: 1234px;
+    height: 55px;
+    /* border: 1px solid black; */
+    margin: 0 auto;
+
+  }
+
+.description-box{
+  display: flex;
+  align-items: center;
+  width: 250px;
+  justify-content: space-between;
+
+}
+.des-head h3{
+  font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 600; /* Weight */
+    font-size: 20px; /* Size */
+    line-height: 30px; /* Line height */
+    margin: 0;
+    color: #164C96  ;
+  
+  
+}
+
+.big-line{
+  width: 1279px;
+  height: 4px;
+  background: #EAECF0;
+}
+.small-line{
+  width: 120px;
+  height: 4px;
+  background: #164C96;
+  
+}
+
+
+
+
+
+
+  .discription-and-reviews{
+width: 1234px;
+height: 2528.4px;
+/* border: 1px solid black; */
+margin: 0 auto;
+  }
+  
+
+
+
+ 
+  .about-the-car h1{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 600; /* Weight */
+    font-size: 24px; /* Size */
+    line-height: 36px; /* Line height */
+    margin: 0;
+  color: #344054  ;
+    
+  }
+  .about-the-car p{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 400; /* Weight */
+    font-size: 20px; /* Size */
+    line-height: 33px; /* Line height */
+    /* margin: 0; */
+  color: #667085  ;
+    
+  }
+  
+
+  .benifts{
+    width: 1088.25px;
+    height: 330px;
+  }
+  .benifts h1{
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 600; /* Weight */
+    font-size: 24px; /* Size */
+    line-height: 36px; /* Line height */
+    /* margin: 0; */
+  color: #344054;
+
+   
+  }
+  .benifts li{
+    list-style: none;
+    margin: 18px 0;
+    font-family: "Poppins", sans-serif; /* Font */
+    font-weight: 400; /* Weight */
+    font-size: 16px; /* Size */
+    line-height: 27.2px; /* Line height */
+    color: #667085;
+  
+  }
+  .benifts li::before {
+    content: "\1F5F8";
+    font-weight: 900;
+    color: #164C96;
+    font-size: 14px;
+    margin-right: 20px;
+    background: #E7F4FC;
+    border-radius: 50%;
+    padding: 2px 6px;
+}
+
+.review-graph{
+  width:760px ;
+  height:173.67px ;
+  border-radius: 15.69px;
+  padding:59.95px 59.95px 59.95px 60.1px ;
+  gap: 47.08px;
+  background: #F8F8F8  ;
+ 
+}
+.number-review{
+  width: 521px;
+  height: 172.78px;
+  gap: 15.69px;
+  
+}
+.five-star-line{
+  width: 521px;
+  height: 33px;
+  gap: 7.85px;
+
+display: flex;
+align-items: center;
+justify-content: left;
+}
+.five-star-line h1{
+  font-family: "Inter", sans-serif; /* Font */
+  font-weight: 500; /* Weight */
+  font-size: 27.46px; /* Size */
+  line-height: 33.24px; /* Line height */
+  color: #333333;
+}
+.five-star-line .five{
+  width: 456.63px;
+  height: 11.1px;
+  border-radius: 7.85px;
+ background: #9E5A35 ;
+}
+.five-star-line .four{
+  width: 305.65px;
+  height: 11.84px;
+  border-radius: 7.85px;
+ background: #9E5A35 ;
+}
+.five-star-line .three{
+  width: 173.18px;
+  height: 11.84px;
+  border-radius: 7.85px;
+ background: #9E5A35 ;
+}
+.five-star-line .two{
+  width: 54.77px;
+  height: 11.84px;
+  border-radius: 7.85px;
+ background: #9E5A35 ;
+}
+.five-star-line .one{
+  width: 11.77px;
+  height: 11.77px;
+  border-radius: 7.85px;
+ background: #9E5A35 ;
+}
+.rating-review{
+  width: 188.33px;
+  height: 174.78px;
+  gap: 15.69px;
+  
+}
+.rating-review h1{
+  font-family: "Inter", sans-serif; /* Font */
+    font-weight: 700; /* Weight */
+    font-size: 78.47px; /* Size */
+    line-height: 94.97px; /* Line height */
+    text-align: right;
+    margin: 0;
+  color: #333333;
+ 
+}
+.rating-review h2{
+  font-family: "Inter", sans-serif; /* Font */
+  font-weight: 600; /* Weight */
+  font-size: 27.46px; /* Size */
+  line-height: 33.24px; /* Line height */
+  text-align: right;
+  /* margin: 0; */
+color: #333333;
+  
+}
+
+.testimonial-review{
+  width: 1185px;
+  height: 440px;
+  gap: 27px;
+  /* border: 1px solid black; */
+}
+.image-name-star{
+  width: 1185px;
+  height: 94px;
+  gap: 18.58px;
+  /* border: 1px solid black;; */
+}
+.under-image-name-star{
+  width: 531px;
+  height: 62.19px;
+  gap: 12.38px;
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+}
+.testo-heading{
+  font-family: "Inter", sans-serif; /* Font */
+  font-weight: 600; /* Weight */
+  font-size: 27.77px; /* Size */
+  line-height: 29.98px; /* Line height */
+  /* text-align: right; */
+  margin: 0;
+color: #333333;
+}
+.day-date{
+  font-family: "Inter", sans-serif; /* Font */
+  font-weight: 500; /* Weight */
+  
+  margin: 0;
+color: #333333;
+ 
+}
+.testo-pera{
+  font-family: "Inter", sans-serif; /* Font */
+  font-weight: 400; /* Weight */
+  font-size: 20.13px; /* Size */
+  line-height: 29.79px; /* Line height */
+  margin: 0;
+color: #333333;
+
+
+}
+
+.similar-cars{
+  width:1234px ;
+  height:572px ;
+  gap: 47px;
+  /* border: 1px solid black; */
+}
+.similar-cars h1{
+  font-family: "Inter", sans-serif; 
+  font-weight: 700; 
+  font-size: 30px; 
+  line-height: 38px; 
+  
+color: #344054;
+  
+}
+.three-car-box{
+  width:1234px ;
+  height:484px ;
+  gap: 21px;
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* margin: 35px 0; */
+}
+.single-car-box{
+  width: 398.1px;
+  height: 479px;
+ /* border: 1px solid black; */
+}
+.car-image-box{
+  width: 397px;
+  height: 279px;
+  border-radius: 20px;
+  /* padding: 52px 32px; */
+ background: #F2F2F2 ;
+ /* border: 1px solid black; */
+ box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.car-detail-box{
+width: 397px;
+height: 198px;
+gap: 10px;
+/* border: 1px solid black; */
+background: #FFFFFF;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.car-name{
+  font-family: "Poppins", sans-serif; /* Font */
+  font-weight: 500; /* Weight */
+  font-size: 26px; /* Size */
+  line-height: 31.2px; /* Line height */
+  /* margin: 5px 0; */
+  margin: 0;
+  color: #737373;
+  
+
+}
+.car-price{
+  font-family: "Lato", sans-serif; /* Font */
+  font-weight: 900; /* Weight */
+  font-size: 33px; /* Size */
+  line-height: 39.6px; /* Line height */
+  /* margin: 5px 0; */
+  margin: 0;
+  color: #404040;
+}
+.car-price sub{
+  font-family: "Lato", sans-serif; /* Font */
+  font-weight: 400; /* Weight */
+  font-size: 15px; /* Size */
+  line-height: 18px; /* Line height */
+  /* margin: 5px 0; */
+  margin: 0;
+  color: #A6A6A6;
+  
+}
+.car-location{
+  font-family: "Lato", sans-serif; /* Font */
+  font-weight: 400; /* Weight */
+  font-size: 15px; /* Size */
+  line-height: 18px; /* Line height */
+  /* margin: 5px 0; */
+  margin: 0;
+  color: #A6A6A6;
+}
+.car-location i{
+  width: 16.1px;
+  height: 22px;
+  color: #A6A6A6;
+  margin: 0;
+}
+
+.car-button-border{
+  width: 396.1px;
+  height: 101px;
+  /* border: 1px solid black; */
+}
+.car-button{
+  width:368.1px ;
+  height: 71px;
+  border-radius: 12px;
+  cursor: pointer;
+  /* padding: 15px; */
+  /* border: 1px solid black; */
+  background: #9961BA  ;
+
+
+  /* Width
+Fill (368.1px)
+Height
+Hug (71px)
+Radius
+12px
+Padding
+10px, 25px, 10px, 25px
+Gap
+10px */
+}
+.main-btns{
+  width: 318px;
+  height: 51px;
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.paid-btns{
+  width: 257.1px;
+  height: 37px;
+  background: #9961BA  ;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-family: "Poppins", sans-serif; /* Font */
+  font-weight: 500; /* Weight */
+  font-size: 24px; /* Size */
+  line-height: 28.8px; /* Line height */
+  /* margin: 5px 0; */
+  margin: 0;
+  text-align: center;
+}
+
+

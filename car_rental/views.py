@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.db import IntegrityError
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -63,6 +63,11 @@ def create_car(request):
 def getCars(request,param):
     data = Car.objects.filter(car_type=param)
     return render(request, 'car_rental/services/availableCars.html',{'data':data})
+
+def getCarDetail(request,car_id):
+    car = get_object_or_404(Car, id=car_id)
+    data = Car.objects.all()
+    return render(request, 'car_rental/services/carDetails.html',{'data':data,'car':car})
 
 
 def show_photos(request):

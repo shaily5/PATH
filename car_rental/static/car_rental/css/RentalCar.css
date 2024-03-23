@@ -1,0 +1,553 @@
+.car-top-headings{
+    width: 1350px;
+    margin: 0 auto;
+    /* border: 1px solid black; */
+    text-align: center;
+    
+}
+.car-top-headings h1{
+    margin: 0 0 20px 0px;
+    font-family: "Poppins", sans-serif; /* Font family */
+  font-size: 40px; /* Font size */
+  line-height: 48px; /* Line height */
+  text-align: center; /* Center align */
+  font-weight: 500;
+  color: #1C1C1C;
+}
+.car-top-headings p{
+    margin: 0 0 20px 0px;
+    font-family: "Poppins", sans-serif; /* Font family */
+  font-size: 20px; /* Font size */
+  line-height: 24px; /* Line height */
+  text-align: center; /* Center align */
+  font-weight: 400;
+  color: #6D6D6D  ;
+}
+.rental-page-width{
+width: 1350px;
+height: 1190px;
+
+/* border: 1px solid black; */
+margin: 0 auto;
+
+}
+.rental-page-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.filter-box-width{
+    width: 378px;
+    height: 888px;
+    border-radius: 24px;
+    /* border: 1px solid #EAEAEA    ; */
+    /* border: 1px solid black;; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  
+}
+
+
+.cars-box-width{
+    width: 930px;
+    height: 1340px;
+    /* border: 1px solid black; */
+}
+.rental-car-box-width-height-main-box{
+
+    width: 928px;
+    height: 366px;
+}
+
+.rental-car-three-car-box{
+    
+        gap:38px 16px;
+        /* border: 1px solid black; */
+        /* display: flex; */
+        display: grid;
+grid-template-columns: repeat(3,1fr);
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 0 50px 0;
+   
+}
+
+.rental-car-single-car-box {
+    width: 299.1px;
+    height: 366px;
+    /* border: 1px solid black; */
+}
+.rental-car-car-image-box {
+    width: 298px;
+    height: 209px;
+    border-radius: 20px;
+    /* padding: 52px 32px; */
+    background: #F2F2F2;
+    /* border: 1px solid black; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.rental-car-car-detail-box {
+    width: 299px;
+    height: 154px;
+    gap: 10px;
+    /* border: 1px solid black; */
+    background: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.rental-car-car-name {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 19.55px;
+    line-height: 23.36px;
+    /* margin: 5px 0; */
+    margin: 0;
+    color: #737373;
+}
+.rental-car-car-price {
+    font-family: "Lato", sans-serif;
+    font-weight: 900;
+    font-size: 24.82px;
+    line-height: 29.78px;
+    /* margin: 5px 0; */
+    margin: 0;
+    color: #404040;
+}
+.rental-car-car-price sub {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    /* margin: 5px 0; */
+    margin: 0;
+    color: #A6A6A6;
+}
+.rental-car-car-location {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 11.28px;
+    line-height: 13.54px;
+    /* margin: 5px 0; */
+    margin: 0;
+    color: #A6A6A6;
+}
+.rental-car-car-button-border {
+    width: 299.1px;
+    height: 75px;
+    /* border: 1px solid black; */
+}
+.rental-car-car-button {
+    width: 276.1px;
+    height: 53px;
+    border-radius: 12px;
+    cursor: pointer;
+    /* padding: 15px; */
+    /* border: 1px solid black; */
+    background: #9961BA;
+}
+.rental-car-main-btns {
+    width: 240px;
+    height: 39px;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+}
+.rental-car-paid-btns {
+    width: 235.1px;
+    height: 37px;
+    background: #9961BA;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 18.05px;
+    line-height: 21.66px;
+    /* margin: 5px 0; */
+    margin: 0;
+    text-align: center;
+}
+.filter-clearall{
+    width: 378px;
+    height: 64px;
+    border-bottom:2px solid #F5F7F9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.filter{
+    padding: 16px 20px;
+}
+.filter h4{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    margin: 0;
+    color: #1C1C1C;
+}
+.clearall-btn{
+    padding: 16px 20px;
+}
+.clearall-btn button{
+   width: 120px;
+   height: 32px;
+   border: none;
+   background: #9961ba57;
+   border-radius: 999px;
+   color: #9961BA;
+   cursor: pointer;
+   font-family: "Poppins", sans-serif;
+   font-weight: 600;
+   font-size: 14px;
+   line-height: 24px;
+}
+
+.select-codes{
+    width: 338px;
+    height: 843px;
+    gap: 27px;
+    margin: 20px auto;
+    /* border: 1px solid black; */
+}
+
+.select-care-date{
+    width:338px ;
+    /* height: 86px; */
+    /* border: 1px solid black; */
+    gap: 12px;
+    margin: 0 0 20px 0;
+}
+.care-date h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 9px 0;
+    color: #1C1C1C;
+}
+.care-date input{
+    width: 300px;
+    height: 50px;
+    gap: 8px;
+    border-radius: 12px;
+    border: 1px solid #C4C4C4    ;
+    padding: 0 20px;
+}
+.select-distance-km h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 9px 0;
+    color: #1C1C1C;
+}
+.select-km{
+    display: flex;
+    justify-content: space-between;
+}
+.select-km .touch-active{
+    background: #9961ba57;
+color: #9961BA;
+
+}
+.select-km .no-touch{
+color: #797979;
+border: 1px solid #DFDFDF;
+    
+
+}
+.select-km button{
+width: 100px;
+height: 41px;
+border: none;
+border-radius: 999px;
+
+cursor: pointer;
+font-family: "Poppins", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+background: white;
+
+}
+
+.select-seats h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 9px 0;
+    color: #1C1C1C;
+}
+.select-seats-4-5{
+    display: flex;
+    justify-content: space-between;
+}
+.select-seats-4-5 .touch-active{
+    background: #9961ba57;
+color: #9961BA;
+
+}
+.select-seats-4-5 .no-touch{
+color: #797979;
+border: 1px solid #DFDFDF;
+    
+
+}
+.select-seats-4-5 button{
+width: 160px;
+height: 41px;
+border: none;
+border-radius: 999px;
+
+cursor: pointer;
+font-family: "Poppins", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+background: white;
+
+
+}
+
+
+
+
+
+
+
+
+.car-type h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 9px 0;
+    color: #1C1C1C;
+}
+.car-name-select1{
+    display: flex;
+    justify-content: space-between;
+}
+.car-name-select1 .touch-active{
+    background: #9961ba57;
+color: #9961BA;
+
+}
+.car-name-select1 .no-touch{
+color: #797979;
+border: 1px solid #DFDFDF;
+}
+.car-name-select1 button{
+width: 105px;
+height: 41px;
+border: none;
+border-radius: 999px;
+
+cursor: pointer;
+font-family: "Poppins", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+background: white;
+
+
+}
+.car-name-select2{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 0 0 ;
+}
+
+.car-name-select2 .no-touch{
+color: #797979;
+border: 1px solid #DFDFDF;
+}
+.car-name-select2 button{
+width: 160px;
+height: 41px;
+border: none;
+border-radius: 999px;
+
+cursor: pointer;
+font-family: "Poppins", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+background: white;
+
+
+}
+
+
+
+.fuel-type-pd h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 9px 0;
+    color: #1C1C1C;
+}
+.petrol-diesel{
+    display: flex;
+    justify-content: space-between;
+}
+.petrol-diesel .touch-active{
+    background: #9961ba57;
+color: #9961BA;
+
+}
+.petrol-diesel .no-touch{
+color: #797979;
+border: 1px solid #DFDFDF;
+}
+.petrol-diesel button{
+width: 160px;
+height: 41px;
+border: none;
+border-radius: 999px;
+
+cursor: pointer;
+font-family: "Poppins", sans-serif;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+background: white;
+
+
+}
+
+
+
+.rate-per-hour h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 9px 0;
+    color: #1C1C1C;
+}
+
+
+/* niiuniunucndunvudnunvdsi */
+
+
+.range-slider {
+    
+    margin: 10px 0;
+    
+    position: relative;
+    height: 20px;
+  }
+  
+  .range-slider input[type=range] {
+    position: absolute;
+    
+  }
+  
+  
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 99%;
+  }
+  
+  input[type=range]:focus {
+    outline: black;
+    
+  }
+ 
+  
+  
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: #F2EBF6;
+    border-radius: 6px;
+    box-shadow: none;
+    border: 0;
+    
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    z-index: 2;
+    position: relative;
+    box-shadow: none;
+   
+    height: 24px;
+    width: 24px;
+    border-radius: 28px;
+    
+    
+    background: white;
+    border: 1px solid #9961BA;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -7px;
+  }
+  .min-max{
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 12px;
+
+  }
+  .min-price{
+width: 165px;
+height: 76px;
+border-radius: 12px;
+border: 1px solid #E1E7EE;
+  }
+
+
+
+  .under-min{
+padding: 12px;
+   
+  }
+
+.under-min p{
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+   margin: 0;
+    color: #1C1C1C;
+
+
+  
+}
+
+  .under-min h6{
+   margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    color: #1C1C1C;
+  }
+
+
+  
+  .see-all-btn button{
+    width: 210px;
+    height: 64px;
+    border-radius: 14px;
+    gap: 10px;
+    text-align: center;
+    padding: 10px 25px;
+    border: none;
+    background: #9961BA;
+   color: white;
+   cursor: pointer;
+   margin: 0;
+   font-family: "Poppins", sans-serif;
+   font-weight: 700;
+   font-size: 20px;
+   line-height: 24px;
+  }
