@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block body_block %}
 <style>
     body {
-        position: relative;
+        {#position: relative;#}
         height: 100%;
         width: 100%;
         margin: 0;
@@ -16,7 +15,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 35%;
+        height: 100%;
         width: 100%;
         background-image: url("{% static 'images/bg.png' %}");
         background-size: cover;
@@ -39,6 +38,7 @@
     }
 
     .main-block {
+        margin-top: 70px;
         width: 100%;
         background-color: rgba(255, 255, 255, 0.8);
         padding: 50px;
@@ -205,4 +205,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{%endblock%}
