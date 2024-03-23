@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
+def homepage(request):
+    return render(request, 'parcel/homepage.html',)
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parcel, createParcelRide
 from .forms import ParcelForm, CreateParcelRideForm, RideSearchForm
@@ -64,6 +66,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parcel, createParcelRide
 from .forms import ParcelForm, CreateParcelRideForm, RideSearchForm
 from django.http import HttpResponse
+
+
+def homepage(request):
+    return render(request, 'parcel/homepage.html',)
 def parcel_list(request):
     parcels = Parcel.objects.all()
     return render(request, 'parcel/parcel_list.html', {'parcels': parcels})
