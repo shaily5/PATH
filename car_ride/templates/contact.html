@@ -1,107 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body_block %}
-<style>
-    .container3 {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/login.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css'%}">
+
+  <style>
+    body {
+      background-image: url("{% static 'images/img10.jpg' %}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      /* Additional styling */
     }
-    .details {
-        margin-bottom: 20px;
+
+    .content1 {
+      display: flex;
+      justify-content: space-between;
     }
-    .details i {
-        margin-right: 10px;
+
+    .left-side {
+        flex: 1;
+        margin-right: 10px; /* Add margin to separate from right side */
+        text-align: center; /* Align content in the center */
     }
-    .topic {
-        font-weight: bold;
+
+    .right-side {
+      flex: 1;
+      margin-left: 20px; /* Add a margin of 20px on the left */
     }
-    .contactus {
-        display: flex;
-        flex-direction: column;
-    }
-    .topic-text h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    .input-box {
-        margin-bottom: 15px;
-    }
-    .input-box input,
-    .input-box textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    .input-box textarea {
-        height: 100px;
-    }
-    button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
-    hr {
-        border: none;
-        height: 10px;
-        background-color: #fff;
-        margin: 40px 0;
-    }
-</style>
-<div class="cssanimation sequence fadeInBottom">
-    <div class="container3">
-        <div class="content1">
-            <div class="left-side">
-                <div class="address details">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="topic">Address</div>
-                    <div class="text-one">University Of Windsor, Windsor, ON</div>
-                    <div class="text-two">Canada</div>
-                </div>
-                <div class="phone details">
-                <i class="fas fa-phone-alt"></i>
-                <div class="topic">Phone</div>
-                <div class="text-one">+1 (123) 456-7890</div>
-                <div class="text-two">9999, 8888</div>
-            </div>
-            <div class="email details">
-                <i class="fas fa-envelope"></i>
-                <div class="topic">Email</div>
-                <div class="text-one">windsor@uwindsor.ca</div>
-            </div>
-        </div>
-        <div class="right-side">
-            <form class="contactus" action="" method="post">
-            {% csrf_token %}
-            <div class="topic-text">
-                <h2> CONTACT US </h2>
-                <br>
-            </div>
-            <div class="input-box">
-                <input type="text" name="name" placeholder="Name">
-            </div>
-            <div class="input-box">
-                <input type="text" name="email" placeholder="Email">
-            </div>
-            <div class="input-box">
-                <input type="text" name="phone" placeholder="Phone">
-            </div>
-            <div class="input-box message-box">
-                <textarea name="msg" placeholder="Message"></textarea>
-            </div>
-            <button style="margin-top: 20px;">SUBMIT</button></br></br>
-          </form>
-        </div>
+  </style>
+
+  <div class="cssanimation sequence fadeInBottom">
+    <!-- Add img7 after the header -->
+    <div style="position: relative; display: inline-block;">
+  <img src="{% static 'images/contact.png' %}" alt="Image" style="max-width: 100%;">
+
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
+</div>
+
+    <div class="content1">
+      <div class="left-side">
+        <!-- Add img9 here -->
+        <img src="{% static 'images/contact-vector.png' %}" alt="Image" style="max-width: 100%; margin-top: 15%; height: 70%">
+      </div>
+      <div class="right-side">
+        <form class="contactus" action="" method="post" style=" background-color: rgba(153, 97, 186); border-radius: 20px">
+          {% csrf_token %}
+          <div class="topic-text" style="color: white">
+            <h2 style="color: white; text-align: center"> CONTACT US </h2>
+            <br>
+          </div>
+          <div class="input-box">
+            <input type="text" name="name" placeholder="Name" style="border-radius: 50px; border-color: white; background: white">
+          </div>
+          <div class="input-box">
+            <input type="text" name="email" placeholder="Email" style="border-radius: 50px; border-color: white; background: white">
+          </div>
+          <div class="input-box">
+            <input type="text" name="phone" placeholder="Phone" style="border-radius: 50px; border-color: white; background: white">
+          </div>
+          <div class="input-box">
+            <textarea name="msg" placeholder="Message" style="margin-top: 2%; width: 98%; margin-left: 1.5%; border-radius: 10px; border-color: white; background: white"></textarea>
+          </div>
+          <button style="margin-top: 20px; background-color: white; color: black; border-color: white; border-radius: 50px">SUBMIT</button></br></br>
+        </form>
       </div>
     </div>
+    <hr size="10" ,width="1" , color="#fff">
   </div>
 {% endblock %}
