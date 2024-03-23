@@ -26,6 +26,7 @@ urlpatterns = [
     path('', include('PATH.urls')),
     path('', include('car_rental.urls')),
     path('car_ride/', include('car_ride.urls')),
+    path('parcel_service/', include('parcel_service.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

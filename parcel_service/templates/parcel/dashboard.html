@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Parcel Ride</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    .section {
+        flex: 1;
+        padding: 20px;
+        border: 1px solid #ccc;
+        overflow-y: auto;
+    }
+
+    .section-heading {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .messages {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .message {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .message-content {
+        font-size: 14px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2 class="section-heading">My Parcel Ride</h2>
+
+            <ul class="messages">
+                {% for ride in user_rides %}
+                <li class="message">
+                    <div class="message-content">
+                        <p> Name : {{ ride.cust }} </p>
+                        <p> Source: {{ ride.from_place }} </p>
+                        <p> Destination: {{ ride.to_place }} </p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="section">
+            <h2 class="section-heading">My Messages</h2>
+            <ul class="messages">
+                <li class="message">
+                    <div class="message-content">
+                        <p>John Doe</p>
+                        <p>Source : Windsor</p>
+                        <p> Destination : Toronto</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="section">
+            <h2 class="section-heading">Messages with Users</h2>
+        </div>
+    </div>
+</body>
+</html>

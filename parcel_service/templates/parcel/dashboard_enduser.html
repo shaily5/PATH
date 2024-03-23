@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Parcel Ride</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    .section {
+        flex: 1;
+        padding: 20px;
+        border: 1px solid #ccc;
+        overflow-y: auto;
+    }
+
+    .section-heading {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .messages {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .message {
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+    }
+
+    .message-content {
+        font-size: 14px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+
+            <h2 class="section-heading">Search for a Ride</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Search</button>
+            </form>
+            <p>{{ message }}</p>
+            <ul class="messages">
+                {% for ride in rides %}
+                <li class="message" onclick="showRideDetails({{ ride.id }})">
+                    <div class="message-content">
+                        <p> <b> Id : </b> {{ ride.pk }} </p>
+                        <p> <b> Name : </b> {{ ride.cust }} </p>
+                        <p> <b> Source : </b> {{ ride.from_place }} </p>
+                        <p> <b> Destination : </b> {{ ride.to_place }} </p>
+                        <p> <b> Date : </b> {{ ride.from_date }} </p>
+                        <button onclick="showRideDetails({{ ride.pk }})">View Details</button>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+{#        <div class="section" id="parcel-details-section" style="display: none;">#}
+{#            <h2 class="section-heading">Parcel Ride Details</h2>#}
+{#            <ul class="messages" id="parcel-details">#}
+{#                {% for ride in rides %}#}
+{#                <li class="message">#}
+{#                    <div class="message-content">#}
+{#                            <p><b>Name:</b> <span id="car_num"></span></p>#}
+{#                            <p><b>Source:</b> <span id="from_place"></span></p>#}
+{#                            <p><b>Destination:</b> <span id="to_place"></span></p>#}
+{#                            <p><b>Car Number:</b> <span id="car_num"></span></p>#}
+{#                            <p><b>Company:</b> <span id="company"></span></p>#}
+{#                            <p><b>Car Type:</b> <span id="car_type"></span></p>#}
+{#                            <p><b>From Date:</b> <span id="from_date"></span></p>#}
+{#                            <p><b>To Date:</b> <span id="to_date"></span></p>#}
+{#                            <p><b>Price:</b> <span id="price"></span></p>#}
+{#                            <p><b>Total Seats:</b> <span id="total_seats"></span></p>#}
+{#                            <p><b>Seats Booked:</b> <span id="seats_booked"></span></p>#}
+{#                            <img id="car_img" src="" alt="Car Image">#}
+{#                    </div>#}
+{#                </li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
+        <div class="section" id="parcel-details-section" style="display: none;">
+    <h2 class="section-heading" id="parcel-details-heading" style="display: block;">Parcel Ride Details</h2>
+    <ul class="messages" id="parcel-details">
+        {% for ride in rides %}
+        <li class="message">
+            <div class="message-content">
+                <p><b>Name:</b> <span id="car_num"></span></p>
+                <p><b>Source:</b> <span id="from_place"></span></p>
+                <p><b>Destination:</b> <span id="to_place"></span></p>
+                <p><b>Car Number:</b> <span id="car_num"></span></p>
+                <p><b>Company:</b> <span id="company"></span></p>
+                <p><b>Car Type:</b> <span id="car_type"></span></p>
+                <p><b>From Date:</b> <span id="from_date"></span></p>
+                <p><b>To Date:</b> <span id="to_date"></span></p>
+                <p><b>Price:</b> <span id="price"></span></p>
+                <p><b>Total Seats:</b> <span id="total_seats"></span></p>
+                <p><b>Seats Booked:</b> <span id="seats_booked"></span></p>
+                <img id="car_img" src="" alt="Car Image">
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+        <div class="section" id="parcelRegistrationForm" style="display: none;">
+            <h2 class="section-heading">Parcel Registration Form</h2>
+        </div>
+    </div>
+
+    <script>
+
+{#        function showRideDetails(ride_id) {#}
+{#    // Make an AJAX request to get the ride details#}
+{#    fetch(`/parcel_service/get_ride_details/${ride_id}`)#}
+{#        .then(response => response.json())#}
+{#        .then(data => {#}
+{#            // Update the HTML elements with the ride details#}
+{#            document.getElementById('car_num').textContent = data.car_num;#}
+{#            document.getElementById('company').textContent = data.company;#}
+{#            document.getElementById('car_name').textContent = data.car_name;#}
+{#            document.getElementById('car_type').textContent = data.car_type;#}
+{#            document.getElementById('from_place').textContent = data.from_place;#}
+{#            document.getElementById('to_place').textContent = data.to_place;#}
+{#            document.getElementById('from_date').textContent = data.from_date;#}
+{#            document.getElementById('to_date').textContent = data.to_date;#}
+{#            document.getElementById('price').textContent = data.price;#}
+{#            document.getElementById('total_seats').textContent = data.total_seats;#}
+{#            document.getElementById('seats_booked').textContent = data.seats_booked;#}
+{#            document.getElementById('car_img').src = data.car_img;#}
+{#            // Update other HTML elements similarly#}
+{#        })#}
+{#        .catch(error => console.error('Error:', error));#}
+{# } #}
+
+{#function showRideDetails(ride_id) {#}
+{#    // Make an AJAX request to get the ride details#}
+{#    fetch(`/parcel_service/get_ride_details/${ride_id}`)#}
+{#        .then(response => response.json())#}
+{#        .then(data => {#}
+{#            // Update the HTML elements with the ride details#}
+{#            document.getElementById('car_num').textContent = data.car_num;#}
+{#            document.getElementById('company').textContent = data.company;#}
+{#            document.getElementById('car_name').textContent = data.car_name;#}
+{#            document.getElementById('car_type').textContent = data.car_type;#}
+{#            document.getElementById('from_place').textContent = data.from_place;#}
+{#            document.getElementById('to_place').textContent = data.to_place;#}
+{#            document.getElementById('from_date').textContent = data.from_date;#}
+{#            document.getElementById('to_date').textContent = data.to_date;#}
+{#            document.getElementById('price').textContent = data.price;#}
+{#            document.getElementById('total_seats').textContent = data.total_seats;#}
+{#            document.getElementById('seats_booked').textContent = data.seats_booked;#}
+{#            // Update other HTML elements similarly#}
+{#        })#}
+{#        .catch(error => console.error('Error:', error));#}
+{# } #}
+{##}
+{#document.addEventListener('DOMContentLoaded', function() {#}
+{#    // Your script here#}
+{#    // Attach the showRideDetails function to the onclick event of the ride elements#}
+{#    const rideElements = document.getElementsByClassName('ride-element');#}
+{#    Array.from(rideElements).forEach(element => {#}
+{#        element.onclick = function() {#}
+{#            // Extract the ride_id from the element's data-ride-id attribute#}
+{#            const rideId = element.getAttribute('data-ride-id');#}
+{#            showRideDetails(rideId);#}
+{#        };#}
+{#    });#}
+{# }); #}
+
+{#function showRideDetails(ride_id) {#}
+{#    fetch(`/parcel_service/get_ride_details/${ride_id}`)#}
+{#        .then(response => response.json())#}
+{#        .then(data => {#}
+{#            // Update the HTML elements with the ride details if they exist#}
+{#            const updateElement = (id, value) => {#}
+{#                const element = document.getElementById(id);#}
+{#                if (element) {#}
+{#                    element.textContent = value;#}
+{#                }#}
+{#            };#}
+{##}
+{#            updateElement('car_num', data.car_num);#}
+{#            updateElement('company', data.company);#}
+{#            updateElement('car_name', data.car_name);#}
+{#            updateElement('car_type', data.car_type);#}
+{#            updateElement('from_place', data.from_place);#}
+{#            updateElement('to_place', data.to_place);#}
+{#            updateElement('from_date', data.from_date);#}
+{#            updateElement('to_date', data.to_date);#}
+{#            updateElement('price', data.price);#}
+{#            updateElement('total_seats', data.total_seats);#}
+{#            updateElement('seats_booked', data.seats_booked);#}
+{#            // Update other HTML elements similarly#}
+{#            detailsSection.style.display = 'block';#}
+{#        })#}
+{#        .catch(error => console.error('Error:', error));#}
+{# } #}
+
+function showRideDetails(ride_id) {
+    fetch(`/parcel_service/get_ride_details/${ride_id}`)
+        .then(response => response.json())
+        .then(data => {
+            const detailsSection = document.getElementById('parcel-details-section');
+            const detailsList = document.getElementById('parcel-details');
+
+            // Clear existing details
+            detailsList.innerHTML = '';
+
+            // Populate details
+            const createDetailElement = (label, value) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<b>${label}:</b> ${value}`;
+                detailsList.appendChild(li);
+            };
+
+            createDetailElement('Name', data.car_num);
+            createDetailElement('Source', data.from_place);
+            createDetailElement('Destination', data.to_place);
+            createDetailElement('Car Number', data.car_num);
+            createDetailElement('Company', data.company);
+            createDetailElement('Car Type', data.car_type);
+            createDetailElement('From Date', data.from_date);
+            createDetailElement('To Date', data.to_date);
+            createDetailElement('Price', data.price);
+            createDetailElement('Total Seats', data.total_seats);
+            createDetailElement('Seats Booked', data.seats_booked);
+
+            // Show details section
+            detailsSection.style.display = 'block';
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+        document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('parcelRegistrationForm').style.display = 'block';
+    });
+    </script>
+</body>
+</html>
