@@ -64,10 +64,17 @@ def getCars(request,param):
     data = Car.objects.filter(car_type=param)
     return render(request, 'car_rental/services/availableCars.html',{'data':data})
 
+
 def getCarDetail(request,car_id):
-    car = get_object_or_404(Car, id=car_id)
-    data = Car.objects.all()
-    return render(request, 'car_rental/services/carDetails.html',{'data':data,'car':car})
+    if request.session.get('details_car_id') is None:
+        request.session['details_car_id'] = car_id
+
+    if request.session.get('username') is not None:
+        car = get_object_or_404(Car, id=car_id)
+        data = Car.objects.all()
+        return render(request, 'car_rental/services/carDetails.html', {'data': data, 'car': car})
+    else:
+        return render(request, "PATH/login.html")
 
 
 def show_photos(request):
@@ -132,6 +139,10 @@ def bookRentalCar(request):
                 return render(request, "PATH/login.html")
 
 def loginView(request):
+    #
+    # if request.session.get('details_car_id') is not None:
+    #     return redirect(getCarDetail)
+
     if request.method == "GET":
         form=LoginForm()
         return render(request, "car_rental/authentication/login.html",{'LoginForm':form})

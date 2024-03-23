@@ -219,77 +219,31 @@
       <div class="box1">
         <div class="car-box">
           <!-- Car 1 -->
+           {% for car in cars %}
           <div class="car">
-            <img src="../../static/PATH/images/thar.png" alt="Car 2">
+            <img src="{{ car.photo.url }}" alt="Car 2">
             <div>
               <div class="car-details">
                 <div class="heading">
-                  Jeep XD
+                  {{ car.make }} {{ car.model }}
                 </div>
 
                 <div class="details-row">
                   <div class="detail"><i class="fa-solid fa-user"></i>5</div>
                   <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>
-                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>
+                  <div class="detail"> <i class="fa-solid fa-car"></i> {{ car.car_type }}</div>
                 </div>
               </div>
               <div class="additional-details">
                 <div>
                   <p style="margin: 0;">Daily rate from</p>
-                  <h1 style="margin: 0;" class="price">$200</h1>
+                  <h1 style="margin: 0;" class="price">$ {{ car.daily_rate }}</h1>
                 </div>
-                <button class="action-button">Book Now</button>
+                  <a href="http://localhost:8000/car_rental/getCarDetail/{{ car.id }}"><button class="action-button">Book Now</button> </a>
               </div>
             </div>
           </div>
-          <!-- Car 2 -->
-          <div class="car">
-            <img src="../../static/PATH/images/thar.png" alt="Car 2">
-            <div>
-              <div class="car-details">
-                <div class="heading">
-                  Jeep XD
-                </div>
-
-                <div class="details-row">
-                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>
-                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>
-                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>
-                </div>
-              </div>
-              <div class="additional-details">
-                <div>
-                  <p style="margin: 0;">Daily rate from</p>
-                  <h1 style="margin: 0;" class="price">$200</h1>
-                </div>
-                <button class="action-button">Book Now</button>
-              </div>
-            </div>
-          </div>
-          <!-- Car 3 -->
-          <div class="car">
-            <img src="./images/thar.png" alt="Car 2">
-            <div>
-              <div class="car-details">
-                <div class="heading">
-                  Jeep XD
-                </div>
-
-                <div class="details-row">
-                  <div class="detail"><i class="fa-solid fa-user"></i>5</div>
-                  <div class="detail"><i class="fa-solid fa-gas-pump"></i>Gasoline</div>
-                  <div class="detail"> <i class="fa-solid fa-car"></i> SUV</div>
-                </div>
-              </div>
-              <div class="additional-details">
-                <div>
-                  <p style="margin: 0;">Daily rate from</p>
-                  <h1 style="margin: 0;" class="price">$200</h1>
-                </div>
-                <button class="action-button">Book Now</button>
-              </div>
-            </div>
-          </div>
+        {%  endfor %}
         </div>
       </div>
     </div>

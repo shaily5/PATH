@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -17,8 +17,9 @@ from django.contrib.auth.forms import UserCreationForm
 from PATH.forms import ContactForm
 
 def homepage(request):
-    print("C Home")
-    return render(request, 'PATH/homepage.html')  # Replace 'home.html' with the name of your home template
+    # print("C Home")
+    cars = Car.objects.all()
+    return render(request, 'PATH/homepage.html',{'cars':cars})  # Replace 'home.html' with the name of your home template
 
 current_time = timezone.now().strftime("%H:%M:%S %d-%m-%Y")
 def LoginUser(request):
@@ -44,6 +45,11 @@ def LoginUser(request):
                 if request.session.get('car_type') is not None:
                     cars = Car.objects.filter(car_type=request.session.get('car_type'))
                     return render(request, "car_rental/services/availableCars.html", {'cars': cars})
+                elif request.session.get('details_car_id') is not None:
+                    car = get_object_or_404(Car, id=request.session.get('details_car_id'))
+                    data = Car.objects.all()
+                    return render(request, 'car_rental/services/carDetails.html', {'data': data, 'car': car})
+
                 else:
                     login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
                     Notification.objects.create(user=customer, message=login_message)
