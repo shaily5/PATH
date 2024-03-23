@@ -6,14 +6,14 @@ body {
     position: relative;
     height: 95vh;
     width: 100%;
-    background-image: url("{% static 'images/img7.jpg' %}");
+    background-image: url("{% static 'images/bg.png' %}");
     background-size: cover;
     background-position: center;
     text-align: center;
 }
 .container {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 10% auto;
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
@@ -57,6 +57,7 @@ p {
         <h1>Cancellation Confirmation</h1>
         <p>The Ride has been canceled successfully.</p>
        <a href="{% url 'car_ride:customerbookings' %}" class="redirect-button">Go to Customer Booking</a>
+        <a href="{% url 'car_ride:mybookings' %}" class="redirect-button">Go to My Booking</a>
    </div>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}

@@ -64,7 +64,7 @@
     align-items: left; /* Center buttons horizontally */
     margin-left: 40px;
 }
-.action-buttons a, 
+.action-buttons a,
 .action-buttons button {
     margin-top: 5px;
     text-decoration: none;
@@ -75,14 +75,22 @@
     font-size: 15px;
     margin-bottom: 10px;
 }
-.action-buttons a:hover, 
-.action-buttons button:hover {     
+.action-buttons a:hover,
+.action-buttons button:hover {
     color: #32213B;
 }
 .booking-card p{
     margin-left: 10px;
 }
 </style>
+    <script>
+    function confirmCancelBooking(bookingId) {
+        var confirmation = confirm("Are you sure want to cancel this customer's booking?");
+        if (confirmation) {
+            document.getElementById("cancel_booking_form_" + bookingId).submit();
+        }
+    }
+</script>
     <div class="cssanimation sequence fadeInBottom">
         {% if otherbookings %}
             <div class="booking-container">
@@ -102,14 +110,14 @@
                             <th>Customer Contact:</th>
                             <td>{{ booking.contact }}</td>
                         </tr>
-                        <tr>
-                            <th>Pickup Date:</th>
-                            <td>{{ booking.pickup }}</td>
-                        </tr>
-                        <tr>
-                            <th>Dropoff Date:</th>
-                            <td>{{ booking.dropoff }}</td>
-                        </tr>
+{#                        <tr>#}
+{#                            <th>Pickup Date:</th>#}
+{#                            <td>{{ booking.pickup }}</td>#}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                            <th>Dropoff Date:</th>#}
+{#                            <td>{{ booking.dropoff }}</td>#}
+{#                        </tr>#}
                        <tr>
                             <th>Pickup Address:</th>
                            <td>{{ booking.pick_add }}</td>
@@ -128,10 +136,10 @@
                         </tr>
                         </table>
                         <div class="action-buttons">
-                        <form action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
+                        <form id="cancel_booking_form_{{ booking.id }}" action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit">
-                                <i class="fas fa-trash-alt"></i> Delete
+                            <button type="button" onclick="confirmCancelBooking('{{ booking.id }}')">
+                            <i class="fas fa-trash-alt"></i> Delete
                             </button>
                         </form>
                         </div>
@@ -139,8 +147,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p>
-                <center>No bookings yet!</center>
+        <p><center style="margin-top: 10%; margin-left: 25%; margin-right: 25%; color: white; font-size: 40px; width: 50%; border-radius: 10px; padding: 20px; background-color: #9961BA; opacity: 70%;">You do not have any bookings right now !!</center>
             </p>
         {% endif %}
     </div>
