@@ -25,7 +25,7 @@
 
         .addcar {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 2%;
         }
 
         .addcar h3 {
@@ -38,7 +38,7 @@
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
-            width: 70%;
+            width: 60%;
             margin: 0 auto;
             background-color: #FFFFFF;
         }
@@ -59,6 +59,7 @@
         form input[type="text"],
         form input[type="date"],
         form input[type="number"],
+        form input[type="file"],
         form select {
             width: 250px;
             padding: 8px;
@@ -78,7 +79,7 @@
             width: 25%;
             height: 7%;
             margin-top: 0%;
-            margin-left: 35%;
+            {#margin-left: 35%;#}
         }
 
         p {
@@ -110,7 +111,15 @@
                 <h3>Enter Your Ride Details</h3>
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <div style="
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+">
                     {{ form.as_p }}
+                        </div>
                     <button type="submit">Post Ride</button>
                 </form>
             </div>

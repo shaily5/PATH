@@ -39,8 +39,8 @@ body {
     border-radius: 5px;
 }
 .details-container {
-    margin-left: 10%;
-    width: 900px;
+    margin-left: 5%;
+    width: 1200px;
     border-collapse: collapse;
     height:110px;
     text-align: left;
@@ -63,6 +63,8 @@ body {
 .details-container .t1 th,
 .details-container .t1 td {
     padding: 6px 0;
+    margin-left: 3%;
+    margin-right: 1%;
 }
 .booking-details-container {
     margin-top: 20px;
@@ -83,6 +85,11 @@ h4{
 }
 .booking-box table {
     width: 100%;
+}
+
+.details-container{
+    margin-left: 5%;
+    padding-left: 5%;
 }
 .action-buttons {
     margin-top: 20px;
@@ -131,7 +138,7 @@ h4{
                         </table>
                     </div>
                 </div>
-                <h4>Your Booking deatils</h4>
+                <h4>Your Booking Deatils</h4>
                 <div class="booking-details-container">
                 <table class="t2">
                     <tr>
@@ -191,7 +198,7 @@ h4{
 				<form id="cancel-form-{{ i.id }}" action="{% url 'car_ride:cancel_booking' i.id %}" method="post">
                     {% csrf_token %}
 					<button type="button" class="cancel-btn" onclick="showConfirmation('{{ i.id }}')">
-                    <i class="fas fa-trash-alt"></i> Delete
+                    <i class="fas fa-trash-alt"></i> Cancel Booking
                     </button>
                 </form>
 				<script>

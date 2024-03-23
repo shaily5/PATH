@@ -10,7 +10,7 @@
   }
 
 .box-element-product {
-  width: calc(50% - 20px);
+  width: calc(48% - 20px);
   margin-bottom: 20px;
   background-color: rgba(153, 97, 186, 0.2); 
   border-radius: 10px;
@@ -41,7 +41,7 @@
     max-height: 150px; /* Adjust the maximum height of the image */
     object-fit: cover;
     border-radius: 5px;
-    margin-right: 50px; /* Add spacing between the image and table */
+    margin-right: 1px; /* Add spacing between the image and table */
   }
 
   .box-element-product table {
@@ -103,29 +103,29 @@
             <a href="{% url 'PATH:login' %}?next={% url 'car_ride:cardetails' mycar.pk %}"><button name="book_car_{{mycar.pk}}">Book This Car</button></a>
         {% endif %}
     </div>
-      <table>
+      <table style="margin-right: 13%">
         <tr class="route-info">
-          <th>Route:</th>
+          <th>Route</th>
           <td>{{mycar.from_place}}-{{mycar.to_place}}</td>
         </tr>
         <tr class="travel-dates">
-          <th>Travel Dates:</th>
+          <th>Travel Dates</th>
           <td>{{mycar.from_date}}-{{mycar.to_date}}</td>
         </tr>
         <tr class="seats-info">
-          <th>Seats Left:</th>
+          <th>Seats Left</th>
           <td>{{mycar.total_seats}}</td>
         </tr>
         <tr class="seats-info">
-          <th>Reserved:</th>
+          <th>Reserved</th>
           <td>{{mycar.seats_booked}}</td>
         </tr>
         <tr class="car-info">
-          <th>Car:</th>
+          <th>Car</th>
           <td>{{mycar.company}} {{mycar.car_name}}</td>
         </tr>
         <tr class="price-info">
-          <th>Price:</th>
+          <th>Price</th>
           <td>CAD ${{mycar.price}}</td>
         </tr>
       </table>

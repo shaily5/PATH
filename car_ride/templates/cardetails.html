@@ -25,31 +25,31 @@
         text-align: center;
     }
     .container2 {
-        max-width: 900px;
-        margin: 0 auto;
+        max-width: 1100px;
+        margin: 2% auto;
         padding: 20px;
       border: 1px solid #ccc;
       border-radius: 10px;
-      background-color: #ffffff; 
+      background-color: #ffffff;
     }
     .abc {
       display: flex;
-      align-items: center; 
+      align-items: center;
       margin-bottom: 20px;
     }
     .abc img {
       width: 25%;
       height: auto;
       border-radius: 10px;
-      margin-right: 50px; 
+      margin-right: 50px;
     }
     .abc table {
-        margin-left: 22%;
-        width: 400px; 
+        margin-left: 19%;
+        width: 50%;
         border-collapse: collapse;
         height:130px;
         text-align: left;
-        background-color: rgba(153, 97, 186, 0.3); 
+        background-color: rgba(153, 97, 186, 0.3);
         border-radius: 10px;
     }
     .abc .t1 {
@@ -58,7 +58,7 @@
         border-bottom: 1px solid #c3c1c5;
     }
     .abc t1:first-child {
-        background-color: #FFFFFF; 
+        background-color: #FFFFFF;
         color: black;
         font-weight: bold;
         width: 30%;
@@ -66,12 +66,12 @@
         border-bottom-left-radius: 10px;
     }
     form {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
         padding: 20px;
-        background-color: #ffffff; 
+        background-color: #ffffff;
         border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
     .form-group {
         display: flex;
@@ -80,16 +80,20 @@
         margin-bottom: 15px;
     }
     .form-group label {
-        width: 45%; 
+        text-align: center;
+        align-items: flex-end;
+        width: 45%;
         margin-bottom: 5px;
         margin-top: 5%;
+        font-weight: bold;
+        margin-left: 10%;
     }
     .form-group input[type="text"],
     .form-group input[type="email"],
     .form-group input[type="number"],
     .form-group input[type="date"],
     .form-group select {
-        width: 330px;
+        width: 250px;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -105,13 +109,17 @@
         cursor: pointer;
         font-size: 16px;
         width: 25%;
-        height: 7%;
+        height: 18%;
         margin-top: 3%;
-        margin-left: 35%;
+        {#margin-left: 35%;#}
     }
     button:hover {
         background-color: #FFFFFF;
         color: #9961BA;
+    }
+
+    table td{
+        padding-left: 30px;
     }
 </style>
 <div>
@@ -159,6 +167,13 @@
      <div class="form-group">
          <form action="#" method="post" >
              {% csrf_token %}
+              <div style="
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+">
              {{ form }}
              <button type="submit">Book Ride</button>
          </form>

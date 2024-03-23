@@ -12,7 +12,7 @@
  }
  div.title-container {
     text-align: center;
-    margin-top: 150px;
+    margin-top: 100px;
  }
  .form-container {
     max-width: 1000px;
@@ -59,31 +59,92 @@ button:hover {
   background-color: #FFFFFF;
   color: #9961BA;
 }
+
+.title-container {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.title-content {
+  background-color: rgba(0, 0, 0, 0.3); /* Transparent black background */
+  color: #ffffff; /* White text color */
+  padding: 20px; /* Padding for better spacing */
+}
+
+.title-content h2,
+.title-content h4 {
+  margin: 0; /* Remove default margin */
+}
+
+
+
+.title-content {
+  width: 70%; /* Make the container width match the form container */
+  height: 150px; /* Make the container height match the form container */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+    margin-left: 16%;
+    margin-bottom: 5%;
+}
+
+.title-content p
+{
+  margin: 0; /* Remove default margin */
+}
+
+.form-container {
+  max-width: 1000px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 270px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #9961BA;
+  color: #FFFFFF;
+  border-color: #9961BA;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 20%;
+  margin-top: 18px;
+}
+
+button:hover {
+  background-color: #FFFFFF;
+  color: #9961BA;
+}
+
+
+
+
 </style>
 <div class="background-image">
-  <div class="title-container">
-    <div class="cssanimation sequence fadeInBottom">
-      <div class="container2" id="container2">
-        <div class="content-wrapper">
-          <div class="content" id="content">
-            <div class="title">
-              <h3>Search Your Ride</h3>
-            </div>
-            <div class="form-container">
-              <form action="#" method="post">
-                <div class="form-group">
-                  <form action="#" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button id="add">Search Ride</button><br><br>
-                  </form>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+    <div class="title-container">
+      <div class="title-content">
+        <p style="margin-bottom: 2%; font-size: 40px">Find Your Best Ride</p>
+        <p style="font-size: 25px">We are ready to serve you the best Ride.</p>
       </div>
+    </div>
+    <div class="form-container">
+      <form action="#" method="post">
+        <div class="form-group">
+          <form action="#" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="add">Search Ride</button><br><br>
+          </form>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+
 {% endblock %}

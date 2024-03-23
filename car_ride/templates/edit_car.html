@@ -2,85 +2,127 @@
 {% load static %}
 {% block body_block %}
     <style>
-    body {
-        position: relative;
-        height: 95vh;
-        width: 100%;
-        background-image: url("{% static 'images/bg.png' %}");
-        background-size: cover;
-        background-position: center;
-    }
-    h3 {
-        text-align: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        color: #9961BA; /* Change title color */
-    }
-    form {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #ffffff; /* Adjust background color */
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow */
-        text-align: center;
-        font-weight: bold;
-    }
-    .form-group {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between; /* Ensure two fields in one row */
-        margin-bottom: 15px; /* Adjust margin between rows */
-    }
-    .form-group label {
-        width: 40%; /* Adjust width of labels */
-        margin-bottom: 5px; /* Add margin below labels */
-    }
-    .form-group input[type="text"],
-    .form-group input[type="email"],
-    .form-group input[type="number"],
-    .form-group select {
-        width: 345px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-    button {
-        padding: 10px 20px;
-        background-color: #9961BA;
-        color: #FFFFFF;
-        border-color: #9961BA;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        width: 25%;
-        height: 7%;
-        margin-top: 110px;
-    }
-    button:hover {
-        background-color: #FFFFFF;
-        color: #9961BA;
-    }
+        body {
+            position: relative;
+            height: 95vh;
+            width: 100%;
+            background-image: url("{% static 'images/bg.png' %}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+        }
+
+        .alert center {
+            margin: 0;
+        }
+
+        .addcar {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .addcar h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #9961BA;
+        }
+
+        .form-container {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 60%;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        form label {
+            width: auto;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form input[type="number"],
+        form input[type="file"],
+        form select {
+            width: 250px;
+            padding: 8px;
+            margin-bottom: 1px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #9961BA;
+            color: #FFFFFF;
+            border-color: #9961BA;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 25%;
+            height: 7%;
+            margin-top: 0%;
+            {#margin-left: 35%;#}
+        }
+
+        p {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+        }
+
+        button:hover {
+            background-color: #FFFFFF;
+            color: #9961BA;
+        }
     </style>
     <div class="background-image">
-        <form id="edit_car_form" action="{% url 'car_ride:edit_car' car.id %}" method="post">
-            <h3>Edit Your Car Details</h3>
-            <div class="form-group">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" id="update_button" style="align-items: center; margin-right: 25%; margin-top: 2%;">Update</button>
+        <div>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <center>{{ message }}</center>
             </div>
-        </form>
-	<script>
-        document.getElementById("edit_car_form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            var confirmation = confirm("Are you sure you want to update the car details?");
-            if (confirmation) {
-                document.getElementById("edit_car_form").submit();
-            }
-        });
-    </script>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="cssanimation sequence fadeInBottom">
+            <div class="addcar">
+                <div class="form-container">
+                    <h3>Update Your Ride Details</h3>
+                    <form id="edit_car_form" action="{% url 'car_ride:edit_car' car.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                        ">
+                            {{ form.as_p }}
+                        </div>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
