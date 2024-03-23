@@ -7,7 +7,7 @@
             position: relative;
             height: 95vh;
             width: 100%;
-            background-image: url("{% static 'images/img7.jpg' %}");
+            background-image: url("{% static 'images/bg.png' %}");
             background-size: cover;
             background-position: center;
         }
@@ -18,7 +18,7 @@
             justify-content: space-between;
         }
         .car-card {
-            margin-top: 3%;
+            margin-top: 1%;
             background-color: #fff;
             padding: 15px;
             border-radius: 10px;
@@ -95,7 +95,7 @@
                             </a>
                             <form id="cancelForm{{c.id}}" action="{% url 'car_ride:cancel_car' c.id %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" onclick="confirmCancel({{c.id}})">
+                                <button type="button" onclick="confirmCancel('{{ c.id }}')">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </button>
                             </form>
@@ -104,27 +104,31 @@
                     <div class="car-info">
                         <table>
                         <tr>
-                        <th>Name:</th>
-                        <td>{{ c.car_name }}</td>
+                        <th>Name</th>
+                        <td>{{ c.company }} {{ c.car_name }}</td>
                         </tr>
                          <tr>
-                             <th>Type:</th>
+                             <th>Type</th>
                              <td>{{ c.car_type }}</td>
                          </tr>
                         <tr>
-                             <th>Number:</th>
+                            <th>Number</th>
                             <td>{{ c.car_num }}</td>
                         </tr>
                         <tr>
-                             <th>From Location:</th>
-                            <td>{{ c.from_place }}</td>
+                             <th>Route</th>
+                            <td>{{ c.from_place }} - {{ c.to_place }}</td>
                         </tr>
-                       <tr>
-                             <th>To Location:</th>
-                           <td>{{ c.to_place }}</td>
-                       </tr>
                         <tr>
-                             <th>Price:</th>
+                             <th>Travel Dates</th>
+                            <td>{{ c.from_date }} - {{ c.to_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Time</th>
+                            <td>{{ c.departure_time }} - {{ c.arrival_time }}</td>
+                        </tr>
+                        <tr>
+                             <th>Price</th>
                             <td>{{ c.price }}</td>
                         </tr>
                             </table>
@@ -132,7 +136,8 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p><center>No Rides added yet</center></p>
+            <p style="margin-left: 35%; margin-top: 15%; background-color: rgba(0, 0, 0, 0.3); color: white;
+            padding: 30px 30px; font-size: 40px; border-radius: 10px">No Rides added yet</p>
         {% endif %}
     </div>
 <script>

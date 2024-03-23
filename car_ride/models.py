@@ -2,6 +2,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
+from django.utils import timezone
 
 class Customer(models.Model):
     usern = models.OneToOneField(User, on_delete=models.CASCADE, max_length=80, unique=True, blank=True)
@@ -42,6 +43,8 @@ class Mycar(models.Model):
     car_img = models.ImageField(upload_to="cars", default="", null=True, blank=True)
     total_seats = models.IntegerField()
     seats_booked = models.IntegerField(default=0)
+    departure_time = models.TimeField(default=timezone.now)  # Departure time
+    arrival_time = models.TimeField(default=timezone.now)  # Arrival time
 
     def update_seats_after_cancellation(self, num_seats_canceled):
         """
@@ -75,8 +78,8 @@ class Booking(models.Model):
     car = models.ForeignKey(Mycar, on_delete=models.SET_NULL, null=True)
     contact = models.CharField(max_length=11, null=False)
     email = models.EmailField(max_length=80)
-    pickup = models.DateField()
-    dropoff = models.DateField()
+    # pickup = models.DateField()
+    # dropoff = models.DateField()
     pick_add = models.CharField(max_length=100, null=False)
     drop_add = models.CharField(max_length=100, null=False)
     date_added = models.DateTimeField(auto_now_add=True)

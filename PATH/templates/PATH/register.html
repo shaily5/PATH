@@ -35,22 +35,23 @@
                             <div class="form-flex">
                                 <label style="font-size: 16px;" class="label" for="firstname">First Name</label>
                             </div>
-                            <input type="text" id="firstname" name="firstname" required>
+                            <input type="text" id="firstname" name="firstname" placeholder="Firstname" required>
                         </div>
                         <div class="input-box">
                             <div class="form-flex">
                                 <label style="font-size: 16px;" class="label" for="username">Enter username</label>
                             </div>
-                            <input type="text" id="username" name="username" required>
+                            <input type="text" id="username" name="username" placeholder="Username" required>
 
                         </div>
                         <div class="input-box">
                             <div class="form-flex">
                                 <label style="font-size: 16px;" class="label" for="password">Password</label>
-                                <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i>
-                                    Hide</label>
+                                <label id="togglePassword" style="font-size: 18px; cursor: pointer;">
+                                <i class="fa-solid fa-eye-slash"></i>
+                                </label>
                             </div>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password" placeholder="Password" required>
                         </div>
                         <!-- <div class="input-box">
                             <div class="form-flex">
@@ -64,13 +65,13 @@
                             <div class="form-flex">
                                 <label style="font-size: 16px;" class="label" for="email">Email</label>
                             </div>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" placeholder="Email" required>
                         </div>
                         <div class="input-box">
                             <div class="form-flex">
                                 <label style="font-size: 16px;" class="label" for="mobile">Phone Number</label>
                             </div>
-                            <input type="text" id="mobile" name="mobile" required>
+                            <input type="text" id="mobile" name="mobile" placeholder="Phone Number" required>
 
                         </div>
 
@@ -78,18 +79,19 @@
                             <div class="form-flex">
                                 <label style="font-size: 16px;" class="label" for="address">Address</label>
                             </div>
-                            <input type="text" id="address" name="address" required>
+                            <input type="text" id="address" name="address" placeholder="Address" required>
                         </div>
                         <div class="input-box">
                             <div class="form-flex">
                                 <label style="font-size: 16px;" class="label" for="city">City</label>
                             </div>
-                            <input type="text" id="city" name="city" required>
+                            <input type="text" id="city" name="city" placeholder="City" required>
 
                         </div>
                         <div class="input-box">
                             <div class="form-flex">
                                 <span class="details">State</span>
+                            </div>
                                 <select class="form-control" name="state" id="inputState"
                                     style="border:1px solid black; width: 100%;">
                                     <option value="SelectState">Select State</option>
@@ -107,7 +109,7 @@
                                     <option value="Saskatchewan">Saskatchewan</option>
                                     <option value="Yukon">Yukon</option>
                                 </select>
-                            </div>
+
 
 
                         </div>
@@ -124,6 +126,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div>
                             <div style="margin-bottom: 30px;">
 
@@ -150,3 +153,17 @@
 </body>
 
 </html>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+
+            togglePassword.addEventListener('click', function () {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        });
+</script>

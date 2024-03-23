@@ -1,72 +1,61 @@
-{% load static %}
+{% extends "PATH/base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Login Form</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'PATH/css/login.css' %}">
-</head>
-
-<body>
-
-    <div class="container">
-        <div class="header">
-            <img src="{% static 'PATH/images/logo.png' %}" alt="Logo" class="logo"> <!-- Path to your logo image -->
-        </div>
-        <div class="content">
-            <div class="side-image">
-                <img src="{% static 'car_rental/images/Frame.png' %}" alt="Side Image"> <!-- Path to your side image -->
+{% block content %}
+    <form  method="post">
+        {% csrf_token %}
+        <div style="padding: 0 0 50px 0;">
+            <h2>LOGIN</h2>
+            <p>New to the plateform? <a href="{% url 'PATH:register' %}" style="color: white;"> Sign up
+                    for free </a></p><br>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
             </div>
-            <div class="login-form">
-                <form action="http://localhost:8000/login/" method="post">
-                    {% csrf_token %}
-                    <div style="padding: 0 0 50px 0;">
-                        <h2>Welcome again</h2>
-                        <p>New to Design Space? <a href="{% url 'PATH:register' %}" style="color: white;"> Sign up
-                                for free </a></p><br>
-                        {% if messages %}
-                        {% for message in messages %}
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <center>{{ message }}</center>
-                        </div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
+            {% endfor %}
+            {% endif %}
+        </div>
 
 
-                    <div class="form-flex">
-                        <label style="font-size: 16px;" class="label" for="username">Enter username / Email</label>
-                    </div>
-                    <input type="text" id="username" name="username" required>
+        <div class="form-flex">
+            <label style="font-size: 16px;" class="label" for="username">Enter username / Email</label>
+        </div>
+        <input type="text" id="username" name="username" placeholder="Username" required>
 
-                    <div>
-                        <div class="form-flex">
-                            <label style="font-size: 16px;" class="label" for="password">Password</label>
-                            <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>
-                        </div>
-                        <div style="margin-bottom: 30px;">
-                            <input type="password" id="password" name="password" required>
-                            <div class="form-flex">
-                                <!-- <div class="check">
-                                    <input type="checkbox" id="checkbox1" class="checkbox-input">
-                                    <label for="checkbox1" class="checkbox-label">Remember me ?</label>
-                                </div> -->
-                                <a class="forg" href="{% url 'PATH:password_reset' %}">Forget password?</a>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit">Login</button>
-                </form>
-
+        <div>
+            <div class="form-flex">
+                <label style="font-size: 16px;" class="label" for="password">Password</label>
+                <label id="togglePassword" style="font-size: 18px; cursor: pointer;">
+                    <i class="fa-solid fa-eye-slash"></i>
+                </label>
+{#                <label for="" style="font-size: 18px;"> <i class="fa-solid fa-eye-slash"></i> Hide</label>#}
+            </div>
+            <div style="margin-bottom: 30px;">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <div class="form-flex">
+                    <!-- <div class="check">
+                        <input type="checkbox" id="checkbox1" class="checkbox-input">
+                        <label for="checkbox1" class="checkbox-label">Remember me ?</label>
+                    </div> -->
+                    <a class="forg" href="{% url 'PATH:password_reset' %}">Forget password?</a>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-</body>
+        <button type="submit">Login</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
 
-</html>
+            togglePassword.addEventListener('click', function () {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        });
+    </script>
+{% endblock %}

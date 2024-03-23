@@ -109,6 +109,10 @@
                 <td>{{ car.from_date }} - {{ car.to_date }}</td>
             </tr>
             <tr>
+                <th>Timing:</th>
+                <td>{{ car.departure_time }} - {{ car.arrival_time }}</td>
+            </tr>
+            <tr>
                 <th>Seats Left:</th>
                 <td>{{ car.total_seats }}</td>
             </tr>
@@ -122,8 +126,9 @@
             </tr>
         </table>
 </div>
-    {% empty %}
-    <p>No cars are available!</p>
-    {% endfor %}
+{% endfor %}
+    {% if not cars %}
+    <p><center style="margin-top: 10%; margin-left: 10%; margin-right: 10%; color: white; font-size: 40px; width: 45%; border-radius: 10px; padding: 20px; background-color: #9961BA; opacity: 70%;">No rides available at this moment !!</center></p>
+    {% endif %}
 </div>
 {% endblock %}
