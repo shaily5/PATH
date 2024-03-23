@@ -95,7 +95,7 @@
                             </a>
                             <form id="cancelForm{{c.id}}" action="{% url 'car_ride:cancel_car' c.id %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" onclick="confirmCancel({{c.id}})">
+                                <button type="button" onclick="confirmCancel('{{ c.id }}')">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </button>
                             </form>
@@ -122,6 +122,10 @@
                         <tr>
                              <th>Travel Dates</th>
                             <td>{{ c.from_date }} - {{ c.to_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Time</th>
+                            <td>{{ c.departure_time }} - {{ c.arrival_time }}</td>
                         </tr>
                         <tr>
                              <th>Price</th>

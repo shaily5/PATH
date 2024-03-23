@@ -83,6 +83,14 @@
     margin-left: 10px;
 }
 </style>
+    <script>
+    function confirmCancelBooking(bookingId) {
+        var confirmation = confirm("Are you sure want to cancel this customer's booking?");
+        if (confirmation) {
+            document.getElementById("cancel_booking_form_" + bookingId).submit();
+        }
+    }
+</script>
     <div class="cssanimation sequence fadeInBottom">
         {% if otherbookings %}
             <div class="booking-container">
@@ -128,10 +136,10 @@
                         </tr>
                         </table>
                         <div class="action-buttons">
-                        <form action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
+                        <form id="cancel_booking_form_{{ booking.id }}" action="{% url 'car_ride:cancel_booking' booking.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit">
-                                <i class="fas fa-trash-alt"></i> Delete
+                            <button type="button" onclick="confirmCancelBooking('{{ booking.id }}')">
+                            <i class="fas fa-trash-alt"></i> Delete
                             </button>
                         </form>
                         </div>
@@ -139,11 +147,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p>
-                <center style="margin-top: 10%; margin-left: 30%; color: white; font-size: 40px; width: 45%; border-radius: 10px;
-     padding: 20px; /* Add padding to create space between text and background */
-     background-color: #9961BA; opacity: 70%;
-     ">You do not have any bookings right now !!</center>
+        <p><center style="margin-top: 10%; margin-left: 25%; margin-right: 25%; color: white; font-size: 40px; width: 50%; border-radius: 10px; padding: 20px; background-color: #9961BA; opacity: 70%;">You do not have any bookings right now !!</center>
             </p>
         {% endif %}
     </div>

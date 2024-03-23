@@ -230,8 +230,8 @@ def cancel_booking(request, booking_id):
         booking.delete()
         car.update_seats_after_cancellation(num_seats_canceled)
 
-        foryou = f"{current_time}: Your booking of {booking.car.cust}'s car {car.car_name} has been canceled"
-        forowner = f"{current_time}: User {booking.name.fname} has canceled the booking of your car {booking.car.car_name}"
+        foryou = f"{current_time}: Your booking of {booking.car.cust}'s car {car.car_name} has been cancelled/rejected."
+        forowner = f"{current_time}: The booking of the car {booking.car.car_name} by the user {booking.name.fname} has been cancelled/rejected."
         Notification.objects.create(user=booking.name, message=foryou)
         Notification.objects.create(user=booking.car.cust, message=forowner)
 
@@ -296,7 +296,7 @@ def Contactus(request):
 def user_notifications(request):
     if request.user.is_authenticated:
         user = request.user.customer
-        notifications = Notification.objects.filter(user=user)
+        notifications = Notification.objects.filter(user=user).order_by('-id')
         print("notify: ", notifications)
         context = {'notifications': notifications}
         return render(request, 'user_notifications.html', context)

@@ -94,6 +94,14 @@
             color: #9961BA;
         }
     </style>
+    <script>
+    function confirmUpdate() {
+        var confirmation = confirm("Are you sure want to update your ride details?");
+        if (confirmation) {
+            document.getElementById("edit_car_form").submit();
+        }
+    }
+</script>
     <div class="background-image">
         <div>
             {% if messages %}
@@ -119,7 +127,7 @@
                         ">
                             {{ form.as_p }}
                         </div>
-                        <button type="submit">Update</button>
+                        <button type="button" onclick="confirmUpdate()">Update</button>
                     </form>
                 </div>
             </div>

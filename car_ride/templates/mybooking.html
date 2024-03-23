@@ -177,6 +177,10 @@ h4{
                         <th>Travel Dates:</th>
                         <td>{{i.car.from_date}} - {{i.car.to_date}}</td>
                     </tr>
+                    <tr class="t1" style="border-bottom: none">
+                        <th>Estimated Timing:</th>
+                        <td>{{i.car.departure_time}} - {{i.car.arrival_time}}</td>
+                    </tr>
                     <tr>
                         <th>PickUp Address:</th>
                         <td>{{i.pick_add}}</td>
@@ -219,8 +223,10 @@ h4{
             </div>
         {% endfor %}
     {% endif %}
+    {% if not book %}
     <p style="margin-top: 10%; margin-right: 2%; color: white; font-size: 40px; width: 40%; border-radius: 10px;
      padding: 20px; text-align: center; /* Add padding to create space between text and background */
      background-color: rgba(0, 0, 0, 0.5);">You have no bookings right now !!</p>
+    {% endif %}
 </div>
 {% endblock %}
