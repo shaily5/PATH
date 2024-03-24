@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/form.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/CarDetail.css' %}" />
+
+</head>
+<header>
+
+        <nav class="navbar">
+            <div class="containers">
+              <div class="navbar-logo">
+                <img src="../../static/PATH/images/logo.png" alt="Logo" />
+              </div>
+              <ul class="navbar-menu">
+                <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
+
+                <li><a href="http://localhost:8000/rental/dashboard/" class="active">Rental car</a></li>
+                <li><a href="login">Rides</a></li>
+                  <li><a href="http://localhost:8000/parcel_service/homepage/">Parcel service</a></li>
+              </ul>
+              <div class="navbar-buttons">
+                  {% if request.user.username %}
+                      <h1 style="color: white;">Welcome, {{ request.user.username }}!</h1>
+                      <a href="{% url 'PATH:logout' %}"><button class="signup-btn">Log Out</button></a>
+                  {% else %}
+                  <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>
+                  <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>
+                  {% endif %}
+              </div>
+            </div>
+          </nav>
+</header>
+
+<body>
+            <h1> Can Rented Successfully</h1>
+</body>
+
+</html>

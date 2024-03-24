@@ -25,9 +25,9 @@
               <ul class="navbar-menu">
                 <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
 
-                <li><a href="car_rental/login" class="active">Rental car</a></li>
+                <li><a href="http://localhost:8000/rental/dashboard/" class="active">Rental car</a></li>
                 <li><a href="login">Rides</a></li>
-                  <li><a href="#">Parcel service</a></li>
+                  <li><a href="http://localhost:8000/parcel_service/homepage/">Parcel service</a></li>
               </ul>
               <div class="navbar-buttons">
                   {% if request.user.username %}
@@ -109,7 +109,11 @@
                         <div>
                             <i style="color: white;" class="fa-solid fa-phone fa-xl"></i>
                         </div>
-                        <button class="rent">Rent Now</button>
+
+                  <form action="http://localhost:8000/car_rental/addLicenseDetails/{{ car.id }}" method="GET">
+                      {% csrf_token %}
+                        <button type="submit"  class="rent">Rent Now</button>
+                  </form>
                     </div>
                 </div>
 

@@ -24,10 +24,9 @@
               </div>
               <ul class="navbar-menu">
                 <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
-
-                <li><a href="car_rental/login" class="active">Rental car</a></li>
+                <li><a href="#" class="active">Rental car</a></li>
                 <li><a href="{% url 'car_ride:home' %}">Rides</a></li>
-                  <li><a href="#">Parcel service</a></li>
+                  <li><a href="http://localhost:8000/parcel_service/homepage/">Parcel service</a></li>
               </ul>
               <div class="navbar-buttons">
                   {% if request.user.username %}
@@ -80,6 +79,7 @@
                         <select name="car_type" required>
                             <option value="" disabled selected>Car Type</option>
                             <option value="sedan">Sedan</option>
+                            <option value="sports">Sports</option>
                             <option value="suv">SUV</option>
                             <option value="truck">Truck</option>
                             <option value="van">Van</option>
@@ -236,9 +236,8 @@
 
                                             <div class="rental-car-main-btns">
                                                 <i style="color: white;" class="fa-solid fa-phone fa-xl"></i>
-                                                <button class="rental-car-paid-btns">
-                                                    Rent Now
-                                                </button>
+                                                 <a href="http://localhost:8000/car_rental/getCarDetail/{{ car.id }}"><button class="action-button">Rent Now</button> </a>
+
                                             </div>
                                         </div>
                                     </div>
@@ -263,5 +262,4 @@
 
     </section>
 </body>
-
 </html>

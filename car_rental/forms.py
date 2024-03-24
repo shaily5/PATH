@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import Car, RentalReservation, CustomUser
+from .models import Car, RentalReservation, CustomUser, LicenseDetail
 
 
 class CarForm(forms.ModelForm):
@@ -8,6 +8,11 @@ class CarForm(forms.ModelForm):
         model = Car
         fields = ['make', 'model', 'year', 'color', 'photo','daily_rate','available','car_type']
 
+
+class LicenseDetailForm(forms.ModelForm):
+    class Meta:
+        model = LicenseDetail
+        fields = ['issuing_country', 'issuing_authority', 'birth_date', 'driving_license_number', 'expiry_date']
 
 class RentalReservationForm(forms.ModelForm):
     class Meta:
