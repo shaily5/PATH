@@ -131,7 +131,7 @@ def bookRentalCar(request):
                 request.session['return_time'] = return_time
                 request.session['pickup_location'] = pickup_location
 
-
+            print(request.session.get('username'))
             if request.session.get('username') is not None:
                 cars = Car.objects.filter(car_type=request.session.get('car_type'))
                 return render(request, "car_rental/services/availableCars.html", {'cars': cars})
@@ -229,3 +229,114 @@ def rental_reservation_view(request):
         form = RentalReservationForm()
 
     return render(request, 'car_rental/rental_reservation.html', {'RentalForm': form})
+
+def license_detail_view(request,car_id):
+
+    request.session['rented_car_id'] = car_id
+
+    if request.session.get('pickup_time') is None:
+        # request.session['user_id'] = user
+        return render(request, "car_rental/services/dashboard.html" )
+
+    if request.method == 'GET':
+
+       try:
+        license_detail_exists = LicenseDetail.objects.get(customer__username=request.user.pk)
+
+        customer = Customuser.objects.get(username__username=request.session['username'])
+        car_type = request.session.get('car_type')
+        rental_start_date = request.session.get('rental_start_date')
+        rental_end_date = request.session.get('rental_end_date')
+        pickup_time = request.session.get('pickup_time')
+        return_time = request.session.get('return_time')
+        pickup_location = request.session.get('pickup_location')
+        car_id = request.session.get('rented_car_id')
+        car = get_object_or_404(Car, id=car_id)
+
+        rental_details = RentalReservation(
+            car_type=car_type,
+            rental_start_date=rental_start_date,
+            rental_end_date=rental_end_date,
+            pickup_time=pickup_time,
+            return_time=return_time,
+            pickup_location=pickup_location,
+            car_id=car,
+            customer=customer,
+        )
+        rental_details.save()
+
+        request.session['car_type'] = None
+        request.session['rental_start_date'] = None
+        request.session['rental_end_date'] = None
+        request.session['pickup_time'] = None
+        request.session['return_time'] = None
+        request.session['pickup_location'] = None
+        request.session['rented_car_id'] = None
+
+        return render(request, 'car_rental/services/rentSuccess.html')
+
+       except LicenseDetail.DoesNotExist:
+
+           form = LicenseDetailForm()
+           return render(request, 'car_rental/authentication/licenseDetails.html',
+                         {'LicenseForm': form, 'car_id': request.session.get('rented_car_id')})
+        # if license_detail_exists:
+        #
+        #
+        # else:
+
+
+    if request.method == 'POST':
+
+            # LicenseDetail.objects.get()
+            issuing_country= request.POST['issuing_country']
+            issuing_authority= request.POST['issuing_authority']
+            driving_license_number=request.POST['driving_license_number']
+            expiry_date=request.POST['expiry_date']
+            birth_date=request.POST['birth_date']
+            issue_date=request.POST['issue_date']
+            customer = Customuser.objects.get(username__username=request.session['username'])
+
+            car_type = request.session.get('car_type')
+            rental_start_date = request.session.get('rental_start_date')
+            rental_end_date = request.session.get('rental_end_date')
+            pickup_time = request.session.get('pickup_time')
+            return_time = request.session.get('return_time')
+            pickup_location = request.session.get('pickup_location')
+            car_id = request.session.get('rented_car_id')
+
+            car = get_object_or_404(Car, id=car_id)
+
+            rental_details = RentalReservation(
+                car_type=car_type,
+                rental_start_date=rental_start_date,
+                rental_end_date=rental_end_date,
+                pickup_time=pickup_time,
+                return_time=return_time,
+                pickup_location=pickup_location,
+                car_id=car,
+                customer=customer,
+            )
+            rental_details.save()
+
+
+            license_detail = LicenseDetail(
+                issuing_country=issuing_country,
+                issuing_authority=issuing_authority,
+                driving_license_number=driving_license_number,
+                expiry_date=expiry_date,
+                customer=customer,
+                birth_date=birth_date,
+                issue_date=issue_date,
+            )
+            license_detail.save()
+            rental_details.save()
+
+            request.session['car_type'] = None
+            request.session['rental_start_date'] = None
+            request.session['rental_end_date'] = None
+            request.session['pickup_time'] = None
+            request.session['return_time'] = None
+            request.session['pickup_location'] = None
+            request.session['rented_car_id'] = None
+            return render(request, 'car_rental/services/rentSuccess.html',{"id":customer.pk})

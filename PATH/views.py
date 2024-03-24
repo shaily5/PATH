@@ -42,6 +42,7 @@ def LoginUser(request):
                 customer = None
             if customer:
                 request.session['username']=user.username
+
                 if request.session.get('car_type') is not None:
                     cars = Car.objects.filter(car_type=request.session.get('car_type'))
                     return render(request, "car_rental/services/availableCars.html", {'cars': cars})
@@ -53,6 +54,7 @@ def LoginUser(request):
                 else:
                     login_message = f"{current_time}: Hello {user.username}, You have successfully logged into your account."
                     Notification.objects.create(user=customer, message=login_message)
+
             return redirect('PATH:homepage')
             # return render(request,'PATH/homepage.html',{"username":username})
         else:
