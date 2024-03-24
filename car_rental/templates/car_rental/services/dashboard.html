@@ -7,12 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="{% static 'car_rental/css/RentalCar.css' %}" />
-    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="{% static 'car_rental/css/RentalCar.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
 
 </head>
 <header>
@@ -39,14 +41,38 @@
               </div>
             </div>
           </nav>
+           {% if request.user.username %}
+               <br><br><br><br><br><br><br>
+                    <nav class="" style="background-color: #0c0b0b">
+                        <div class="containers">
+                          <div class="navbar-logo">
+                            <h1 style="">Car Rental</h1>
+                          </div>
+                          <ul class="navbar-menu">
+                            <li><a href="http://localhost:8000/car_rental/userDashboard" >Dashboard</a></li>
+                            <li><a href="#" class="active">Rent a car</a></li>
+                            <li><a href="{% url 'getReservations' %}">My Rentals</a></li>
+                            <li><a href="">My Profile</a></li>
+                          </ul>
+                          <div class="navbar-buttons">
 
-        <div class="box">
+                          </div>
+                        </div>
+                  </nav>
+            {% else %}
+
+            {% endif %}
+
+
+
+
+        <div class="box" style="margin-top: 30px">
             <div class="inner-box" style="margin-bottom: 0;">
                 <h1 class="inner-heading">
                     Find your rental car
                 </h1>
                 <p class="inner-paragraph">
-                    Carent, is ready to serve the best experience in car rental.
+                    PATH, is ready to serve the best experience in car rental.
                 </p>
             </div>
         </div>
@@ -56,7 +82,6 @@
                     {% csrf_token %}
                 <div class="row">
                     <div class="input-group1">
-
                         <select name="pickup_location" required>
                             <option value="" disabled selected>Pickup Location</option>
                             <!-- Add options for pickup locations -->
@@ -75,11 +100,13 @@
                       </div>
                 </div>
                 <div class="row">
-                    {% if  car_id_selected  %}
-                       <input type="hidden" name="car_type" value="{{ car_type }}">
-                    {% else %}
-                      <div class="input-group2">
-                        <select name="car_type" required>
+
+
+                    <div class="input-group2">
+                         {% if  car_id_selected  %}
+                            <input name="car_type" value="{{ car_type }}" type="hidden">
+                         {% else %}
+                            <select name="car_type" required>
                             <option value="" disabled selected>Car Type</option>
                             <option value="sedan">Sedan</option>
                             <option value="sports">Sports</option>
@@ -87,10 +114,9 @@
                             <option value="truck">Truck</option>
                             <option value="van">Van</option>
                           </select>
+                        {% endif %}
 
-                     </div>
-                    {% endif %}
-
+                    </div>
                     <div class="input-group2">
                         <input name="pickup_time" type="time" placeholder="Pickup Time">
                       </div>

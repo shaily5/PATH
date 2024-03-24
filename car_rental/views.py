@@ -17,6 +17,37 @@ from django.urls import reverse_lazy
 
 # views.py
 
+
+def showUserDashboard(request):
+    return render(request, 'car_rental/services/userDashboard.html')
+
+def getReservations(request):
+    customer = Customuser.objects.get(username__username=request.session['username'])
+
+    reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
+
+    for reservation in reservations:
+        car = Car.objects.get(pk=reservation.car_id.pk)
+
+        rental_start_date = reservation.rental_start_date
+        rental_end_date = reservation.rental_end_date
+
+        # Calculate the number of days by subtracting the start date from the end date
+        num_days = (rental_end_date - rental_start_date).days + 1
+        reservation.num_days = num_days
+        reservation.perDayCharge = car.daily_rate
+        reservation.netCharge = (reservation.perDayCharge * num_days)
+        reservation.insurance = 25
+        reservation.image = car.photo.url
+        taxes = (float(reservation.perDayCharge * num_days) + float(25)) * float(
+            0.13)  # Add 1 to include both start and end dates
+        reservation.taxes = taxes
+
+        reservation.total = float(reservation.taxes) + float(25) + (float(car.daily_rate) * float(num_days))
+
+    return render(request, 'car_rental/services/rentSuccess.html',
+                  {"id": customer.pk, 'reservations': reservations})
+
 def dashboard(request):
     data = Car.objects.all()
     return render(request, 'car_rental/dashboard.html',{'cars':data})
@@ -168,9 +199,30 @@ def bookRentalCar(request):
                     request.session['return_time'] = None
                     request.session['pickup_location'] = None
                     request.session['rented_car_id'] = None
+                    car_ids = []
 
-                    return render(request, 'car_rental/services/rentSuccess.html')
+                    reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
 
+                    for reservation in reservations:
+                        car = Car.objects.get(pk=reservation.car_id.pk)
+
+                        rental_start_date = reservation.rental_start_date
+                        rental_end_date = reservation.rental_end_date
+
+                        # Calculate the number of days by subtracting the start date from the end date
+                        num_days = (rental_end_date - rental_start_date).days + 1
+                        reservation.num_days = num_days
+                        reservation.perDayCharge = car.daily_rate
+                        reservation.netCharge = (reservation.perDayCharge*num_days)
+                        reservation.insurance = 25
+                        taxes=(float(reservation.perDayCharge*num_days)+float(25))*float(0.13)# Add 1 to include both start and end dates
+                        reservation.taxes = taxes
+                        reservation.image = car.photo.url
+                        reservation.total = float(reservation.taxes) + float(25) + (
+                                    float(car.daily_rate) * float(num_days))
+
+                    return render(request, 'car_rental/services/rentSuccess.html',
+                                  {"id": customer.pk, 'reservations': reservations})
                 except LicenseDetail.DoesNotExist:
 
                     form = LicenseDetailForm()
@@ -321,8 +373,29 @@ def license_detail_view(request,car_id,car_type):
             request.session['pickup_location'] = None
             request.session['rented_car_id'] = None
 
-            return render(request, 'car_rental/services/rentSuccess.html')
+            reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
 
+            for reservation in reservations:
+                car = Car.objects.get(pk=reservation.car_id.pk)
+
+                rental_start_date = reservation.rental_start_date
+                rental_end_date = reservation.rental_end_date
+
+                # Calculate the number of days by subtracting the start date from the end date
+                num_days = (rental_end_date - rental_start_date).days + 1
+                reservation.num_days = num_days
+                reservation.perDayCharge = car.daily_rate
+                reservation.netCharge = (reservation.perDayCharge * num_days)
+                reservation.insurance = 25
+                reservation.image = car.photo.url
+                taxes = (float(reservation.perDayCharge * num_days) + float(25)) * float(
+                    0.13)  # Add 1 to include both start and end dates
+                reservation.taxes = taxes
+
+                reservation.total = float(reservation.taxes) + float(25) + (float(car.daily_rate) * float(num_days))
+
+            return render(request, 'car_rental/services/rentSuccess.html',
+                          {"id": customer.pk, 'reservations': reservations})
        except LicenseDetail.DoesNotExist:
 
            form = LicenseDetailForm()
@@ -379,4 +452,29 @@ def license_detail_view(request,car_id,car_type):
             request.session['return_time'] = None
             request.session['pickup_location'] = None
             request.session['rented_car_id'] = None
-            return render(request, 'car_rental/services/rentSuccess.html',{"id":customer.pk})
+
+            reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
+
+            for reservation in reservations:
+                car = Car.objects.get(pk=reservation.car_id.pk)
+
+                rental_start_date = reservation.rental_start_date
+                rental_end_date = reservation.rental_end_date
+
+                # Calculate the number of days by subtracting the start date from the end date
+                num_days = (rental_end_date - rental_start_date).days + 1
+                reservation.num_days = num_days
+                reservation.perDayCharge = car.daily_rate
+                reservation.netCharge = (reservation.perDayCharge * num_days)
+                reservation.insurance = 25
+                reservation.image = car.photo.url
+                taxes = (float(reservation.perDayCharge * num_days) + float(25)) * float(
+                    0.13)  # Add 1 to include both start and end dates
+                reservation.taxes = taxes
+
+                reservation.total = float(reservation.taxes) + float(25) + (float(car.daily_rate) * float(num_days))
+
+            return render(request, 'car_rental/services/rentSuccess.html',
+                          {"id": customer.pk, 'reservations': reservations})
+
+            # all_reservations = RentalReservation.objects.filter()

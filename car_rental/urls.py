@@ -31,7 +31,13 @@ urlpatterns = [
 
     path('car_rental/getCarDetail/<int:car_id>/', views.getCarDetail, name='getCarDetail'),
 
-    path('car_rental/addLicenseDetails/<int:car_id>/<str:car_type>', views.license_detail_view, name='license_detail_view')
+    path('car_rental/addLicenseDetails/<int:car_id>/<str:car_type>', views.license_detail_view, name='license_detail_view'),
+
+    path('car_rental/getReservations', views.getReservations,
+         name='getReservations'),
+    path('car_rental/userDashboard', views.showUserDashboard,
+         name='userDashboard'),
+
 
 ]
 
