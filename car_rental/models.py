@@ -103,7 +103,7 @@ class RentalReservation(models.Model):
     customer = models.ForeignKey(Customuser, on_delete=models.CASCADE,default=None)  # Use Customer model here
     pickup_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
 
-    car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
+    car_type = models.CharField(max_length=20, choices=car_type_choices,default="")
     car_id = models.ForeignKey(Car, on_delete=models.CASCADE,default=1)  # Use Customer model here
 
     def __str__(self):

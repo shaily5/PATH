@@ -49,7 +49,7 @@
     <section>
         <div class="colorss" style="width: 1400px; margin: 20px auto; ">
             <div style="width: 1000px; margin: 40px auto; ">
-                <form method="POST" action="http://localhost:8000/car_rental/addLicenseDetails/{{ car_id }}">
+                <form method="POST" action="http://localhost:8000/car_rental/addLicenseDetails/{{ car_id }}/{{ car_type }}">
                     {% csrf_token %}
                     <div>
                             <div>
@@ -59,10 +59,8 @@
                                         <!-- <input class="width977input" type="text" id="countryInput" placeholder="Enter your country of residence"> -->
                                         <select name="issuing_country" style="width: 1000px;" class="width977input" id="countrySelect">
                                             <option value="" disabled selected>Select your Issuing Country</option>
-                                            <option value="Albania">India</option>
-                                            <option value="Afghanistan">Canada</option>
-                                            <option value="Albania">China</option>
-                                            <!-- Add more countries as needed -->
+                                            <option value="Canada">Canada</option>
+                                            <option value="USA">USA</option>
                                         </select>
 
                                     </div>

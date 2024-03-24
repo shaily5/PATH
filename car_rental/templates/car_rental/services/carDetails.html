@@ -110,8 +110,9 @@
                             <i style="color: white;" class="fa-solid fa-phone fa-xl"></i>
                         </div>
 
-                  <form action="http://localhost:8000/car_rental/addLicenseDetails/{{ car.id }}" method="GET">
+                  <form action="http://localhost:8000/car_rental/addLicenseDetails/{{ car.id }}/{{ car.car_type }}" method="GET">
                       {% csrf_token %}
+
                         <button type="submit"  class="rent">Rent Now</button>
                   </form>
                     </div>

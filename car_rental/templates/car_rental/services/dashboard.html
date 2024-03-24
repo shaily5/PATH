@@ -75,7 +75,10 @@
                       </div>
                 </div>
                 <div class="row">
-                    <div class="input-group2">
+                    {% if  car_id_selected  %}
+                       <input type="hidden" name="car_type" value="{{ car_type }}">
+                    {% else %}
+                      <div class="input-group2">
                         <select name="car_type" required>
                             <option value="" disabled selected>Car Type</option>
                             <option value="sedan">Sedan</option>
@@ -85,7 +88,9 @@
                             <option value="van">Van</option>
                           </select>
 
-                    </div>
+                     </div>
+                    {% endif %}
+
                     <div class="input-group2">
                         <input name="pickup_time" type="time" placeholder="Pickup Time">
                       </div>
