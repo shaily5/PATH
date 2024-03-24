@@ -9,6 +9,11 @@ class AddcarForm(forms.ModelForm):
         ('Crossover SUV', 'Crossover SUV'),
         ('Mini Van', 'Mini Van'),
     ]
+    LUGGAGE_CHOICES = [
+        ('Small (max 7 KG)', 'Small (max 7 KG)'),
+        ('Medium (max 15 KG)', 'Medium (max 15 KG)'),
+        ('Large (max 23 KG)', 'Large (max 23 KG)'),
+    ]
     from_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     to_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     car_type = forms.ChoiceField(choices=CAR_TYPE_CHOICES, required=True)
@@ -17,11 +22,12 @@ class AddcarForm(forms.ModelForm):
     arrival_time = forms.CharField(required=True, widget=forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'))
     is_parcel = forms.BooleanField(required=False, label='Are you taking Parcel?')
     kilograms = forms.FloatField(required=False, label='Kilograms', initial=0)
+    luggage_details = forms.ChoiceField(choices=LUGGAGE_CHOICES, label='Luggage Details')
 
     class Meta:
         model = Mycar
-        fields = ['car_num', 'company', 'car_name', 'car_type', 'from_place', 'to_place', 'from_date', 'to_date', 'departure_time', 'arrival_time', 'price', 'car_img',  'total_seats', 'is_parcel', 'kilograms']
-        labels = {'car_num': 'Car Number', 'company': 'Company Name', 'car_name': 'Car Name', 'car_type': 'Car Type', 'from_place': 'From Place', 'to_place': 'To Place', 'departure_time': 'Departure Time', 'arrival_time': 'Arrival Time', 'car_img': 'Car Image', 'total_seats': 'Total Seats'}
+        fields = ['car_num', 'company', 'car_name', 'car_type', 'from_place', 'to_place', 'from_date', 'to_date', 'departure_time', 'arrival_time', 'price', 'car_img',  'total_seats', 'is_parcel', 'kilograms', 'luggage_details']
+        labels = {'car_num': 'Car Number', 'company': 'Company Name', 'car_name': 'Car Name', 'car_type': 'Car Type', 'from_place': 'From Place', 'to_place': 'To Place', 'departure_time': 'Departure Time', 'arrival_time': 'Arrival Time', 'car_img': 'Car Image', 'total_seats': 'Total Seats', 'luggage_details': 'Luggage Details'}
 
 
     def __init__(self, *args, **kwargs):

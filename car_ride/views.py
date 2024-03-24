@@ -95,11 +95,9 @@ def dash(request):
 
 # @login_required(login_url='login')
 def Addcar(request):
-    print('Hello1')
     if request.method == 'GET':
         print('Hello2', request.user.is_authenticated, type(request.user))
         if request.user.is_authenticated:
-            print('Hello3')
             form = AddcarForm()
             print('Hello4')
             return render(request, "addmycar.html", {'form': form})
@@ -178,7 +176,6 @@ def Search(request):
 def MyBookings(request):
     print("from my booking", request.user, request.method)
     if request.method == 'GET':
-        print("-----")
         if request.user.is_authenticated:
             user = request.user
             cust = Customer.objects.get(usern=user)
@@ -344,7 +341,6 @@ def Change(request):
 def cancel_car(request, car_id):
     if request.method == 'POST':
         if request.user.is_authenticated:
-            # Ensure that the user is a Customer instance
             if hasattr(request.user, 'customer'):
                 car = get_object_or_404(Mycar, id=car_id, cust=request.user.customer)
                 bookings = car.booking_set.all()

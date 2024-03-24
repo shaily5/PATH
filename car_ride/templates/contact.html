@@ -10,7 +10,6 @@
       background-image: url("{% static 'images/img10.jpg' %}");
       background-size: cover;
       background-repeat: no-repeat;
-      /* Additional styling */
     }
 
     .content1 {
@@ -20,18 +19,17 @@
 
     .left-side {
         flex: 1;
-        margin-right: 10px; /* Add margin to separate from right side */
-        text-align: center; /* Align content in the center */
+        margin-right: 10px;
+        text-align: center;
     }
 
     .right-side {
       flex: 1;
-      margin-left: 20px; /* Add a margin of 20px on the left */
+      margin-left: 20px;
     }
   </style>
 
   <div class="cssanimation sequence fadeInBottom">
-    <!-- Add img7 after the header -->
     <div style="position: relative; display: inline-block;">
   <img src="{% static 'images/contact.png' %}" alt="Image" style="max-width: 100%;">
 
@@ -40,7 +38,6 @@
 
     <div class="content1">
       <div class="left-side">
-        <!-- Add img9 here -->
         <img src="{% static 'images/contact-vector.png' %}" alt="Image" style="max-width: 100%; margin-top: 15%; height: 70%">
       </div>
       <div class="right-side">
@@ -66,6 +63,5 @@
         </form>
       </div>
     </div>
-{#    <hr size="10" ,width="1" , color="#fff">#}
   </div>
 {% endblock %}

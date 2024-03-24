@@ -47,6 +47,7 @@ class Mycar(models.Model):
     arrival_time = models.TimeField(default=timezone.now)  # Arrival time
     is_parcel = models.BooleanField(default=False)
     kilograms = models.FloatField(blank=True, default=0)
+    luggage_details = models.CharField(max_length=30)
 
     def update_seats_after_cancellation(self, num_seats_canceled):
         """
