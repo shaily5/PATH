@@ -15,10 +15,12 @@ class AddcarForm(forms.ModelForm):
     total_seats = forms.IntegerField(required=True)
     departure_time = forms.CharField(required=True, widget=forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'))
     arrival_time = forms.CharField(required=True, widget=forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'))
+    is_parcel = forms.BooleanField(required=False, label='Are you taking Parcel?')
+    kilograms = forms.FloatField(required=False, label='Kilograms', initial=0)
 
     class Meta:
         model = Mycar
-        fields = ['car_num', 'company', 'car_name', 'car_type', 'from_place', 'to_place', 'from_date', 'to_date', 'departure_time', 'arrival_time', 'price', 'car_img',  'total_seats']
+        fields = ['car_num', 'company', 'car_name', 'car_type', 'from_place', 'to_place', 'from_date', 'to_date', 'departure_time', 'arrival_time', 'price', 'car_img',  'total_seats', 'is_parcel', 'kilograms']
         labels = {'car_num': 'Car Number', 'company': 'Company Name', 'car_name': 'Car Name', 'car_type': 'Car Type', 'from_place': 'From Place', 'to_place': 'To Place', 'departure_time': 'Departure Time', 'arrival_time': 'Arrival Time', 'car_img': 'Car Image', 'total_seats': 'Total Seats'}
 
 
