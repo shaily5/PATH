@@ -133,9 +133,22 @@ def authenticate_user(email, password):
     except CustomUser.DoesNotExist:
         return None  # Return None and email does not exist message
 
+
 def homepage(request):
-    data = Car.objects.all()
-    return render(request, "car_rental/services/dashboard.html",{"cars":data})
+    if request.method == 'POST':
+        seats = request.POST.get('seats')
+
+        car_type = request.POST.get('car_type')
+        fuel_type = request.POST.get('fuel_type')
+
+        # Filter cars based on the submitted form data
+        filtered_cars = Car.objects.filter(seats=seats, car_type=car_type, fuel_type=fuel_type)
+        return render(request, "car_rental/services/dashboard.html", {"cars": filtered_cars})
+    else:
+        # If no filter criteria submitted, display all cars
+
+        data = Car.objects.all()
+        return render(request, "car_rental/services/dashboard.html", {"cars": data})
 
 
 def bookRentalCar(request):

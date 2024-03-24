@@ -112,6 +112,7 @@
   </style>
 
 </head>
+<body>
 <header>
         <nav class="navbar">
             <div class="containers">
@@ -135,16 +136,18 @@
               </div>
             </div>
           </nav>
+</header>
 
-            <nav class="" style="background-color: #0c0b0b">
-                <div class="containers">
-                  <div class="navbar-logo">
-                    <h1 style="">Car Rental</h1>
-                  </div>
-                  <ul class="navbar-menu">
-                    <li><a href="#" >Dashboard</a></li>
-                    <li><a href="#" class="active">Rental car</a></li>
-                    <li><a href="{% url 'getReservations' %}">My Rentals</a></li>
+           <div >
+                <nav class="" style="position: fixed; margin-top: 120px; background-color: #0c0b0b; width: 100%; text-align: center; align-items: center; padding: 30px 50px;">
+                <div class="" style="align-items: center; text-align: center; ">
+{#                  <div class="">#}
+{#                    <h1 style="">Car Rental</h1>#}
+{#                  </div>#}
+                  <ul class="navbar-menu" style="display: flex; justify-content: center">
+                    <li><a href="http://localhost:8000/car_rental/userDashboard" >Dashboard</a></li>
+                    <li><a href="{% url 'dashboard' %}" >Rental car</a></li>
+                    <li><a href="{% url 'getReservations' %}" class="active">My Rentals</a></li>
                     <li><a href="">My Profile</a></li>
                   </ul>
                   <div class="navbar-buttons">
@@ -153,15 +156,10 @@
                 </div>
           </nav>
 
-</header>
-
-<body>
-
-
 
   {% if reservations %}
 
-  <div style="margin-top: 60px" class="car-reserve" >
+  <div style="margin-top: 140px" class="car-reserve" >
       {% for details in reservations %}
             <div class="container" >
               <img src="{{ details.image }}" alt="Reserved Car" class="car-image">
@@ -205,5 +203,6 @@
            <a href="http://localhost:8000/rental/dashboard/"><button class="signup-btn">Book Now</button></a>
           </div>
   {% endif %}
-</body>
+           </div>
+</>
 </html>

@@ -41,7 +41,27 @@
               </div>
             </div>
           </nav>
+         {% if request.user.username %}
+               <br><br><br><br><br><br><br>
+                    <nav class="" style="background-color: #0c0b0b">
+                        <div class="containers">
+                          <div class="navbar-logo">
+                            <h1 style="">Car Rental</h1>
+                          </div>
+                          <ul class="navbar-menu">
+                            <li><a href="http://localhost:8000/car_rental/userDashboard" >Dashboard</a></li>
+                            <li><a href="#" class="active">Rent a car</a></li>
+                            <li><a href="{% url 'getReservations' %}">My Rentals</a></li>
+                            <li><a href="">My Profile</a></li>
+                          </ul>
+                          <div class="navbar-buttons">
 
+                          </div>
+                        </div>
+                  </nav>
+         {% else %}
+
+         {% endif %}
         <div class="box">
             <div class="inner-box" style="margin-bottom: 0;">
                 <h1 class="inner-heading">
