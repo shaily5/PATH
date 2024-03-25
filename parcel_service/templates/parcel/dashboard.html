@@ -54,31 +54,75 @@
 
             <ul class="messages">
                 {% for ride in user_rides %}
-                <li class="message">
+                <li class="message" onclick="showParcelRequests({{ ride.id }});">
                     <div class="message-content">
+                        <p> Name : {{ ride.id }} </p>
                         <p> Name : {{ ride.cust }} </p>
                         <p> Source: {{ ride.from_place }} </p>
                         <p> Destination: {{ ride.to_place }} </p>
+                        <a href="{% url 'parcel_service:parcel_request' ride.id %}">View Parcel Requests</a>
+
                     </div>
                 </li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="section">
-            <h2 class="section-heading">My Messages</h2>
-            <ul class="messages">
-                <li class="message">
-                    <div class="message-content">
-                        <p>John Doe</p>
-                        <p>Source : Windsor</p>
-                        <p> Destination : Toronto</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="section">
-            <h2 class="section-heading">Messages with Users</h2>
-        </div>
+
     </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the ride_id from the data attribute of the element clicked
+    const messagesList = document.getElementById('my-messages-list');
+    messagesList.addEventListener('click', function(event) {
+        const rideId = event.target.dataset.rideId;
+        if (rideId) {
+            showParcelRequests(rideId);
+        }
+    });
+});
+
+function showParcelRequests(ride_id) {
+    fetch(`/parcel_service/get_parcel_requests/${ride_id}/`)
+        .then(response => response.json())
+        .then(data => {
+            const messagesList = document.getElementById('my-messages-list');
+            if (!messagesList) {
+                console.error('Error: Element with ID "my-messages-list" not found.');
+                return;
+            }
+
+            messagesList.innerHTML = ''; // Clear existing messages
+
+            // Check if data is an array
+            if (Array.isArray(data)) {
+                // Iterate over each parcel request and create a new list item
+                data.forEach(request => {
+                    const li = document.createElement('li');
+                    li.classList.add('message');
+
+                    const content = `
+                        <div class="message-content">
+                            <p><b>Sender:</b> ${request.sender}</p>
+                            <p><b>Recipient:</b> ${request.recipient}</p>
+                            <p><b>Source:</b> ${request.source_city}</p>
+                            <p><b>Destination:</b> ${request.destination_city}</p>
+                            <p><b>Description:</b> ${request.description}</p>
+                            <p><b>Ride Id:</b> ${request.ride_id}</p>
+                        </div>
+                    `;
+
+                    li.innerHTML = content;
+                    messagesList.appendChild(li);
+                });
+            } else {
+                console.error('Error: Expected an array of parcel requests, but received:', data);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+</script>
 </body>
 </html>
