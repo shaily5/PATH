@@ -7,18 +7,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <link rel="stylesheet" href="{% static 'car_rental/css/RentalCar.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/login.css' %}" />
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+  <style>
+    /* Basic styling */
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    .car-reserve {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
-    <link rel="stylesheet" href="{% static 'car_rental/css/RentalCar.css' %}" />
-    <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
+.car-reserve .container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 0px;
+    text-align: center;
+}
 
+    .container {
+      width: 600px;
+      margin: 50px auto;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      font-size: 24px; /* Increase header size slightly */
+      margin-bottom: 10px;
+    }
+
+    .car-image {
+      display: block;
+      margin: 0 auto; /* Center image horizontally */
+      width: 300px;
+    }
+
+    .rental-summary {
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .rental-summary .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .contact-info a {
+      text-decoration: none;
+      color: #333;
+    }
+
+
+  .card-container {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom, #90EE90 0%, #007F00 100%);
+    border-radius: 30px;
+  }
+
+  .card-container h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .card-container p {
+    font-size: 1.1em;
+    color: #777;
+    text-align: center;
+  }
+
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  </style>
 </head>
 <header>
-    <div class="background-image">
+{#    <div class="background-image">#}
         <nav class="navbar">
             <div class="containers">
               <div class="navbar-logo">
@@ -41,31 +138,47 @@
               </div>
             </div>
           </nav>
-            <br><br><br><br><br><br><br>
-            <nav class="" style="background-color: #0c0b0b">
-                <div class="containers">
-                  <div class="navbar-logo">
-                    <h1 style="">Car Rental</h1>
-                  </div>
-                  <ul class="navbar-menu">
-                    <li><a href="#" class="active">Dashboard</a></li>
-                    <li><a href="{% url 'dashboard' %}" >Rent a car</a></li>
-                    <li><a href="{% url 'getReservations' %}">My Rentals</a></li>
-                    <li><a href="">My Profile</a></li>
-                  </ul>
-                  <div class="navbar-buttons">
-
-                  </div>
-                </div>
-          </nav>
 
 
 </header>
 
 <body>
-    <section style="margin: 20px 0;">
+    <section style="width: 100%; height: 100vh;">
+        {% if request.user.username %}
+               <br><br><br><br><br><br><br>
+                    <nav class="" style="background-color: #0c0b0b;height: 73px">
+                        <div class="containers">
+                          <div class="navbar-logo">
+                            <h1 style="">Car Rental</h1>
+                          </div>
+                          <ul class="navbar-menu">
+                            <li><a href="#" class="active" >Dashboard</a></li>
+                            <li><a href="{% url 'dashboard' %}">Rent a car</a></li>
+                            <li><a href="{% url 'getReservations' %}">My Rentals</a></li>
+                            <li><a href="">My Profile</a></li>
+                          </ul>
+                          <div class="navbar-buttons">
 
+                          </div>
+                        </div>
+                  </nav>
+         {% else %}
 
+         {% endif %}
+
+      <div style="margin-top: 100px;  gap: 20px; display: flex; justify-content: space-between; flex-direction: row; text-align: center;" class="" >
+            <div class="container" style="height: 350px;"  >
+              <img width="200px" height="240px" src="../../static/PATH/images/find_ride.jpg" alt="Reserved Car" class="car-image">
+               <h1>Finding a car for rent ?</h1>
+                <a href="{% url 'dashboard' %}"><button class="signup-btn">Book Rental</button></a>
+             </div>
+            <div class="container" style="height: 350px;"  >
+              <img width="200px" height="240px" src="../../static/PATH/images/post_car.jpg" alt="Reserved Car" class="car-image">
+                <h1>Post your car for rent ?</h1>
+                <button class="signup-btn">Post Rental</button>
+             </div>
+        </div>
+        </div>
     </section>
 </body>
 </html>

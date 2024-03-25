@@ -145,7 +145,7 @@
 {#                    <h1 style="">Car Rental</h1>#}
 {#                  </div>#}
                   <ul class="navbar-menu" style="display: flex; justify-content: center">
-                    <li><a href="http://localhost:8000/car_rental/userDashboard" >Dashboard</a></li>
+                    <li><a href="{% url 'userDashboard' %}" >Dashboard</a></li>
                     <li><a href="{% url 'dashboard' %}" >Rental car</a></li>
                     <li><a href="{% url 'getReservations' %}" class="active">My Rentals</a></li>
                     <li><a href="">My Profile</a></li>
@@ -155,7 +155,7 @@
                   </div>
                 </div>
           </nav>
-
+{#           </div>#}
 
   {% if reservations %}
 
@@ -166,9 +166,6 @@
               <div class="header">
                 <h2>{{ details.car_id }}</h2>
               </div>
-{#              <div class="car-details">#}
-{#                <p>{{ details.car_id }}</p>#}
-{#              </div>#}
               <div class="rental-summary">
                 <h3>Your Receipt</h3>
                 <div class="item">
