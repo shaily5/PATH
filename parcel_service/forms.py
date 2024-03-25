@@ -6,8 +6,8 @@ from django.forms.widgets import SelectDateWidget
 class ParcelForm(forms.ModelForm):
     class Meta:
         model = Parcel
-        fields = ['sender', 'recipient', 'source', 'destination', 'description', 'weight']
-
+        fields = ['sender', 'recipient', 'source_city', 'destination_city', 'description', 'weight','image']
+        labels = {'source_city': 'Pickup Address','destination_city': 'Dropoff Address'}
 class CreateParcelRideForm(forms.ModelForm):
     class Meta:
         model = createParcelRide
