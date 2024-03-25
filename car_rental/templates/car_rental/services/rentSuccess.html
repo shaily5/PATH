@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+         <link rel="stylesheet" href="{% static 'car_rental/css/RentalCar.css' %}" />
+         <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
+
+
+  <style>
+    /* Basic styling */
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    .car-reserve {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.car-reserve .container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 0px;
+    text-align: center;
+}
+
+    .container {
+      width: 600px;
+      margin: 50px auto;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      font-size: 24px; /* Increase header size slightly */
+      margin-bottom: 10px;
+    }
+
+    .car-image {
+      display: block;
+      margin: 0 auto; /* Center image horizontally */
+      width: 300px;
+    }
+
+    .rental-summary {
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .rental-summary .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .contact-info a {
+      text-decoration: none;
+      color: #333;
+    }
+
+
+  .card-container {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom, #90EE90 0%, #007F00 100%);
+    border-radius: 30px;
+  }
+
+  .card-container h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .card-container p {
+    font-size: 1.1em;
+    color: #777;
+    text-align: center;
+  }
+
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  </style>
+
+</head>
+<body>
+<header>
+        <nav class="navbar">
+            <div class="containers">
+              <div class="navbar-logo">
+                <img src="../../static/PATH/images/logo.png" alt="Logo" />
+              </div>
+              <ul class="navbar-menu">
+                <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
+                <li><a href="#" class="active">Rental car</a></li>
+                <li><a href="{% url 'car_ride:home' %}">Rides</a></li>
+                  <li><a href="http://localhost:8000/parcel_service/homepage/">Parcel service</a></li>
+              </ul>
+              <div class="navbar-buttons">
+                  {% if request.user.username %}
+                      <h1 style="color: white;">Welcome, {{ request.user.username }}!</h1>
+                      <a href="{% url 'PATH:logout' %}"><button class="signup-btn">Log Out</button></a>
+                  {% else %}
+                  <a href="{% url 'PATH:register' %}"><button class="signup-btn">Sign Up</button></a>
+                  <a href="{% url 'PATH:login' %}"> <button class="login-btn active">Login</button></a>
+                  {% endif %}
+              </div>
+            </div>
+          </nav>
+</header>
+
+           <div >
+                <nav class="" style="position: fixed; margin-top: 120px; background-color: #0c0b0b; width: 100%; text-align: center; align-items: center; padding: 30px 50px;">
+                <div class="" style="align-items: center; text-align: center; ">
+{#                  <div class="">#}
+{#                    <h1 style="">Car Rental</h1>#}
+{#                  </div>#}
+                  <ul class="navbar-menu" style="display: flex; justify-content: center">
+                    <li><a href="http://localhost:8000/car_rental/userDashboard" >Dashboard</a></li>
+                    <li><a href="{% url 'dashboard' %}" >Rental car</a></li>
+                    <li><a href="{% url 'getReservations' %}" class="active">My Rentals</a></li>
+                    <li><a href="">My Profile</a></li>
+                  </ul>
+                  <div class="navbar-buttons">
+
+                  </div>
+                </div>
+          </nav>
+
+
+  {% if reservations %}
+
+  <div style="margin-top: 140px" class="car-reserve" >
+      {% for details in reservations %}
+            <div class="container" >
+              <img src="{{ details.image }}" alt="Reserved Car" class="car-image">
+              <div class="header">
+                <h2>{{ details.car_id }}</h2>
+              </div>
+{#              <div class="car-details">#}
+{#                <p>{{ details.car_id }}</p>#}
+{#              </div>#}
+              <div class="rental-summary">
+                <h3>Your Receipt</h3>
+                <div class="item">
+                  <span>({{ details.num_days }} day)</span>
+                  <span>${{ details.netCharge }}</span>
+                </div>
+                <div class="item">
+                  <span>Insurance Add on</span>
+                  <span>${{ details.insurance }}.00</span>
+                </div>
+                <div class="item">
+                  <span>Tax and Fees</span>
+                  <span>${{ details.taxes }}.00</span>
+                </div>
+
+                <div class="item">
+                  <span>Total</span>
+                  <span>${{ details.total }}.00</span>
+                </div>
+              </div>
+                <button class="edit-btn">Edit Booking</button><br>
+                <button class="delete-btn">Delete Booking</button>
+             </div>
+     {% endfor %}
+  </div>
+
+ {% else %}
+          <div class="card-container">
+            <img src="{% static 'PATH/images/smily.png' %}" alt="Status notification">
+            <h1>Oops!</h1>
+            <p style="color: white;">You have no rental reservations</p>
+           <a href="http://localhost:8000/rental/dashboard/"><button class="signup-btn">Book Now</button></a>
+          </div>
+  {% endif %}
+           </div>
+</>
+</html>

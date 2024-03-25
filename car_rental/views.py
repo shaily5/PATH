@@ -9,11 +9,44 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import CarForm, RentalReservationForm, AddNewUser, LoginForm, CarRentalForm
-from car_rental.models import Car, RentalReservation, RentalInvoice, CustomUser
+
+from PATH.models import Customuser
+from .forms import CarForm, RentalReservationForm, AddNewUser, LoginForm, CarRentalForm, LicenseDetailForm
+from car_rental.models import Car, RentalReservation, RentalInvoice, CustomUser, LicenseDetail
 from django.urls import reverse_lazy
 
 # views.py
+
+
+def showUserDashboard(request):
+    return render(request, 'car_rental/services/userDashboard.html')
+
+def getReservations(request):
+    customer = Customuser.objects.get(username__username=request.session['username'])
+
+    reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
+
+    for reservation in reservations:
+        car = Car.objects.get(pk=reservation.car_id.pk)
+
+        rental_start_date = reservation.rental_start_date
+        rental_end_date = reservation.rental_end_date
+
+        # Calculate the number of days by subtracting the start date from the end date
+        num_days = (rental_end_date - rental_start_date).days + 1
+        reservation.num_days = num_days
+        reservation.perDayCharge = car.daily_rate
+        reservation.netCharge = (reservation.perDayCharge * num_days)
+        reservation.insurance = 25
+        reservation.image = car.photo.url
+        taxes = (float(reservation.perDayCharge * num_days) + float(25)) * float(
+            0.13)  # Add 1 to include both start and end dates
+        reservation.taxes = taxes
+
+        reservation.total = float(reservation.taxes) + float(25) + (float(car.daily_rate) * float(num_days))
+
+    return render(request, 'car_rental/services/rentSuccess.html',
+                  {"id": customer.pk, 'reservations': reservations})
 
 def dashboard(request):
     data = Car.objects.all()
@@ -100,15 +133,28 @@ def authenticate_user(email, password):
     except CustomUser.DoesNotExist:
         return None  # Return None and email does not exist message
 
+
 def homepage(request):
-    data = Car.objects.all()
-    return render(request, "car_rental/services/dashboard.html",{"cars":data})
+    if request.method == 'POST':
+        seats = request.POST.get('seats')
+
+        car_type = request.POST.get('car_type')
+        fuel_type = request.POST.get('fuel_type')
+
+        # Filter cars based on the submitted form data
+        filtered_cars = Car.objects.filter(seats=seats, car_type=car_type, fuel_type=fuel_type)
+        return render(request, "car_rental/services/dashboard.html", {"cars": filtered_cars})
+    else:
+        # If no filter criteria submitted, display all cars
+
+        data = Car.objects.all()
+        return render(request, "car_rental/services/dashboard.html", {"cars": data})
 
 
 def bookRentalCar(request):
 
         if request.method == "GET":
-            if request.session.get('car_type') is None:
+            if request.session.get('username') is None:
                 return render(request, "PATH/login.html")
             else:
                 cars = Car.objects.filter(car_type=request.session.get('car_type'))
@@ -116,21 +162,86 @@ def bookRentalCar(request):
 
         if request.method == "POST":
 
-            if request.session.get('car_type') is None:
-                rental_start_date = request.POST['rental_start_date']
-                rental_end_date = request.POST['rental_end_date']
-                pickup_time = request.POST['pickup_time']
-                return_time = request.POST['return_time']
-                pickup_location = request.POST['pickup_location']
-                car_type = request.POST['car_type']
+            # if request.session.get('car_type') is None:
 
-                request.session['car_type'] = car_type
-                request.session['rental_start_date'] = rental_start_date
-                request.session['rental_end_date'] = rental_end_date
-                request.session['pickup_time'] = pickup_time
-                request.session['return_time'] = return_time
-                request.session['pickup_location'] = pickup_location
+            rental_start_date = request.POST['rental_start_date']
+            rental_end_date = request.POST['rental_end_date']
+            pickup_time = request.POST['pickup_time']
+            return_time = request.POST['return_time']
+            pickup_location = request.POST['pickup_location']
+            car_type = request.POST['car_type']
 
+            request.session['car_type'] = car_type
+            request.session['rental_start_date'] = rental_start_date
+            request.session['rental_end_date'] = rental_end_date
+            request.session['pickup_time'] = pickup_time
+            request.session['return_time'] = return_time
+            request.session['pickup_location'] = pickup_location
+
+            if request.session.get('rented_car_id') is not None:
+
+                try:
+                    license_detail_exists = LicenseDetail.objects.get(customer__username=request.user.pk)
+
+                    customer = Customuser.objects.get(username__username=request.session['username'])
+                    car_type = request.session.get('car_type')
+                    rental_start_date = request.session['rental_start_date']
+                    rental_end_date = request.session.get('rental_end_date')
+                    pickup_time = request.session.get('pickup_time')
+                    return_time = request.session.get('return_time')
+                    pickup_location = request.session.get('pickup_location')
+                    car_id = request.session.get('rented_car_id')
+                    car = get_object_or_404(Car, id=car_id)
+
+                    rental_details = RentalReservation(
+                        car_type=car_type,
+                        rental_start_date=rental_start_date,
+                        rental_end_date=rental_end_date,
+                        pickup_time=pickup_time,
+                        return_time=return_time,
+                        pickup_location=pickup_location,
+                        car_id=car,
+                        customer=customer,
+                    )
+                    rental_details.save()
+
+                    request.session['car_type'] = None
+                    request.session['rental_start_date'] = None
+                    request.session['rental_end_date'] = None
+                    request.session['pickup_time'] = None
+                    request.session['return_time'] = None
+                    request.session['pickup_location'] = None
+                    request.session['rented_car_id'] = None
+                    car_ids = []
+
+                    reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
+
+                    for reservation in reservations:
+                        car = Car.objects.get(pk=reservation.car_id.pk)
+
+                        rental_start_date = reservation.rental_start_date
+                        rental_end_date = reservation.rental_end_date
+
+                        # Calculate the number of days by subtracting the start date from the end date
+                        num_days = (rental_end_date - rental_start_date).days + 1
+                        reservation.num_days = num_days
+                        reservation.perDayCharge = car.daily_rate
+                        reservation.netCharge = (reservation.perDayCharge*num_days)
+                        reservation.insurance = 25
+                        taxes=(float(reservation.perDayCharge*num_days)+float(25))*float(0.13)# Add 1 to include both start and end dates
+                        reservation.taxes = taxes
+                        reservation.image = car.photo.url
+                        reservation.total = float(reservation.taxes) + float(25) + (
+                                    float(car.daily_rate) * float(num_days))
+
+                    return render(request, 'car_rental/services/rentSuccess.html',
+                                  {"id": customer.pk, 'reservations': reservations})
+                except LicenseDetail.DoesNotExist:
+
+                    form = LicenseDetailForm()
+                    return render(request, 'car_rental/authentication/licenseDetails.html',
+                                  {'LicenseForm': form, 'car_id': request.session.get('rented_car_id'),
+                                   'car_type': request.session.get('car_type')})
 
             if request.session.get('username') is not None:
                 cars = Car.objects.filter(car_type=request.session.get('car_type'))
@@ -229,3 +340,154 @@ def rental_reservation_view(request):
         form = RentalReservationForm()
 
     return render(request, 'car_rental/rental_reservation.html', {'RentalForm': form})
+
+def license_detail_view(request,car_id,car_type):
+
+    request.session['rented_car_id'] = car_id
+    request.session['car_type'] = car_type
+
+    if request.session.get('pickup_time') is None:
+        # request.session['user_id'] = user
+
+        return render(request, "car_rental/services/dashboard.html",{'car_id_selected':car_id,'car_type':request.session.get('car_type')})
+
+    if request.method == 'GET':
+
+       try:
+            license_detail_exists = LicenseDetail.objects.get(customer__username=request.user.pk)
+
+            customer = Customuser.objects.get(username__username=request.session['username'])
+            car_type = request.session.get('car_type')
+            rental_start_date = request.session.get('rental_start_date')
+            rental_end_date = request.session.get('rental_end_date')
+            pickup_time = request.session.get('pickup_time')
+            return_time = request.session.get('return_time')
+            pickup_location = request.session.get('pickup_location')
+            car_id = request.session.get('rented_car_id')
+            car = get_object_or_404(Car, id=car_id)
+
+            rental_details = RentalReservation(
+                car_type=car_type,
+                rental_start_date=rental_start_date,
+                rental_end_date=rental_end_date,
+                pickup_time=pickup_time,
+                return_time=return_time,
+                pickup_location=pickup_location,
+                car_id=car,
+                customer=customer,
+            )
+            rental_details.save()
+
+            request.session['car_type'] = None
+            request.session['rental_start_date'] = None
+            request.session['rental_end_date'] = None
+            request.session['pickup_time'] = None
+            request.session['return_time'] = None
+            request.session['pickup_location'] = None
+            request.session['rented_car_id'] = None
+
+            reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
+
+            for reservation in reservations:
+                car = Car.objects.get(pk=reservation.car_id.pk)
+
+                rental_start_date = reservation.rental_start_date
+                rental_end_date = reservation.rental_end_date
+
+                # Calculate the number of days by subtracting the start date from the end date
+                num_days = (rental_end_date - rental_start_date).days + 1
+                reservation.num_days = num_days
+                reservation.perDayCharge = car.daily_rate
+                reservation.netCharge = (reservation.perDayCharge * num_days)
+                reservation.insurance = 25
+                reservation.image = car.photo.url
+                taxes = (float(reservation.perDayCharge * num_days) + float(25)) * float(
+                    0.13)  # Add 1 to include both start and end dates
+                reservation.taxes = taxes
+
+                reservation.total = float(reservation.taxes) + float(25) + (float(car.daily_rate) * float(num_days))
+
+            return render(request, 'car_rental/services/rentSuccess.html',
+                          {"id": customer.pk, 'reservations': reservations})
+       except LicenseDetail.DoesNotExist:
+
+           form = LicenseDetailForm()
+           return render(request, 'car_rental/authentication/licenseDetails.html',
+                         {'LicenseForm': form, 'car_id': request.session.get('rented_car_id'),'car_type':request.session.get('car_type')})
+
+
+    if request.method == 'POST':
+            issuing_country= request.POST['issuing_country']
+            issuing_authority= request.POST['issuing_authority']
+            driving_license_number=request.POST['driving_license_number']
+            expiry_date=request.POST['expiry_date']
+            birth_date=request.POST['birth_date']
+            issue_date=request.POST['issue_date']
+            customer = Customuser.objects.get(username__username=request.session['username'])
+
+            car_type = request.session.get('car_type')
+            rental_start_date = request.session.get('rental_start_date')
+            rental_end_date = request.session.get('rental_end_date')
+            pickup_time = request.session.get('pickup_time')
+            return_time = request.session.get('return_time')
+            pickup_location = request.session.get('pickup_location')
+            car_id = request.session.get('rented_car_id')
+
+            car = get_object_or_404(Car, id=car_id)
+
+            rental_details = RentalReservation(
+                car_type=car_type,
+                rental_start_date=rental_start_date,
+                rental_end_date=rental_end_date,
+                pickup_time=pickup_time,
+                return_time=return_time,
+                pickup_location=pickup_location,
+                car_id=car,
+                customer=customer,
+            )
+            rental_details.save()
+
+            license_detail = LicenseDetail(
+                issuing_country=issuing_country,
+                issuing_authority=issuing_authority,
+                driving_license_number=driving_license_number,
+                expiry_date=expiry_date,
+                customer=customer,
+                birth_date=birth_date,
+                issue_date=issue_date,
+            )
+            license_detail.save()
+
+            request.session['car_type'] = None
+            request.session['rental_start_date'] = None
+            request.session['rental_end_date'] = None
+            request.session['pickup_time'] = None
+            request.session['return_time'] = None
+            request.session['pickup_location'] = None
+            request.session['rented_car_id'] = None
+
+            reservations = RentalReservation.objects.filter(customer__username__username=request.session['username'])
+
+            for reservation in reservations:
+                car = Car.objects.get(pk=reservation.car_id.pk)
+
+                rental_start_date = reservation.rental_start_date
+                rental_end_date = reservation.rental_end_date
+
+                # Calculate the number of days by subtracting the start date from the end date
+                num_days = (rental_end_date - rental_start_date).days + 1
+                reservation.num_days = num_days
+                reservation.perDayCharge = car.daily_rate
+                reservation.netCharge = (reservation.perDayCharge * num_days)
+                reservation.insurance = 25
+                reservation.image = car.photo.url
+                taxes = (float(reservation.perDayCharge * num_days) + float(25)) * float(
+                    0.13)  # Add 1 to include both start and end dates
+                reservation.taxes = taxes
+
+                reservation.total = float(reservation.taxes) + float(25) + (float(car.daily_rate) * float(num_days))
+
+            return render(request, 'car_rental/services/rentSuccess.html',
+                          {"id": customer.pk, 'reservations': reservations})
+
+            # all_reservations = RentalReservation.objects.filter()

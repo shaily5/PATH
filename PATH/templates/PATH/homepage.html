@@ -95,8 +95,11 @@
         </div>
         <ul class="navbar-menu">
           <li><a href=" " class="active">Home</a></li>
-
-          <li><a href="rental/dashboard/">Rental car</a></li>
+          {% if request.user.username %}
+                        <li><a href="http://localhost:8000/car_rental/userDashboard">Rental car</a></li>
+          {% else %}
+                        <li><a href="rental/dashboard/">Rental car</a></li>
+          {% endif %}
           <li><a href="{% url 'car_ride:home' %}">Rides</a></li>
             <li><a href="#">Parcel service</a></li>
         </ul>

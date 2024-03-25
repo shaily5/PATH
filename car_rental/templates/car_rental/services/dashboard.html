@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="{% static 'car_rental/css/RentalCar.css' %}" />
     <link rel="stylesheet" href="{% static 'car_rental/css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'car_rental/css/login.css' %}" />
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -24,10 +26,9 @@
               </div>
               <ul class="navbar-menu">
                 <li><a href="{% url 'PATH:homepage' %}" >Home</a></li>
-
-                <li><a href="car_rental/login" class="active">Rental car</a></li>
+                <li><a href="#" class="active">Rental car</a></li>
                 <li><a href="{% url 'car_ride:home' %}">Rides</a></li>
-                  <li><a href="#">Parcel service</a></li>
+                  <li><a href="http://localhost:8000/parcel_service/homepage/">Parcel service</a></li>
               </ul>
               <div class="navbar-buttons">
                   {% if request.user.username %}
@@ -40,7 +41,27 @@
               </div>
             </div>
           </nav>
+         {% if request.user.username %}
+               <br><br><br><br><br><br><br>
+                    <nav class="" style="background-color: #0c0b0b">
+                        <div class="containers">
+                          <div class="navbar-logo">
+                            <h1 style="">Car Rental</h1>
+                          </div>
+                          <ul class="navbar-menu">
+                            <li><a href="http://localhost:8000/car_rental/userDashboard" >Dashboard</a></li>
+                            <li><a href="#" class="active">Rent a car</a></li>
+                            <li><a href="{% url 'getReservations' %}">My Rentals</a></li>
+                            <li><a href="">My Profile</a></li>
+                          </ul>
+                          <div class="navbar-buttons">
 
+                          </div>
+                        </div>
+                  </nav>
+         {% else %}
+
+         {% endif %}
         <div class="box">
             <div class="inner-box" style="margin-bottom: 0;">
                 <h1 class="inner-heading">
@@ -76,16 +97,22 @@
                       </div>
                 </div>
                 <div class="row">
-                    <div class="input-group2">
+                    {% if  car_id_selected  %}
+                       <input type="hidden" name="car_type" value="{{ car_type }}">
+                    {% else %}
+                      <div class="input-group2">
                         <select name="car_type" required>
                             <option value="" disabled selected>Car Type</option>
                             <option value="sedan">Sedan</option>
+                            <option value="sports">Sports</option>
                             <option value="suv">SUV</option>
                             <option value="truck">Truck</option>
                             <option value="van">Van</option>
                           </select>
 
-                    </div>
+                     </div>
+                    {% endif %}
+
                     <div class="input-group2">
                         <input name="pickup_time" type="time" placeholder="Pickup Time">
                       </div>
@@ -108,103 +135,72 @@
             <p>
                 We present popular cars that are rented by customers to maximize your comfort on long trips.</p>
         </div>
+         <form id="carFilterForm" action="{% url 'dashboard' %}" method="POST">
+            {% csrf_token %}
+        <!-- Your form fields here -->
+        </form>
+
         <div class="rental-page-width">
             <div class="rental-page-flex">
             <div class="filter-box-width">
+                <div class="clearall-btn">
+                <button id="clearAllBtn">Clear all</button>
+                </div>
+                <form id="carFilterForm" action="{% url 'dashboard' %}" method="POST">
+                    {% csrf_token %}
                 <div class="filter-clearall">
                     <div class="filter">
-                        <h4>Filters (4)</h4>
+                        <h4>Apply Filters</h4>
                     </div>
-                    <div class="clearall-btn">
-                        <button>Clear all</button>
-                    </div>
+
                 </div>
 
                 <div class="select-codes">
                     <div class="select-care-date">
-                        <div class="care-date">
-                            <h2>Select care date</h2>
-                            <input type="date" placeholder="Pickup Date">
-                        </div>
-                    </div>
-                    <div class="select-care-date">
-                        <div class="care-date">
-                            <h2>Date of birth</h2>
-                            <input type="date" placeholder="Pickup Date">
-                        </div>
-                    </div>
-                    <div class="select-care-date">
-                        <div class="select-distance-km">
-                            <h2>Distance</h2>
-                            <div class="select-km">
-                                <button class="touch-active">2Km</button>
-                                <button class="no-touch">6Km</button>
-                                <button class="no-touch">8Km</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="select-care-date">
                         <div class="select-seats">
-                            <h2>Seats</h2>
-                            <div class="select-seats-4-5">
-                                <button class="touch-active">4/5 Seater</button>
-                                <button class="no-touch">6/7 Seater</button>
-                            </div>
+                        <div class="login-form">
+
+                            <h3>Seats</h3>
+
+                        <div class="input-group1">
+                        <select class="form-control"  id="inputState" name="seats">
+                            <option value="5">4/5 Seater</option>
+                            <option value="7">6/7 Seater</option>
+                        </select>
+                        </div>
+
+                        </div>
                         </div>
                     </div>
                     <div class="select-care-date">
-                        <div class="car-type">
-                            <h2>Car type</h2>
-                            <div class="car-name-select1">
-                                <button class="touch-active">Sedan</button>
-                                <button class="no-touch">SUV</button>
-                                <button class="no-touch">Luxury</button>
-                            </div>
-                            <div class="car-name-select2">
-                                <button class="no-touch">Hatchback</button>
-                                <button class="no-touch">Auto Pilot</button>
-                            </div>
+                        <div class="car-type" >
+                        <h2>Car type</h2>
+                        <div class="input-group1">
+                            <select id="carTypeSelect" name="car_type">
+                                <option value="sedan">Sedan</option>
+                                <option value="suv">SUV</option>
+                                <option value="truck">Truck</option>
+                                <option value="van">Van</option>
+                                <option value="sports">Auto Pilot</option>
+                            </select>
                         </div>
+                    </div>
                     </div>
                     <div class="select-care-date">
                         <div class="fuel-type-pd">
-                            <h2>Fuel type</h2>
-                            <div class="petrol-diesel">
-                                <button class="touch-active">Petrol</button>
-                                <button class="no-touch">Diesel</button>
+                        <h2>Fuel type</h2>
+                            <div class="input-group1">
+                                <select id="fuelTypeSelect" name="fuel_type">
+                                    <option value="petrol">Petrol</option>
+                                    <option value="diesel">Diesel</option>
+                                </select>
                             </div>
-                        </div>
                     </div>
-                    <div class="select-care-date">
-                        <div class="rate-per-hour">
-                            <h2>Rate per hour</h2>
-                            <div class='range-slider'>
-                                <!-- <input type="number" min="0" max="180" step="1" v-model="sliderMin"> -->
-                                <input class="left" type="range" min="0" max="180" step="1" v-model="sliderMin">
-                                <!-- <input type="number" min="0" max="180" step="1" v-model="sliderMax"> -->
-                                <input class="right" type="range" min="0" max="180" step="1" v-model="sliderMax">
-                            </div>
-                            <div class="min-max">
-                                <div class="min-price">
-                                    <div class="under-min">
-                                        <p>Min price</p>
-                                        <h6>$10</h6>
-                                    </div>
-
-                                </div>
-                                <div class="min-price">
-                                    <div class="under-min">
-                                        <p>Max price</p>
-                                        <h6>$40</h6>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
                     </div>
+                    <button type="submit" class="book-now" style="margin: 22px">Apply Filter</button>
                 </div>
+
+            </form>
 
             </div>
             <div class="cars-box-width">
@@ -236,9 +232,8 @@
 
                                             <div class="rental-car-main-btns">
                                                 <i style="color: white;" class="fa-solid fa-phone fa-xl"></i>
-                                                <button class="rental-car-paid-btns">
-                                                    Rent Now
-                                                </button>
+                                                 <a href="http://localhost:8000/car_rental/getCarDetail/{{ car.id }}"><button class="action-button">Rent Now</button> </a>
+
                                             </div>
                                         </div>
                                     </div>
@@ -263,5 +258,15 @@
 
     </section>
 </body>
-
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("clearAllBtn").addEventListener("click", function () {
+            // Set the form method to GET
+            document.getElementById("carFilterForm").method = "GET";
+            // Submit the form
+            document.getElementById("carFilterForm").submit();
+        });
+    });
+</script>

@@ -49,6 +49,12 @@ class Car(models.Model):
         ('sports','Sports')
         # Add more choices as needed
     ]
+
+    fuel_type_choices = [
+        ('petrol', 'petrol'),
+        ('diesel','diesel')
+    ]
+
     car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
 
     make = models.CharField(max_length=100)
@@ -58,6 +64,8 @@ class Car(models.Model):
     available = models.BooleanField(default=True)
     color = models.CharField(max_length=50,default="unknown")
     photo = models.ImageField(upload_to='car_photos/', null=True, blank=True)
+    seats = models.PositiveIntegerField(default='5')
+    fuel_type = models.CharField(max_length=20, choices=fuel_type_choices,default="petrol")
 
     def __str__(self):
         return f"{self.make} {self.model}        {self.car_type}"
@@ -75,6 +83,7 @@ class RentalReservation(models.Model):
         ('suv', 'SUV'),
         ('truck', 'Truck'),
         ('van', 'Van'),
+        ('sports','Sports')
         # Add more choices as needed
     ]
 
@@ -88,19 +97,30 @@ class RentalReservation(models.Model):
 
     rental_start_date = models.DateField(default=timezone.now)
     rental_end_date = models.DateField(default=timezone.now)
-    pickup_time = models.DateTimeField(default=timezone.now)
-    return_time = models.DateTimeField(default=timezone.now)
-
-    # customer = models.ForeignKey(Customuser, on_delete=models.CASCADE)  # Use Customuser model here
+    pickup_time = models.TimeField(default='00:00')  # Example default time
+    return_time = models.TimeField(default='00:00')  # Example default time
 
     customer = models.ForeignKey(Customuser, on_delete=models.CASCADE,default=None)  # Use Customer model here
     pickup_location = models.CharField(max_length=100, choices=PICKUP_LOCATIONS, default='Windsor')
 
-    car_type = models.CharField(max_length=20, choices=car_type_choices,default="sedan")
+    car_type = models.CharField(max_length=20, choices=car_type_choices,default="")
+    car_id = models.ForeignKey(Car, on_delete=models.CASCADE,default=1)  # Use Customer model here
 
     def __str__(self):
-        return f"{self.car} - {self.customer} "
+        return f"{self.car_id} - {self.customer} "
 
+class LicenseDetail(models.Model):
+
+    issuing_country = models.CharField(max_length=100)
+    issuing_authority = models.CharField(max_length=100)
+    birth_date = models.DateField(default=timezone.now().date())
+    driving_license_number = models.CharField(max_length=100)
+    issue_date = models.DateField(default=timezone.now().date())
+    expiry_date = models.DateField(default=timezone.now().date())
+    customer = models.ForeignKey(Customuser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"License Detail for {self.customer.username}"
 
 class RentalInvoice(models.Model):
     rental_reservation = models.OneToOneField('RentalReservation', on_delete=models.CASCADE)
