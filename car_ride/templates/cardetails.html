@@ -93,7 +93,7 @@
     .form-group input[type="number"],
     .form-group input[type="date"],
     .form-group select {
-        width: 250px;
+        width: 90%;
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -173,6 +173,7 @@
   {% endif %}
  <form action="#" method="post" >
      <div class="form-group">
+         <p style="color: #9961BA; font-size: 30px; margin-left: 35%">Enter Your Details</p>
          <form action="#" method="post" >
              {% csrf_token %}
               <div style="
@@ -183,7 +184,7 @@
     gap: 10px;
 ">
              {{ form }}
-             <button type="submit">Book Ride</button>
+             <button type="submit" style="height: 25%">Book Ride</button>
          </form>
      </div>
  </form>

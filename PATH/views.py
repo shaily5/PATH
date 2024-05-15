@@ -18,8 +18,10 @@ from PATH.forms import ContactForm
 
 def homepage(request):
     # print("C Home")
+    visit_count = request.session.get('visit_count', 0) + 1
+    request.session['visit_count'] = visit_count
     cars = Car.objects.all()
-    return render(request, 'PATH/homepage.html',{'cars':cars})  # Replace 'home.html' with the name of your home template
+    return render(request, 'PATH/homepage.html',{'cars':cars, 'visit_count': visit_count})  # Replace 'home.html' with the name of your home template
 
 current_time = timezone.now().strftime("%H:%M:%S %d-%m-%Y")
 def LoginUser(request):
